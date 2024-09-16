@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: fc338175bbd92d84fa1d1b654f063bdc
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: ba410add5b66e5944b87d9c6da100a9e
+  - enabled: 1
+    path: Assets/Scenes/Store.unity
+    guid: 89b63ecabb0cdeb4894438364a5e296c
+  - enabled: 1
+    path: Assets/Scenes/Achievements.unity
+    guid: b3d20c638812a0e4b8f769ac7fcc9fb7
+  - enabled: 1
+    path: Assets/Scenes/Catalogue.unity
+    guid: 89db1b6ed0c1bf241b24b17dd0ca20bc
+  - enabled: 1
+    path: Assets/Scenes/Cleaning.unity
+    guid: d8cb415fbb9e5fd4a88013d779fcca23
+  - enabled: 1
+    path: Assets/Scenes/CompanionProfile.unity
+    guid: d3ff1b3c60a92c84c854610eeb4f9b76
+  - enabled: 1
+    path: Assets/Scenes/Food.unity
+    guid: b155691145c6c8b40a5d09b228be7c6e
+  - enabled: 1
+    path: Assets/Scenes/Friends.unity
+    guid: 906ae7e380926fc4fb75b9ee5d41ac6f
+  - enabled: 1
+    path: Assets/Scenes/Interact.unity
+    guid: 46f06ec572268dd449c47899644b74c6
+  - enabled: 1
+    path: Assets/Scenes/Leaders.unity
+    guid: dc7d3e3c543a7434d938b71d27206714
+  - enabled: 1
+    path: Assets/Scenes/LoadLeaderBoard.unity
+    guid: 1e3af837830e4564ca16863eed368b6f
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 92bda3cf26f779c4f9b672a4dfad0e4d
+  - enabled: 1
+    path: Assets/Scenes/LoginRegister.unity
+    guid: d58b668558370e148a386cad7db44b57
+  - enabled: 1
+    path: Assets/Scenes/PickStarter.unity
+    guid: 6642fa3e4f6d43843b34ef8e34229b9d
+  - enabled: 1
+    path: Assets/Scenes/Quests.unity
+    guid: 438ab7e7c47cf8b4da29c2ac6143c142
+  - enabled: 1
+    path: Assets/Scenes/Register.unity
+    guid: b190f46ce8a26b443afde630421707d2
+  - enabled: 1
+    path: Assets/Scenes/ResetPassword.unity
+    guid: 7e07ee8469d92f741b71d2ab0f1a4a63
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: 5c5807608f5f56042821fcc60b04e193
+  - enabled: 1
+    path: Assets/Scenes/Stats.unity
+    guid: bca43987ff6e58b4e92d64e38a2ebcab
+  - enabled: 1
+    path: Assets/Scenes/StatsGraph.unity
+    guid: 5876b1a0ba4720c409fda88c278e3abd
+  - enabled: 1
+    path: Assets/Scenes/Toys.unity
+    guid: ca4891ae2e2f47b42ad2eecb8c20f4b1
+  - enabled: 1
+    path: Assets/Scenes/Treat.unity
+    guid: 86d3bee406f03674f8b3674c0a5435f8
+  - enabled: 1
+    path: Assets/Scenes/Play.unity
+    guid: 647f96d8b4889174eaa56dacea39eb82
+  - enabled: 1
+    path: Assets/Scenes/Clean.unity
+    guid: 9fca660370b6dad4ca8df3adb1baaae3
+  - enabled: 1
+    path: Assets/Scenes/BuyCleaning.unity
+    guid: 1ebda5221180bfb46a17418df7b2a240
+  - enabled: 1
+    path: Assets/Scenes/BuyFood.unity
+    guid: fcc8684a60c0adb4e8748808b799926e
+  - enabled: 1
+    path: Assets/Scenes/BuyToys.unity
+    guid: 8817146fb9db3b34ea606303dfa488a4
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fa29865ee51cc2441b384e073b645726, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: b32bc7ea2e4549f49a51a7fb8f37764d, type: 2}
