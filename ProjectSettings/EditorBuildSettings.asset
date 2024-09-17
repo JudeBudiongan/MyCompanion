@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/UserAuthentication/SampleScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
     path: Assets/Scenes/Start.unity
@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Leaderboard/Achievements.unity
     guid: b3d20c638812a0e4b8f769ac7fcc9fb7
   - enabled: 1
-    path: Assets/Scenes/Catalogue.unity
+    path: Assets/Scenes/Catalogue/Catalogue.unity
     guid: 89db1b6ed0c1bf241b24b17dd0ca20bc
   - enabled: 1
     path: Assets/Scenes/Store/Cleaning.unity
