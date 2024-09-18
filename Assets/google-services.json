@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "83837299637",
+    "project_id": "mycompanions-51db1",
+    "storage_bucket": "mycompanions-51db1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83837299637:android:3a5d61c9d2cf20b33187fc",
+        "android_client_info": {
+          "package_name": "com.mc.mycompanion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx7z_k7KeKbqk-JRdEP76ku0r6DDVVs-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
