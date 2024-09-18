@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
+  <string name="gcm_defaultSenderId" translatable="false">83837299637</string>
+  <string name="google_storage_bucket" translatable="false">mycompanions-51db1.appspot.com</string>
+  <string name="project_id" translatable="false">mycompanions-51db1</string>
+  <string name="google_api_key" translatable="false">AIzaSyBx7z_k7KeKbqk-JRdEP76ku0r6DDVVs-0</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBx7z_k7KeKbqk-JRdEP76ku0r6DDVVs-0</string>
+  <string name="google_app_id" translatable="false">1:83837299637:android:3a5d61c9d2cf20b33187fc</string>
+</resources>
