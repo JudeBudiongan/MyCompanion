@@ -17,7 +17,7 @@ public class LoginUI : MonoBehaviour
         signupPanel.SetActive(false);
         forgotPasswordPanel.SetActive(false);
         firstStartupPanel.SetActive(false);
-        notifPanel.SetActive(false);  // Hide notification panel
+        notifPanel.SetActive(false); 
     }
 
     // Opens the first startup panel and hides the others
@@ -28,7 +28,7 @@ public class LoginUI : MonoBehaviour
         signupPanel.SetActive(false);
         forgotPasswordPanel.SetActive(false);
         startupPanel.SetActive(false);
-        notifPanel.SetActive(false);  // Hide notification panel
+        notifPanel.SetActive(false);  
     }
 
     // Opens the login panel and hides the others
@@ -39,7 +39,7 @@ public class LoginUI : MonoBehaviour
         forgotPasswordPanel.SetActive(false);
         startupPanel.SetActive(false);
         firstStartupPanel.SetActive(false);
-        notifPanel.SetActive(false);  // Hide notification panel
+        notifPanel.SetActive(false);  
     }
 
     // Opens the sign-up panel and hides the others
@@ -50,7 +50,7 @@ public class LoginUI : MonoBehaviour
         forgotPasswordPanel.SetActive(false);
         startupPanel.SetActive(false);
         firstStartupPanel.SetActive(false);
-        notifPanel.SetActive(false);  // Hide notification panel
+        notifPanel.SetActive(false);  
     }
 
     // Opens the forgot password panel and hides the others
@@ -61,7 +61,7 @@ public class LoginUI : MonoBehaviour
         signupPanel.SetActive(false);
         startupPanel.SetActive(false);
         firstStartupPanel.SetActive(false);
-        notifPanel.SetActive(false);  // Hide notification panel
+        notifPanel.SetActive(false);  
     }
 
     // Check if any input field is empty and display an error message
@@ -110,7 +110,7 @@ public class LoginUI : MonoBehaviour
     {
         if (string.IsNullOrEmpty(forgotPassWord.text) || string.IsNullOrEmpty(forgotCPassWord.text))
         {
-            DisplayNotification("Error", "Please fill in all forgot password fields.");
+            DisplayNotification("Error", "Please fill in all password fields.");
         }
         else if (forgotPassWord.text != forgotCPassWord.text)
         {
