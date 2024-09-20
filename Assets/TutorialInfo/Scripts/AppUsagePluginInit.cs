@@ -4,7 +4,18 @@ using System;
 
 public class AppUsagePluginInit : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // List of known social media package names
+    private readonly Dictionary<string, string> socialMediaApps = new Dictionary<string, string>
+    {
+        { "com.instagram.android", "Instagram" },
+        { "com.snapchat.android", "Snapchat" },
+        { "com.twitter.android", "Twitter" },
+        { "com.facebook.katana", "Facebook" },
+        { "com.whatsapp", "WhatsApp" },
+        { "com.zhiliaoapp.musically", "TikTok" },
+        { "com.google.android.youtube", "YouTube" }
+    };
+
     void Start()
     {
         // Create an instance of the Java class
@@ -58,14 +69,17 @@ public class AppUsagePluginInit : MonoBehaviour
 
                         string packageName = usageStat.Call<string>("getPackageName");
                         long lastTimeUsed = usageStat.Call<long>("getLastTimeUsed");
+                        long totalTimeInForeground = usageStat.Call<long>("getTotalTimeInForeground");
 
-                        usageStats.Add(new UsageStat
+                        if (socialMediaApps.ContainsKey(packageName))
                         {
-                            PackageName = packageName,
-                            LastTimeUsed = lastTimeUsed
-                        });
-
-                        Debug.Log($"Retrieved UsageStat: Package: {packageName}, Last Used: {DateTimeOffset.FromUnixTimeMilliseconds(lastTimeUsed).DateTime}");
+                            usageStats.Add(new UsageStat
+                            {
+                                PackageName = packageName,
+                                LastTimeUsed = lastTimeUsed,
+                                TotalTimeInForeground = totalTimeInForeground
+                            });
+                        }
                     }
 
                     DisplayUsageStats(usageStats);
@@ -84,7 +98,17 @@ public class AppUsagePluginInit : MonoBehaviour
 
         foreach (var stat in usageStats)
         {
-            Debug.Log($"Package: {stat.PackageName}, Last Used: {DateTimeOffset.FromUnixTimeMilliseconds(stat.LastTimeUsed).DateTime}");
+            string appName = socialMediaApps.ContainsKey(stat.PackageName)
+                ? socialMediaApps[stat.PackageName]
+                : stat.PackageName;
+
+            DateTime utcLastUsed = DateTimeOffset.FromUnixTimeMilliseconds(stat.LastTimeUsed).UtcDateTime;
+            DateTime localLastUsed = utcLastUsed.ToLocalTime();
+
+            TimeSpan timeSpent = TimeSpan.FromMilliseconds(stat.TotalTimeInForeground);
+            string formattedTimeSpent = $"{timeSpent.Hours}h {timeSpent.Minutes}m {timeSpent.Seconds}s";
+
+            Debug.Log($"App: {appName}, Package: {stat.PackageName}, Last Used: {localLastUsed}, Time Spent: {formattedTimeSpent}");
         }
     }
 }

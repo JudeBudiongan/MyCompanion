@@ -1,7 +1,11 @@
-[System.Serializable]
+using System;
+
+// AppUsageInfo class to hold app name and usage stats
+[Serializable]
 public class UsageStat
 {
-    // This class creates a datatype that represents each App's usage stat 
     public string PackageName { get; set; }
+
     public long LastTimeUsed { get; set; }
+    public long TotalTimeInForeground { get; set; }
 }
