@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class SeamlessHorizontalScroll : MonoBehaviour
 {
-    public RectTransform imageRectTransform; // Drag the RectTransform of the image here
-    public float speed = 300f; // Speed at which the image moves
-
+    public RectTransform imageRectTransform; 
+    public float speed = 300f; 
     private RectTransform duplicateImageRectTransform;
     private float imageWidth;
     private Camera mainCamera;
