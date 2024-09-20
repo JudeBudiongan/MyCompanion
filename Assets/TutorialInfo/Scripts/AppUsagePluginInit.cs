@@ -16,75 +16,104 @@ public class AppUsagePluginInit : MonoBehaviour
         { "com.google.android.youtube", "YouTube" }
     };
 
+    private AndroidJavaClass pluginClass;
+    private AndroidJavaObject currentActivity;
+    private bool isWaitingForPermission = false;
+
     void Start()
     {
         // Create an instance of the Java class
-        AndroidJavaClass pluginClass = new AndroidJavaClass("com.example.appusageplugin.PluginInterface");
+        pluginClass = new AndroidJavaClass("com.example.appusageplugin.PluginInterface");
 
         // Get unity current activity (pass as context)
         using (AndroidJavaObject unityActivity = new AndroidJavaObject("com.unity3d.player.UnityPlayer"))
         {
-            // Initialize the plugin with Unity's context
-            AndroidJavaObject currentActivity = unityActivity.GetStatic<AndroidJavaObject>("currentActivity");
+            currentActivity = unityActivity.GetStatic<AndroidJavaObject>("currentActivity");
             pluginClass.CallStatic("initialize", currentActivity);
 
             // Check if app has usage stats permission enabled
+            CheckAndRequestPermission();
+        }
+    }
+
+    void Update()
+    {
+        // If waiting for permission, continuously check until granted
+        if (isWaitingForPermission)
+        {
             bool hasPermission = pluginClass.CallStatic<bool>("checkUsagePermission");
-            Debug.Log($"Usage Stats Permission Granted: {hasPermission}");
 
-            if (!hasPermission)
+            if (hasPermission)
             {
-                pluginClass.CallStatic("requestUsageStatsPermission");
-                Debug.Log("Requesting Usage Stats Permission...");
+                Debug.Log("Usage Stats Permission Granted");
+                isWaitingForPermission = false;
+                RetrieveAndDisplayUsageStats();
             }
-            else
+        }
+    }
+
+    void CheckAndRequestPermission()
+    {
+        bool hasPermission = pluginClass.CallStatic<bool>("checkUsagePermission");
+        Debug.Log($"Usage Stats Permission Granted: {hasPermission}");
+
+        if (!hasPermission)
+        {
+            pluginClass.CallStatic("requestUsageStatsPermission");
+            Debug.Log("Requesting Usage Stats Permission...");
+            isWaitingForPermission = true;  // Start checking in the Update method
+        }
+        else
+        {
+            RetrieveAndDisplayUsageStats();
+        }
+    }
+
+    void RetrieveAndDisplayUsageStats()
+    {
+        // Retrieve usage stats if permission is granted
+        using (AndroidJavaObject usageStatsList = pluginClass.CallStatic<AndroidJavaObject>("getUsageStats"))
+        {
+            if (usageStatsList == null)
             {
-                // Retrieve usage stats if permission is granted
-                using (AndroidJavaObject usageStatsList = pluginClass.CallStatic<AndroidJavaObject>("getUsageStats"))
+                Debug.LogError("Failed to retrieve usage stats list.");
+                return;
+            }
+
+            // Convert the Java list to a C# List
+            AndroidJavaObject[] usageStatsArray = usageStatsList.Call<AndroidJavaObject[]>("toArray");
+            if (usageStatsArray == null)
+            {
+                Debug.LogError("Failed to convert usage stats list to array.");
+                return;
+            }
+
+            List<UsageStat> usageStats = new();
+
+            foreach (AndroidJavaObject usageStat in usageStatsArray)
+            {
+                if (usageStat == null)
                 {
-                    if (usageStatsList == null)
+                    Debug.LogWarning("Encountered a null usageStat object.");
+                    continue;
+                }
+
+                string packageName = usageStat.Call<string>("getPackageName");
+                long lastTimeUsed = usageStat.Call<long>("getLastTimeUsed");
+                long totalTimeInForeground = usageStat.Call<long>("getTotalTimeInForeground");
+
+                if (socialMediaApps.ContainsKey(packageName))
+                {
+                    usageStats.Add(new UsageStat
                     {
-                        Debug.LogError("Failed to retrieve usage stats list.");
-                        return;
-                    }
-
-
-                    // Convert the Java list to a C# List
-                    AndroidJavaObject[] usageStatsArray = usageStatsList.Call<AndroidJavaObject[]>("toArray");
-                    if (usageStatsArray == null)
-                    {
-                        Debug.LogError("Failed to convert usage stats list to array.");
-                        return;
-                    }
-
-                    List<UsageStat> usageStats = new();
-
-                    foreach (AndroidJavaObject usageStat in usageStatsArray)
-                    {
-                        if (usageStat == null)
-                        {
-                            Debug.LogWarning("Encountered a null usageStat object.");
-                            continue;
-                        }
-
-                        string packageName = usageStat.Call<string>("getPackageName");
-                        long lastTimeUsed = usageStat.Call<long>("getLastTimeUsed");
-                        long totalTimeInForeground = usageStat.Call<long>("getTotalTimeInForeground");
-
-                        if (socialMediaApps.ContainsKey(packageName))
-                        {
-                            usageStats.Add(new UsageStat
-                            {
-                                PackageName = packageName,
-                                LastTimeUsed = lastTimeUsed,
-                                TotalTimeInForeground = totalTimeInForeground
-                            });
-                        }
-                    }
-
-                    DisplayUsageStats(usageStats);
+                        PackageName = packageName,
+                        LastTimeUsed = lastTimeUsed,
+                        TotalTimeInForeground = totalTimeInForeground
+                    });
                 }
             }
+
+            DisplayUsageStats(usageStats);
         }
     }
 
