@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/UserAuthentication/SampleScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
-    path: Assets/Scenes/Start.unity
-    guid: fc338175bbd92d84fa1d1b654f063bdc
-  - enabled: 1
     path: Assets/Scenes/MainMenu/Main Menu.unity
     guid: ba410add5b66e5944b87d9c6da100a9e
   - enabled: 1
@@ -45,23 +42,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Leaderboard/LoadLeaderBoard.unity
     guid: 1e3af837830e4564ca16863eed368b6f
   - enabled: 1
-    path: Assets/Scenes/Login.unity
-    guid: 92bda3cf26f779c4f9b672a4dfad0e4d
-  - enabled: 1
-    path: Assets/Scenes/LoginRegister.unity
-    guid: d58b668558370e148a386cad7db44b57
-  - enabled: 1
     path: Assets/Scenes/PickStarter.unity
     guid: 6642fa3e4f6d43843b34ef8e34229b9d
   - enabled: 1
     path: Assets/Scenes/Leaderboard/Quests.unity
     guid: 438ab7e7c47cf8b4da29c2ac6143c142
-  - enabled: 1
-    path: Assets/Scenes/Register.unity
-    guid: b190f46ce8a26b443afde630421707d2
-  - enabled: 1
-    path: Assets/Scenes/ResetPassword.unity
-    guid: 7e07ee8469d92f741b71d2ab0f1a4a63
   - enabled: 1
     path: Assets/Scenes/Settings/Settings.unity
     guid: 5c5807608f5f56042821fcc60b04e193
@@ -93,5 +78,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Store/BuyToys.unity
     guid: 8817146fb9db3b34ea606303dfa488a4
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: d69b735bfce11474e8cdca79265d9a82, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fa29865ee51cc2441b384e073b645726, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 47cb4c8f45b3a11458f282016e53161e, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: b32bc7ea2e4549f49a51a7fb8f37764d, type: 2}
