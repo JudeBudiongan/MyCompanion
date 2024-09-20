@@ -10,10 +10,10 @@ public class MainMenuController : MonoBehaviour
     public Image selectedOptionImage;
 
     // List of sprites for each companion (ensure the images are correctly assigned in the Inspector)
-    public Sprite option1Image;
-    public Sprite option2Image;
-    public Sprite option3Image;
-    public Sprite option4Image;
+    public Sprite option1Image;  // Alien sprite
+    public Sprite option2Image;  // Berry sprite
+    public Sprite option3Image;  // Grey sprite
+    public Sprite option4Image;  // Woshi sprite
 
     // Start is called before the first frame update
     void Start()
@@ -22,26 +22,28 @@ public class MainMenuController : MonoBehaviour
         string selectedOption = PlayerPrefs.GetString("SelectedOption", "No option selected");
         string selectedImageName = PlayerPrefs.GetString("SelectedImage", "default");
 
-        // Update the Text component with the chosen option
-        selectedOptionText.text = "You have selected: " + selectedOption;
-
-        // Load the corresponding image based on the name stored in PlayerPrefs
+        // Change the text based on the selected companion
         switch (selectedImageName)
         {
             case "alien-normal":  // Make sure the names match the sprite names
                 selectedOptionImage.sprite = option1Image;
+                selectedOptionText.text = "You have selected: Alien";
                 break;
             case "berry-normal":
                 selectedOptionImage.sprite = option2Image;
+                selectedOptionText.text = "You have selected: Berry";
                 break;
             case "grey-normal":
                 selectedOptionImage.sprite = option3Image;
+                selectedOptionText.text = "You have selected: Grey";
                 break;
             case "woshi-normal":
                 selectedOptionImage.sprite = option4Image;
+                selectedOptionText.text = "You have selected: Woshi";
                 break;
             default:
                 selectedOptionImage.sprite = null;  // No image if something goes wrong
+                selectedOptionText.text = "No option selected";
                 break;
         }
 
