@@ -102,13 +102,10 @@ public class AppUsagePluginInit : MonoBehaviour
                 ? socialMediaApps[stat.PackageName]
                 : stat.PackageName;
 
-            DateTime utcLastUsed = DateTimeOffset.FromUnixTimeMilliseconds(stat.LastTimeUsed).UtcDateTime;
-            DateTime localLastUsed = utcLastUsed.ToLocalTime();
-
             TimeSpan timeSpent = TimeSpan.FromMilliseconds(stat.TotalTimeInForeground);
             string formattedTimeSpent = $"{timeSpent.Hours}h {timeSpent.Minutes}m {timeSpent.Seconds}s";
 
-            Debug.Log($"App: {appName}, Package: {stat.PackageName}, Last Used: {localLastUsed}, Time Spent: {formattedTimeSpent}");
+            Debug.Log($"App: {appName}, Package: {stat.PackageName}, Time Spent: {formattedTimeSpent}");
         }
     }
 }
