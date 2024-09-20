@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; // Import UI for buttons and panels
-using UnityEngine.SceneManagement; // Import SceneManagement to load different scenes
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SelectCompanion : MonoBehaviour
 {
@@ -17,47 +17,53 @@ public class SelectCompanion : MonoBehaviour
     public Button yesButton;
     public Button noButton;
 
+    // Variables to store the selected option and image
+    private string selectedOption;
+    private Sprite selectedImage;  // Sprite for the selected companion's image
+
+    // References to the companion images for each option
+    public Sprite option1Image;
+    public Sprite option2Image;
+    public Sprite option3Image;
+    public Sprite option4Image;
+
     // Start is called before the first frame update
     void Start()
     {
-        // Make sure the notification panel is hidden at the start
         notificationPanel.SetActive(false);
 
-        // Add listener methods to the option buttons
-        option1Button.onClick.AddListener(ShowNotification);
-        option2Button.onClick.AddListener(ShowNotification);
-        option3Button.onClick.AddListener(ShowNotification);
-        option4Button.onClick.AddListener(ShowNotification);
+        // Add listeners to the option buttons
+        option1Button.onClick.AddListener(() => SelectOption("Option 1", option1Image));
+        option2Button.onClick.AddListener(() => SelectOption("Option 2", option2Image));
+        option3Button.onClick.AddListener(() => SelectOption("Option 3", option3Image));
+        option4Button.onClick.AddListener(() => SelectOption("Option 4", option4Image));
 
-        // Add listener methods to Yes and No buttons
+        // Add listeners to Yes and No buttons
         yesButton.onClick.AddListener(GoToMainMenu);
         noButton.onClick.AddListener(GoBackToPickStarter);
-
-        // Ensure Yes and No buttons are initially interactable
-        yesButton.interactable = true;
-        noButton.interactable = true;
     }
 
-    // Method to show the notification panel
-    void ShowNotification()
+    // Method to select an option and show the notification panel
+    void SelectOption(string option, Sprite image)
     {
-        notificationPanel.SetActive(true);
-        // Optionally disable option buttons to prevent further interaction until decision
-        option1Button.interactable = false;
-        option2Button.interactable = false;
-        option3Button.interactable = false;
-        option4Button.interactable = false;
+        selectedOption = option;
+        selectedImage = image;
+        notificationPanel.SetActive(true);  // Show notification panel
     }
 
     // Method to handle Yes button click - go to Main Menu
     void GoToMainMenu()
     {
-        SceneManager.LoadScene("Main Menu"); // Replace "Main Menu" with the actual scene name
+        // Store the selected option and image name in PlayerPrefs
+        PlayerPrefs.SetString("SelectedOption", selectedOption);
+        PlayerPrefs.SetString("SelectedImage", selectedImage.name);  // Store the image name
+
+        SceneManager.LoadScene("Main Menu");
     }
 
     // Method to handle No button click - return to PickStarter
     void GoBackToPickStarter()
     {
-        SceneManager.LoadScene("PickStarter"); // Replace "PickStarter" with the actual scene name
+        notificationPanel.SetActive(false);  // Hide the notification panel
     }
 }

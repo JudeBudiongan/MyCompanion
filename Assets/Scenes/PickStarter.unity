@@ -631,10 +631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1586,7 +1586,7 @@ GameObject:
   - component: {fileID: 1729993641}
   - component: {fileID: 1729993640}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Choose Your Companion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1835,6 +1835,10 @@ MonoBehaviour:
   option4Button: {fileID: 1243369056}
   yesButton: {fileID: 1501831252}
   noButton: {fileID: 1937576526}
+  option1Image: {fileID: 21300000, guid: a1a680f56949390488f4fceca718f07b, type: 3}
+  option2Image: {fileID: 21300000, guid: 28d41f2d36250fe47bf89424d9ca9fc3, type: 3}
+  option3Image: {fileID: 21300000, guid: ed677e32c9cd9634c95f65ea96a5427c, type: 3}
+  option4Image: {fileID: 21300000, guid: 886d1afe334561243a9eb21a11180357, type: 3}
 --- !u!4 &1978768548
 Transform:
   m_ObjectHideFlags: 0
