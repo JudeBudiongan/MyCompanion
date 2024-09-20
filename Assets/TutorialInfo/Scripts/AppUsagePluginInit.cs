@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class AppUsagePluginInit : MonoBehaviour
 {
+    public Text usageStatsText;
+
     // List of known social media package names
     private readonly Dictionary<string, string> socialMediaApps = new Dictionary<string, string>
     {
@@ -96,6 +99,11 @@ public class AppUsagePluginInit : MonoBehaviour
             return;
         }
 
+        // Sort the list in descending order of time spent
+        usageStats.Sort((x, y) => y.TotalTimeInForeground.CompareTo(x.TotalTimeInForeground));
+
+        // Build the display string
+        string displayText = "";
         foreach (var stat in usageStats)
         {
             string appName = socialMediaApps.ContainsKey(stat.PackageName)
@@ -106,6 +114,10 @@ public class AppUsagePluginInit : MonoBehaviour
             string formattedTimeSpent = $"{timeSpent.Hours}h {timeSpent.Minutes}m {timeSpent.Seconds}s";
 
             Debug.Log($"App: {appName}, Package: {stat.PackageName}, Time Spent: {formattedTimeSpent}");
+
+            displayText += $"App: {appName}, Time Spent: {formattedTimeSpent}\n";
         }
+
+        usageStatsText.text = displayText;
     }
 }
