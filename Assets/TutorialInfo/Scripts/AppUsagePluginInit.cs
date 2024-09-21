@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class AppUsagePluginInit : MonoBehaviour
 {
-    public Text usageStatsText;
+    public GameObject appUsageItemPrefab; // Reference to your prefab
+    public Transform contentPanel; // Reference to the Content panel of the Scroll View
 
     // List of known social media package names
     private readonly Dictionary<string, string> socialMediaApps = new Dictionary<string, string>
@@ -80,7 +81,7 @@ public class AppUsagePluginInit : MonoBehaviour
                             {
                                 PackageName = packageName,
                                 LastTimeUsed = lastTimeUsed,
-                                TotalTimeInForeground = totalTimeInForeground
+                                TotalTimeUsed = totalTimeInForeground
                             });
                         }
                     }
@@ -100,24 +101,27 @@ public class AppUsagePluginInit : MonoBehaviour
         }
 
         // Sort the list in descending order of time spent
-        usageStats.Sort((x, y) => y.TotalTimeInForeground.CompareTo(x.TotalTimeInForeground));
+        usageStats.Sort((x, y) => y.TotalTimeUsed.CompareTo(x.TotalTimeUsed));
 
-        // Build the display string
-        string displayText = "";
-        foreach (var stat in usageStats)
+        // Clear existing items in the content panel
+        foreach (Transform child in contentPanel)
         {
-            string appName = socialMediaApps.ContainsKey(stat.PackageName)
-                ? socialMediaApps[stat.PackageName]
-                : stat.PackageName;
-
-            TimeSpan timeSpent = TimeSpan.FromMilliseconds(stat.TotalTimeInForeground);
-            string formattedTimeSpent = $"{timeSpent.Hours}h {timeSpent.Minutes}m {timeSpent.Seconds}s";
-
-            Debug.Log($"App: {appName}, Package: {stat.PackageName}, Time Spent: {formattedTimeSpent}");
-
-            displayText += $"App: {appName}, Time Spent: {formattedTimeSpent}\n";
+            Destroy(child.gameObject);
         }
 
-        usageStatsText.text = displayText;
+        foreach (var stat in usageStats)
+        {
+            GameObject newItem = Instantiate(appUsageItemPrefab, contentPanel);
+            var appNameText = newItem.transform.Find("AppName").GetComponent<Text>();
+            var timeUsedText = newItem.transform.Find("TimeUsed").GetComponent<Text>();
+
+            string appName = socialMediaApps[stat.PackageName];
+            TimeSpan timeUsed = TimeSpan.FromMilliseconds(stat.TotalTimeUsed);
+            string formattedTimeUsed = $"{timeUsed.Hours}h {timeUsed.Minutes}m {timeUsed.Seconds}s";
+            Debug.Log($"App: {appName}, Time Spent: {formattedTimeUsed}");
+
+            appNameText.text = appName;
+            timeUsedText.text = formattedTimeUsed;
+        }
     }
 }
