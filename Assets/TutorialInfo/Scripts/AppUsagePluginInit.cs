@@ -61,7 +61,7 @@ public class AppUsagePluginInit : MonoBehaviour
                         return;
                     }
 
-                    List<UsageStat> usageStats = new();
+                    Dictionary<string, UsageStat> usageStats = new();
 
                     foreach (AndroidJavaObject usageStat in usageStatsArray)
                     {
@@ -77,16 +77,20 @@ public class AppUsagePluginInit : MonoBehaviour
 
                         if (socialMediaApps.ContainsKey(packageName))
                         {
-                            usageStats.Add(new UsageStat
-                            {
-                                PackageName = packageName,
-                                LastTimeUsed = lastTimeUsed,
-                                TotalTimeUsed = totalTimeInForeground
-                            });
+                            if (usageStats.ContainsKey(packageName)) {  
+                                usageStats[packageName].TotalTimeUsed += totalTimeInForeground; // Update time if duplicate entry encountered
+                            } else {
+                                usageStats[packageName] = new UsageStat
+                                {
+                                    PackageName = packageName,
+                                    LastTimeUsed = lastTimeUsed,
+                                    TotalTimeUsed = totalTimeInForeground
+                                };
+                            }
                         }
                     }
 
-                    DisplayUsageStats(usageStats);
+                    DisplayUsageStats(new List<UsageStat>(usageStats.Values));
                 }
             }
         }
