@@ -21,7 +21,7 @@ public class buttoninfoPets : MonoBehaviour
         if (selectedItem != null)
         {
             PriceTxt.text = "Price: $" + selectedItem.price.ToString();
-            BoughtTxt.text = selectedItem.bought ? "Bought" : "Not Bought"; // Update BoughtTxt
+            BoughtTxt.text = selectedItem.bought ? "Owned" : " "; // Update BoughtTxt
         }
     }
 }

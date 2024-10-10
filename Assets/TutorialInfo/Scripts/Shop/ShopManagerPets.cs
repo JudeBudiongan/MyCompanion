@@ -60,7 +60,7 @@ public class ShopManagerPets : MonoBehaviour
 
             // Update UI
             CoinsTxt.text = "Coins: " + coins;
-            ButtonRef.GetComponent<buttoninfoPets>().BoughtTxt.text = "Bought"; // Update Bought status
+            ButtonRef.GetComponent<buttoninfoPets>().BoughtTxt.text = "Owned"; // Update Bought status
         }
         else
         {
