@@ -140,32 +140,32 @@ public class LoginUI : MonoBehaviour
             string.IsNullOrEmpty(signupCPassword.text) || 
             string.IsNullOrEmpty(signupUsername.text))
         {
-            DisplayNotification("Error", "Please fill in all sign-up fields.");
+            DisplayNotification("Error", "Please fill in all sign-up fields."); // Checks if user has filled out all sign in fields
         }
         else if (!IsValidEmail(signupEmail.text))
         {
-            DisplayNotification("Error", "Please enter a valid email address.");
+            DisplayNotification("Error", "Please enter a valid email address."); // Checks if user has put a valid email
         }
         else if (!IsValidPassword(signupPassword.text)) // Password strength check
         {
-            DisplayNotification("Error", "Password must be at least 6 characters long, contain at least 1 uppercase letter, 1 lowercase letter, and 1 symbol.");
+            DisplayNotification("Error", "Password must be at least 6 characters long, contain at least 1 uppercase letter, 1 lowercase letter, and 1 symbol."); 
         }
         else if (signupPassword.text != signupCPassword.text)
         {
-            DisplayNotification("Error", "Passwords do not match.");
+            DisplayNotification("Error", "Passwords do not match."); // If passwords don't match
         }
         else if (!IsUsernameLengthValid(signupUsername.text)) 
         {
-            DisplayNotification("Error", "Username must be between 3 and 15 characters long.");
+            DisplayNotification("Error", "Username must be between 3 and 15 characters long."); // Checks if username is too short or long
         }
         else if (!IsUsernameCharactersValid(signupUsername.text)) 
         {
-            DisplayNotification("Error", "Username can only contain letters, underscores, and full stops.");
+            DisplayNotification("Error", "Username can only contain letters, underscores, and full stops."); // Checks if the username has invalid characters  
         }
         else
         {
             // Call SceneManager's LoadScene method
-            sceneManager.LoadScene("PickStarter");  
+            sceneManager.LoadScene("PickStarter");  // Goes to the select starter screen
         }
     }
 
@@ -206,7 +206,6 @@ public class LoginUI : MonoBehaviour
         string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9\W]).{6,}$";
         return Regex.IsMatch(password, passwordPattern);
     }
-
 
     // Validates email format
     private bool IsValidEmail(string email)

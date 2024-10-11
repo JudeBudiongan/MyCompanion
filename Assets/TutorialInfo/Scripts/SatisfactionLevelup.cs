@@ -1,49 +1,44 @@
 using System;
 
-public class Pet {
-    public int Level {get; private set;}
-    public int Satisfaction{get; private set;}
+public class SatisfactionManager
+{
+    public int SatisfactionLevel { get; private set; }
+    public int Level { get; private set; }
 
-    public Pet() {
-        Level = 1;
-        Satisfaction = 100;
+    public SatisfactionManager()
+    {
+        SatisfactionLevel = 50; // Default initial satisfaction
+        Level = 1;              // Default initial level
     }
 
-    public void IncreaseSatisfaction(int amount) {
-        Satisfaction += amount;
-        if (Satisfaction > 100) {
-            Satisfaction = 100;
+    public void IncreaseSatisfaction(int amount)
+    {
+        SatisfactionLevel += amount;
+        if (SatisfactionLevel > 100)
+        {
+            SatisfactionLevel = 100;
         }
     }
 
-    public void DecreaseSatisfaction(int amount) {
-        Satisfaction -= amount;
-        if (Satisfaction < 0) {
-            Satisfaction = 0;
+    public void DecreaseSatisfaction(int amount)
+    {
+        SatisfactionLevel -= amount;
+        if (SatisfactionLevel < 0)
+        {
+            SatisfactionLevel = 0;
         }
     }
 
-    public void LevelUp() {
+    public void LevelUp()
+    {
         Level++;
         ResetSatisfaction();
+        Console.WriteLine($"Hooray! Companion leveled up to {Level}!");
     }
 
-    public void ResetSatisfaction() {
-        Satisfaction = 100;
-        Console.WriteLine($"Hooray! Your companion has levelled up to {Level} and satisfaction has been reset to 100%.");
-
-    }
-}
-
-class Program
-{
-    static void Main(string[] args) {
-        Pet myPet = new Pet();
-
-        myPet.DecreaseSatisfaction(25); //satisfaction drops to 75%
-        Console.WriteLine($"Pet Satisfaction: {myPet.Satisfaction}%");
-
-        myPet.LevelUp();
-        Console.WriteLine($"Pet satisfaction after level up {myPet.Satisfaction}%");
+    public void ResetSatisfaction()
+    {
+        SatisfactionLevel = 100; // Reset to full satisfaction on level up
+        Console.WriteLine("Satisfaction has been reset to 100.");
     }
 }
