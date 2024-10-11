@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,50 +6,52 @@ using UnityEngine.EventSystems;
 
 public class ShopManagerPets : MonoBehaviour
 {
-    // Define a class to hold item information
     [System.Serializable]
     public class ShopItem
     {
         public int ID;
         public float price;
         public bool bought;
+        public string itemName;
+        public string author;  // Author who created the sprite
 
-        public ShopItem(int id, float price)
+        public ShopItem(int id, float price, string name, string author)
         {
             this.ID = id;
             this.price = price;
             this.bought = false;
+            this.itemName = name;
+            this.author = author;
         }
     }
 
     public List<ShopItem> shopItems = new List<ShopItem>();
     public float coins;
     public Text CoinsTxt;
+    public CompanionManager companionManager;  // Reference to CompanionManager
 
-    // Start is called before the first frame update
     void Start()
     {
         CoinsTxt.text = "Coins: " + coins;
 
-        // Add items to the shop with ID and Price
-        shopItems.Add(new ShopItem(1, 10)); 
-        shopItems.Add(new ShopItem(2, 20)); 
-        shopItems.Add(new ShopItem(3, 30)); 
-        shopItems.Add(new ShopItem(4, 40));
-        shopItems.Add(new ShopItem(5, 10)); 
-        shopItems.Add(new ShopItem(6, 20)); 
-        shopItems.Add(new ShopItem(7, 30)); 
-        shopItems.Add(new ShopItem(8, 40)); 
-        shopItems.Add(new ShopItem(9, 40)); 
+        // Add shop items with ID, Price, Name, and Author
+        shopItems.Add(new ShopItem(1, 10, "Grim-Wooper", "Author A"));
+        shopItems.Add(new ShopItem(2, 20, "Fak", "Author B"));
+        shopItems.Add(new ShopItem(3, 30, "xv6-riscv", "Author C"));
+        shopItems.Add(new ShopItem(4, 40, "T-Tiddy", "Author D"));
+        shopItems.Add(new ShopItem(5, 10, "Priscue", "Author E"));
+        shopItems.Add(new ShopItem(6, 20, "Sushi-Slayer", "Author F"));
+        shopItems.Add(new ShopItem(7, 30, "R-Filly", "Author G"));
+        shopItems.Add(new ShopItem(8, 40, "Alien", "Author H"));
+        shopItems.Add(new ShopItem(9, 40, "Cat", "Author I"));
     }
 
-    // Buy method
+    // Method to handle buying a pet
     public void Buy()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
         var itemID = ButtonRef.GetComponent<buttoninfoPets>().ItemID;
 
-        // Find the item in the shopItems list based on ID
         ShopItem selectedItem = shopItems.Find(item => item.ID == itemID);
 
         if (selectedItem != null && coins >= selectedItem.price && !selectedItem.bought)
@@ -60,7 +61,10 @@ public class ShopManagerPets : MonoBehaviour
 
             // Update UI
             CoinsTxt.text = "Coins: " + coins;
-            ButtonRef.GetComponent<buttoninfoPets>().BoughtTxt.text = "Owned"; // Update Bought status
+            ButtonRef.GetComponent<buttoninfoPets>().BoughtTxt.text = "Owned";
+
+            // Sync with CompanionManager: Mark the pet as bought
+            companionManager.SetCompanionBought(itemID);
         }
         else
         {
