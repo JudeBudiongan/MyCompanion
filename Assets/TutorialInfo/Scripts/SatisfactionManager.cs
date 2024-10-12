@@ -1,4 +1,4 @@
-using System;
+/*using UnityEngine;
 
 public class SatisfactionManager
 {
@@ -33,12 +33,13 @@ public class SatisfactionManager
     {
         Level++;
         ResetSatisfaction();
-        Console.WriteLine($"Hooray! Companion leveled up to {Level}!");
+        Debug.Log($"Hooray! Companion leveled up to {Level}!");
     }
 
     public void ResetSatisfaction()
     {
         SatisfactionLevel = 100; // Reset to full satisfaction on level up
-        Console.WriteLine("Satisfaction has been reset to 100.");
+        Debug.Log("Satisfaction has been reset to 100.");
     }
 }
+*/

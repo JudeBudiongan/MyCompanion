@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,43 +6,45 @@ using UnityEngine.EventSystems;
 public class ShopManagerPets : MonoBehaviour
 {
     [System.Serializable]
-    public class ShopItem
+    public class ShopPets
     {
         public int ID;
         public float price;
         public bool bought;
-        public string itemName;
-        public string author;  // Author who created the sprite
 
-        public ShopItem(int id, float price, string name, string author)
+        public ShopPets(int id, float price)
         {
             this.ID = id;
             this.price = price;
             this.bought = false;
-            this.itemName = name;
-            this.author = author;
         }
     }
 
-    public List<ShopItem> shopItems = new List<ShopItem>();
-    public float coins;
+    public List<ShopPets> shopItems = new List<ShopPets>();
     public Text CoinsTxt;
     public CompanionManager companionManager;  // Reference to CompanionManager
+    public CoinManager coinManager;            // Reference to CoinManager
 
     void Start()
     {
-        CoinsTxt.text = "Coins: " + coins;
+        // Set initial coin display from CoinManager
+        UpdateCoinDisplay();
 
-        // Add shop items with ID, Price, Name, and Author
-        shopItems.Add(new ShopItem(1, 10, "Grim-Wooper", "Author A"));
-        shopItems.Add(new ShopItem(2, 20, "Fak", "Author B"));
-        shopItems.Add(new ShopItem(3, 30, "xv6-riscv", "Author C"));
-        shopItems.Add(new ShopItem(4, 40, "T-Tiddy", "Author D"));
-        shopItems.Add(new ShopItem(5, 10, "Priscue", "Author E"));
-        shopItems.Add(new ShopItem(6, 20, "Sushi-Slayer", "Author F"));
-        shopItems.Add(new ShopItem(7, 30, "R-Filly", "Author G"));
-        shopItems.Add(new ShopItem(8, 40, "Alien", "Author H"));
-        shopItems.Add(new ShopItem(9, 40, "Cat", "Author I"));
+        // Add shop items with ID and Price
+        shopItems.Add(new ShopPets(4, 50));  // Grim-Wooper
+        shopItems.Add(new ShopPets(5, 73));  // Fak
+        shopItems.Add(new ShopPets(6, 873)); // xv6-riscv
+        shopItems.Add(new ShopPets(7, 69));  // T-Tiddy
+        shopItems.Add(new ShopPets(8, 573)); // Priscue
+        shopItems.Add(new ShopPets(9, 699)); // Sushi-Slayer
+        shopItems.Add(new ShopPets(10, 1));   // R-Filly
+        shopItems.Add(new ShopPets(11, 30));  // Eilmar
+    }
+
+    // Method to update coin display
+    private void UpdateCoinDisplay()
+    {
+        CoinsTxt.text = "Coins: " + coinManager.TotalCoins; // Synchronize with CoinManager
     }
 
     // Method to handle buying a pet
@@ -52,15 +53,16 @@ public class ShopManagerPets : MonoBehaviour
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
         var itemID = ButtonRef.GetComponent<buttoninfoPets>().ItemID;
 
-        ShopItem selectedItem = shopItems.Find(item => item.ID == itemID);
+        ShopPets selectedItem = shopItems.Find(item => item.ID == itemID);
 
-        if (selectedItem != null && coins >= selectedItem.price && !selectedItem.bought)
+        if (selectedItem != null && coinManager.TotalCoins >= selectedItem.price && !selectedItem.bought)
         {
-            coins -= selectedItem.price;
+            // Deduct the price using the new method in CoinManager
+            coinManager.DeductCoins(selectedItem.price);
             selectedItem.bought = true;
 
             // Update UI
-            CoinsTxt.text = "Coins: " + coins;
+            UpdateCoinDisplay();
             ButtonRef.GetComponent<buttoninfoPets>().BoughtTxt.text = "Owned";
 
             // Sync with CompanionManager: Mark the pet as bought

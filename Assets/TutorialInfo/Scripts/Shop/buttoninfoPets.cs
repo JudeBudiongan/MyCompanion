@@ -15,7 +15,6 @@ public class buttoninfoPets : MonoBehaviour
     public Sprite HappySprite; // Happy pet sprite after purchase
     public GameObject ShopManager;
     
-
     public ScrollRect scrollRect;
 
     private float bounceSpeedIncrease = 5f; // Multiplier to increase bounce speed after purchase
@@ -34,29 +33,41 @@ public class buttoninfoPets : MonoBehaviour
     {
         var shopManagerScript = ShopManager.GetComponent<ShopManagerPets>();
         var selectedItem = shopManagerScript.shopItems.Find(item => item.ID == ItemID);
+        var companionManager = shopManagerScript.companionManager;
 
         if (selectedItem != null)
         {
             PriceTxt.text = "Price: $" + selectedItem.price.ToString();
-            NameTxt.text = selectedItem.itemName;
 
-            if (selectedItem.bought)
+            // Get companion details from CompanionManager
+            if (ItemID < companionManager.companions.Count) // Ensure index is valid
             {
-                BoughtTxt.text = "Owned";
-                PetImage.sprite = HappySprite; // Change to happy sprite
-                
-                // Increase bounce speed once
-                if (!hasAccelerated)
+                var companion = companionManager.companions[ItemID];
+
+                if (companion != null)
                 {
-                    float currentBobSpeed = PetImage.GetComponent<BobUpDownUI>().bobSpeed;
-                    PetImage.GetComponent<BobUpDownUI>().bobSpeed = currentBobSpeed * bounceSpeedIncrease;
-                    hasAccelerated = true; // Set flag to true to prevent further increases
+                    NameTxt.text = companion.PetName;
+                    AuthorTxt.text = companion.Author;
+
+                    if (selectedItem.bought)
+                    {
+                        BoughtTxt.text = "Owned";
+                        PetImage.sprite = HappySprite; // Change to happy sprite
+
+                        // Increase bounce speed once
+                        if (!hasAccelerated)
+                        {
+                            float currentBobSpeed = PetImage.GetComponent<BobUpDownUI>().bobSpeed;
+                            PetImage.GetComponent<BobUpDownUI>().bobSpeed = currentBobSpeed * bounceSpeedIncrease;
+                            hasAccelerated = true; // Set flag to true to prevent further increases
+                        }
+                    }
+                    else
+                    {
+                        BoughtTxt.text = "Not Owned";
+                        PetImage.sprite = NormalSprite; // Normal sprite
+                    }
                 }
-            }
-            else
-            {
-                BoughtTxt.text = "Not Owned";
-                PetImage.sprite = NormalSprite; // Normal sprite
             }
         }
     }
