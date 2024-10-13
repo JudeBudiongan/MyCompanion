@@ -145,12 +145,12 @@ public class WeeklyUsagePluginInit : MonoBehaviour
         TimeSpan totalUsageTime = TimeSpan.FromMilliseconds(totalTime);
         string formattedTime = $"{totalUsageTime.Hours}h {totalUsageTime.Minutes}m {totalUsageTime.Seconds}s";
 
-        Debug.Log($"Total social media Usage for this week: {formattedTime}");
+        Debug.Log($"Total social media Usage for the last 7 days: {formattedTime}");
 
         var totalUsageText = contentPanel.Find("TotalUsageText").GetComponent<Text>();
         if (totalUsageText != null)
         {
-            totalUsageText.text = $"Total Time This Week: {formattedTime}";
+            totalUsageText.text = $"Total Time Last 7 Days: {formattedTime}";
         }
     }
 }

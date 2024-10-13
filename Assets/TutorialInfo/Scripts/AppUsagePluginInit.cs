@@ -144,7 +144,7 @@ public class AppUsagePluginInit : MonoBehaviour
         TimeSpan totalUsageTime = TimeSpan.FromMilliseconds(totalTime);
         string formattedTime = $"{totalUsageTime.Hours}h {totalUsageTime.Minutes}m {totalUsageTime.Seconds}s";
 
-        Debug.Log($"Total social media Usage for this week: {formattedTime}");
+        Debug.Log($"Total social media Usage for today: {formattedTime}");
 
         var totalUsageText = contentPanel.Find("TotalUsageText").GetComponent<Text>();
         if (totalUsageText != null)
