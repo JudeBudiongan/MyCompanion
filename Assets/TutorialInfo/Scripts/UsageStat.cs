@@ -7,5 +7,5 @@ public class UsageStat
     public string PackageName { get; set; }
 
     public long LastTimeUsed { get; set; }
-    public long TotalTimeInForeground { get; set; }
+    public long TotalTimeUsed { get; set; }
 }

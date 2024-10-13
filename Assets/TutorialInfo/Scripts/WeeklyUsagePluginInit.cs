@@ -1,9 +1,10 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.UI;
 
-public class AppUsagePluginInit : MonoBehaviour
+public class WeeklyUsagePluginInit : MonoBehaviour
 {
     public GameObject appUsageItemPrefab; // Reference to your prefab
     public Transform contentPanel; // Reference to the Content panel of the Scroll View
@@ -44,11 +45,11 @@ public class AppUsagePluginInit : MonoBehaviour
             else
             {
                 // Retrieve usage stats if permission is granted
-                using (AndroidJavaObject usageStatsList = pluginClass.CallStatic<AndroidJavaObject>("getUsageStatsToday"))
+                using (AndroidJavaObject usageStatsList = pluginClass.CallStatic<AndroidJavaObject>("getUsageStatsThisWeek"))
                 {
                     if (usageStatsList == null)
                     {
-                        Debug.LogError("Failed to retrieve usage stats list.");
+                        Debug.LogError("Failed to retrieve this week usage stats list.");
                         return;
                     }
 
@@ -80,6 +81,7 @@ public class AppUsagePluginInit : MonoBehaviour
                         if (socialMediaApps.ContainsKey(packageName))
                         {
                             totalSocialMediaTime += totalTimeInForeground;
+
                             if (usageStats.ContainsKey(packageName))
                             {
                                 usageStats[packageName].TotalTimeUsed += totalTimeInForeground; // Update time if duplicate entry encountered
@@ -117,8 +119,7 @@ public class AppUsagePluginInit : MonoBehaviour
         // Clear existing items in the content panel
         foreach (Transform child in contentPanel)
         {
-            if (child.name != "TotalUsageText")
-            {
+            if (child.name != "TotalUsageText") {
                 Destroy(child.gameObject);
             }
         }
@@ -149,7 +150,7 @@ public class AppUsagePluginInit : MonoBehaviour
         var totalUsageText = contentPanel.Find("TotalUsageText").GetComponent<Text>();
         if (totalUsageText != null)
         {
-            totalUsageText.text = $"Total Time Today: {formattedTime}";
+            totalUsageText.text = $"Total Time This Week: {formattedTime}";
         }
     }
 }
