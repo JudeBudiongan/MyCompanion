@@ -2826,6 +2826,8 @@ MonoBehaviour:
   CoinsTxt: {fileID: 280909872}
   companionManager: {fileID: 1442833137}
   coinManager: {fileID: 1791577974}
+  itemPrefab: {fileID: 1890507566}
+  itemsParent: {fileID: 0}
 --- !u!4 &789047544
 Transform:
   m_ObjectHideFlags: 0
