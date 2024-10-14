@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,64 +25,51 @@ public class ShopManagerPets : MonoBehaviour
     public Text CoinsTxt;
     public CompanionManager companionManager;  // Reference to CompanionManager
     public CoinManager coinManager;            // Reference to CoinManager
-    public GameObject itemPrefab;              // Drag your prefab into this variable in the inspector
-    public Transform itemsParent;               // Parent transform to hold instantiated items
-    public static ShopManagerPets Instance;
 
-    void Awake()
+    void Awake() {
+        if (coinManager == null)
+        {
+            coinManager = FindObjectOfType<CoinManager>();
+        }
+
+        if (companionManager == null)
+        {
+            companionManager = FindObjectOfType<CompanionManager>();
+        }
+    }
+
+    IEnumerator DelayedInitialization()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject); // Destroy duplicate instances
-        }
+        yield return new WaitForSeconds(0.1f); // Slight delay before trying to find the objects
+        coinManager = FindObjectOfType<CoinManager>();
+        companionManager = FindObjectOfType<CompanionManager>();
+        UpdateCoinDisplay();
+        SyncShopItemsWithCompanionManager();  // New function call to ensure correct item state
     }
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        LoadPetData(); // Load previously saved pet data
-        UpdateCoinDisplay(); // Set initial coin display from CoinManager
-        AddShopItems(); // Add items to the shop
-        PopulateShopUI(); // Populate the UI with items
+        StartCoroutine(DelayedInitialization());
+
+        // Add shop items with ID and Price
+        shopItems.Add(new ShopPets(4, 50));
+        shopItems.Add(new ShopPets(5, 73));
+        shopItems.Add(new ShopPets(6, 873));
+        shopItems.Add(new ShopPets(7, 69));
+        shopItems.Add(new ShopPets(8, 573));
+        shopItems.Add(new ShopPets(9, 699));
+        shopItems.Add(new ShopPets(10, 1));
+        shopItems.Add(new ShopPets(11, 30));
+
+        // Sync all button states to ensure they reflect the correct bought status
+        RefreshButtonStates();
     }
 
-    // Method to add shop items
-    private void AddShopItems()
-    {
-        shopItems.Add(new ShopPets(4, 50));  // Grim-Wooper
-        shopItems.Add(new ShopPets(5, 73));  // Fak
-        shopItems.Add(new ShopPets(6, 873)); // xv6-riscv
-        shopItems.Add(new ShopPets(7, 69));  // T-Tiddy
-        shopItems.Add(new ShopPets(8, 573)); // Priscue
-        shopItems.Add(new ShopPets(9, 699)); // Sushi-Slayer
-        shopItems.Add(new ShopPets(10, 1));   // R-Filly
-        shopItems.Add(new ShopPets(11, 30));  // Eilmar
-    }
-
-    // Method to populate the shop UI with items
-    private void PopulateShopUI()
-    {
-        foreach (var shopItem in shopItems)
-        {
-            GameObject itemInstance = Instantiate(itemPrefab, itemsParent); // Instantiate item prefab
-            var buttonInfo = itemInstance.GetComponent<buttoninfoPets>(); // Get buttoninfoPets script from the instantiated item
-            buttonInfo.ItemID = shopItem.ID; // Set the ItemID
-            buttonInfo.UpdateUI(); // Call UpdateUI to initialize the item details
-        }
-    }
-
-    // Method to update coin display
     private void UpdateCoinDisplay()
     {
         CoinsTxt.text = "Coins: " + coinManager.TotalCoins; // Synchronize with CoinManager
     }
 
-    // Method to handle buying a pet
     public void Buy()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
@@ -95,13 +83,15 @@ public class ShopManagerPets : MonoBehaviour
             coinManager.DeductCoins(selectedItem.price);
             selectedItem.bought = true;
 
-            // Save pet data
-            SavePetData();
-
             // Update UI
             UpdateCoinDisplay();
-            ButtonRef.GetComponent<buttoninfoPets>().UpdateUI(); // Update the button info UI
-            companionManager.SetCompanionBought(itemID); // Sync with CompanionManager
+            ButtonRef.GetComponent<buttoninfoPets>().BoughtTxt.text = "Owned";
+
+            // Sync with CompanionManager: Mark the pet as bought
+            companionManager.SetCompanionBought(itemID);
+
+            // Refresh button state for this item
+            ButtonRef.GetComponent<buttoninfoPets>().UpdateButtonState();
         }
         else
         {
@@ -109,23 +99,22 @@ public class ShopManagerPets : MonoBehaviour
         }
     }
 
-    // Method to save pet data
-    private void SavePetData()
+    // Method to refresh button states across all buttons in the scene
+    private void RefreshButtonStates()
     {
-        for (int i = 0; i < shopItems.Count; i++)
+        foreach (var button in FindObjectsOfType<buttoninfoPets>())
         {
-            PlayerPrefs.SetInt("Pet_" + shopItems[i].ID, shopItems[i].bought ? 1 : 0);
+            button.UpdateButtonState();
         }
-        PlayerPrefs.Save(); // Ensure the data is saved
     }
 
-    // Method to load pet data
-    private void LoadPetData()
+    // Sync the bought status of ShopPets with CompanionManager on scene load
+    private void SyncShopItemsWithCompanionManager()
     {
-        for (int i = 0; i < shopItems.Count; i++)
+        foreach (var shopPet in shopItems)
         {
-            int bought = PlayerPrefs.GetInt("Pet_" + shopItems[i].ID, 0);
-            shopItems[i].bought = bought == 1;
+            shopPet.bought = companionManager.IsCompanionBought(shopPet.ID);
         }
+        RefreshButtonStates();
     }
 }

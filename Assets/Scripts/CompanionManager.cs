@@ -15,17 +15,6 @@ public class CompanionManager : MonoBehaviour
             Author = author;
         }
     }
-    public static CompanionManager Instance;
-
-    void Awake() {
-        if (Instance == null) {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        } else {
-            Destroy(gameObject); // Destroy duplicate instances
-        }
-    }
-
 
     [System.Serializable]
     public class Companion : Pet
@@ -82,11 +71,21 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
+    public static CompanionManager Instance;
+    void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+     } else {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+    }
+
+
     public List<Companion> companions = new List<Companion>();
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         // Add companions to the list with IDs, names, and authors
 
         // STARTER COMPANIONS 
@@ -104,8 +103,6 @@ public class CompanionManager : MonoBehaviour
         companions.Add(new Companion(9, "Sushi-Slayer", "JZ"));
         companions.Add(new Companion(10, "R-Filly", "AB"));
         companions.Add(new Companion(11, "Eilmar", "ES")); 
-
-        // ADD MORE COMPANIONS HERE
     }
 
     public void SetCompanionBought(int companionID)
@@ -128,5 +125,15 @@ public class CompanionManager : MonoBehaviour
             return companions[companionID];
         }
         return null;
+    }
+
+    // New method to check if a companion is bought
+    public bool IsCompanionBought(int companionID)
+    {
+        if (companionID >= 0 && companionID < companions.Count)
+        {
+            return companions[companionID].IsBought;
+        }
+        return false; // Return false if the ID is invalid
     }
 }

@@ -5,36 +5,34 @@ using UnityEngine.UI;
 
 public class buttoninfoPets : MonoBehaviour
 {
-    public int ItemID; 
-    public Text PriceTxt; 
+    public int ItemID;
+    public Text PriceTxt; // Text fields
     public Text BoughtTxt;
     public Text NameTxt;
     public Text AuthorTxt; 
-    public Image PetImage; 
-    public Sprite NormalSprite; 
-    public Sprite HappySprite; 
-    public GameObject ShopManager; 
+    public Image PetImage; // Image component to change the pet sprite
+    public Sprite NormalSprite; // Normal pet sprite
+    public Sprite HappySprite; // Happy pet sprite after purchase
+    public GameObject ShopManager;
+    
     public ScrollRect scrollRect;
 
-    private float bounceSpeedIncrease = 5f; 
-    private bool hasAccelerated = false; 
-
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject); // Keep this instance alive across scenes
-    }
+    private float bounceSpeedIncrease = 5f; // Multiplier to increase bounce speed after purchase
+    private bool hasAccelerated = false; // Track if bounce speed has been increased
 
     void Start()
     {
+        // Ensure the scroll view starts at the top
         if (scrollRect != null)
         {
-            scrollRect.verticalNormalizedPosition = 1f; 
+            scrollRect.verticalNormalizedPosition = 1f; // Sets the scroll position to the top
         }
-        
-        UpdateUI();
+
+        // Reflects the correct state upon loading the scene
+        UpdateButtonState();
     }
 
-    public void UpdateUI()
+    public void UpdateButtonState()
     {
         var shopManagerScript = ShopManager.GetComponent<ShopManagerPets>();
         var selectedItem = shopManagerScript.shopItems.Find(item => item.ID == ItemID);
@@ -44,7 +42,7 @@ public class buttoninfoPets : MonoBehaviour
         {
             PriceTxt.text = "Price: $" + selectedItem.price.ToString();
 
-            if (ItemID < companionManager.companions.Count)
+            if (ItemID < companionManager.companions.Count) // Ensure index is valid
             {
                 var companion = companionManager.companions[ItemID];
 
@@ -58,6 +56,7 @@ public class buttoninfoPets : MonoBehaviour
                         BoughtTxt.text = "Owned";
                         PetImage.sprite = HappySprite;
 
+                        // Increase bounce speed once
                         if (!hasAccelerated)
                         {
                             float currentBobSpeed = PetImage.GetComponent<BobUpDownUI>().bobSpeed;
