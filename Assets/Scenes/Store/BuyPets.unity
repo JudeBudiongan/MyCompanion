@@ -2323,10 +2323,10 @@ RectTransform:
   - {fileID: 2008568658}
   m_Father: {fileID: 1658169923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -1045.6091}
-  m_SizeDelta: {x: -197.488, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -1295.5515}
+  m_SizeDelta: {x: 1002.512, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &698493155
 MonoBehaviour:
@@ -2826,8 +2826,6 @@ MonoBehaviour:
   CoinsTxt: {fileID: 280909872}
   companionManager: {fileID: 1442833137}
   coinManager: {fileID: 1791577974}
-  itemPrefab: {fileID: 1890507566}
-  itemsParent: {fileID: 0}
 --- !u!4 &789047544
 Transform:
   m_ObjectHideFlags: 0
@@ -4927,7 +4925,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1200, y: 2665.3857}
+  m_SizeDelta: {x: 1200, y: 2165.5}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1658169924
 MonoBehaviour:
