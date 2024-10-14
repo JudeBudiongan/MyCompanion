@@ -54,15 +54,9 @@ public class SelectCompanion : MonoBehaviour
     // Method to handle Yes button click - go to Main Menu
     void GoToMainMenu()
     {
-        if (selectedImage != null) // Ensure selectedImage is not null
-        {
-            PlayerPrefs.SetString("SelectedOption", selectedOption);
-            PlayerPrefs.SetString("SelectedImage", selectedImage.name);  // Store the image name
-        }
-        else
-        {
-            Debug.LogWarning("Selected image is null!"); // Log a warning for debugging
-        }
+        // Store the selected option and image name in PlayerPrefs
+        PlayerPrefs.SetString("SelectedOption", selectedOption);
+        PlayerPrefs.SetString("SelectedImage", selectedImage.name);  // Store the image name
 
         SceneManager.LoadScene("Main Menu");
     }
