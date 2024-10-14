@@ -11,10 +11,10 @@ MonoImporter:
   - option4Button: {instanceID: 0}
   - yesButton: {instanceID: 0}
   - noButton: {instanceID: 0}
-  - option1Image: {fileID: 21300000, guid: a1a680f56949390488f4fceca718f07b, type: 3}
-  - option2Image: {fileID: 21300000, guid: 28d41f2d36250fe47bf89424d9ca9fc3, type: 3}
-  - option3Image: {fileID: 21300000, guid: ed677e32c9cd9634c95f65ea96a5427c, type: 3}
-  - option4Image: {fileID: 21300000, guid: 886d1afe334561243a9eb21a11180357, type: 3}
+  - option1Image: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
+  - option2Image: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
+  - option3Image: {fileID: 21300000, guid: f5bd145b31cd1f1448be2c792b3a850b, type: 3}
+  - option4Image: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
