@@ -6,7 +6,6 @@ public class CoinManager : MonoBehaviour
     public int TotalCoins { get; private set; } = 1000; // Initialize total coins to 0
     private CompanionManager companionManager; // Reference to CompanionManager
     public static CoinManager Instance;
-
     void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -18,7 +17,6 @@ public class CoinManager : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         companionManager = FindObjectOfType<CompanionManager>();
         Debug.Log($"Initial Total Coins: {TotalCoins}");
     }
