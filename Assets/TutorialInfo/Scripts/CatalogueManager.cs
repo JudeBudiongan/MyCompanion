@@ -14,6 +14,9 @@ public class CatalogueManager : MonoBehaviour
     public Sprite option3Image;  // Grey sprite
     public Sprite option4Image;  // Woshi sprite
 
+    // Array of GameObjects representing the black borders for each companion
+    public GameObject[] companionBorders;
+
     // Constants for companion IDs
     private const int ALIEN_ID = 0;
     private const int BERRY_ID = 1;
@@ -27,7 +30,7 @@ public class CatalogueManager : MonoBehaviour
         int selectedID = PlayerPrefs.GetInt("SelectedID", -1); // Default to -1 if not found
 
         // Debug log to check if selectedID is retrieved correctly
-        Debug.Log("Selected ID: " + selectedID);
+        Debug.Log($"Selected ID: {selectedID}, Slots Length: {companionSlots.Length}, Borders Length: {companionBorders.Length}");
 
         // Display only the selected companion in the catalog
         ShowCompanion(selectedID);
@@ -36,34 +39,49 @@ public class CatalogueManager : MonoBehaviour
     // Method to show the selected companion and hide the rest
     void ShowCompanion(int id)
     {
-        // Hide all companion slots initially
+        // Hide all companion slots and borders initially
         foreach (GameObject slot in companionSlots)
         {
             slot.SetActive(false);
         }
 
-        // Display the corresponding companion based on the ID and update the image
-        switch (id)
+        foreach (GameObject border in companionBorders)
         {
-            case ALIEN_ID:
-                companionSlots[ALIEN_ID].SetActive(true);
-                companionSlots[ALIEN_ID].GetComponent<Image>().sprite = option1Image;
-                break;
-            case BERRY_ID:
-                companionSlots[BERRY_ID].SetActive(true);
-                companionSlots[BERRY_ID].GetComponent<Image>().sprite = option2Image;
-                break;
-            case GREY_ID:
-                companionSlots[GREY_ID].SetActive(true);
-                companionSlots[GREY_ID].GetComponent<Image>().sprite = option3Image;
-                break;
-            case WOSHI_ID:
-                companionSlots[WOSHI_ID].SetActive(true);
-                companionSlots[WOSHI_ID].GetComponent<Image>().sprite = option4Image;
-                break;
-            default:
-                Debug.LogWarning("Invalid Companion ID or no companion selected.");
-                break;
+            border.SetActive(false);
+        }
+
+        // Check if the id is within the valid range
+        if (id >= 0 && id < companionSlots.Length && id < companionBorders.Length)
+        {
+            // Display the corresponding companion based on the ID and update the image and border
+            companionSlots[id].SetActive(true);
+
+            switch (id)
+            {
+                case ALIEN_ID:
+                    companionSlots[ALIEN_ID].GetComponent<Image>().sprite = option1Image;
+                    companionBorders[ALIEN_ID].SetActive(true); // Activate border
+                    break;
+                case BERRY_ID:
+                    companionSlots[BERRY_ID].GetComponent<Image>().sprite = option2Image;
+                    companionBorders[BERRY_ID].SetActive(true); // Activate border
+                    break;
+                case GREY_ID:
+                    companionSlots[GREY_ID].GetComponent<Image>().sprite = option3Image;
+                    companionBorders[GREY_ID].SetActive(true); // Activate border
+                    break;
+                case WOSHI_ID:
+                    companionSlots[WOSHI_ID].GetComponent<Image>().sprite = option4Image;
+                    companionBorders[WOSHI_ID].SetActive(true); // Activate border
+                    break;
+                default:
+                    Debug.LogWarning("Invalid Companion ID or no companion selected.");
+                    break;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Selected ID is out of range: " + id);
         }
     }
 
