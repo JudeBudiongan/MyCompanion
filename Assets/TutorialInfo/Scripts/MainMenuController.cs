@@ -25,21 +25,21 @@ public class MainMenuController : MonoBehaviour
         // Change the text based on the selected companion
         switch (selectedImageName)
         {
-            case "alien-normal":  // Make sure the names match the sprite names
+            case "alien-happy":  // Make sure the names match the sprite names
                 selectedOptionImage.sprite = option1Image;
-                selectedOptionText.text = "You have selected: Alien";
+                selectedOptionText.text = "Alien";
                 break;
-            case "berry-normal":
+            case "berry-happy":
                 selectedOptionImage.sprite = option2Image;
-                selectedOptionText.text = "You have selected: Berry";
+                selectedOptionText.text = "Berry";
                 break;
-            case "grey-normal":
+            case "grey-happy":
                 selectedOptionImage.sprite = option3Image;
-                selectedOptionText.text = "You have selected: Grey";
+                selectedOptionText.text = "Grey";
                 break;
-            case "woshi-normal":
+            case "woshi-happy":
                 selectedOptionImage.sprite = option4Image;
-                selectedOptionText.text = "You have selected: Woshi";
+                selectedOptionText.text = "Woshi";
                 break;
             default:
                 selectedOptionImage.sprite = null;  // No image if something goes wrong

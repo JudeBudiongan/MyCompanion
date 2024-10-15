@@ -393,7 +393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6c2d8375038270439d209875d7d69ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9f6efdbc7f440554fb2020ec67fb6173, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7d936d9dac13c194f888712b92ef0e8a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a634a67f94c386419274d347d4b5e0e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1269,7 +1269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3e8e85ec7594e9a4597015c4e983f937, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1835,10 +1835,10 @@ MonoBehaviour:
   option4Button: {fileID: 1243369056}
   yesButton: {fileID: 1501831252}
   noButton: {fileID: 1937576526}
-  option1Image: {fileID: 21300000, guid: a6c2d8375038270439d209875d7d69ec, type: 3}
-  option2Image: {fileID: 21300000, guid: 9f6efdbc7f440554fb2020ec67fb6173, type: 3}
-  option3Image: {fileID: 21300000, guid: 7d936d9dac13c194f888712b92ef0e8a, type: 3}
-  option4Image: {fileID: 21300000, guid: 3e8e85ec7594e9a4597015c4e983f937, type: 3}
+  option1Image: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
+  option2Image: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
+  option3Image: {fileID: 21300000, guid: 3a634a67f94c386419274d347d4b5e0e, type: 3}
+  option4Image: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
 --- !u!4 &1978768548
 Transform:
   m_ObjectHideFlags: 0
