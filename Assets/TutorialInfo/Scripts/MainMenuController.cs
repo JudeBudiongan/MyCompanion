@@ -3,6 +3,12 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
+    // Constants for companion IDs
+    private const int ALIEN_ID = 0;
+    private const int BERRY_ID = 1;
+    private const int GREY_ID = 2;
+    private const int WOSHI_ID = 3;
+
     // Reference to the UI Text component to display the selected option
     public Text selectedOptionText;
 
@@ -18,26 +24,27 @@ public class MainMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Retrieve the selected option from PlayerPrefs
+        // Retrieve the selected option and ID from PlayerPrefs
         string selectedOption = PlayerPrefs.GetString("SelectedOption", "No option selected");
         string selectedImageName = PlayerPrefs.GetString("SelectedImage", "default");
+        int selectedID = PlayerPrefs.GetInt("SelectedID", -1); // Default to -1 if not found
 
-        // Change the text based on the selected companion
-        switch (selectedImageName)
+        // Change the text and image based on the selected companion
+        switch (selectedID)
         {
-            case "alien-happy":  // Make sure the names match the sprite names
+            case ALIEN_ID:
                 selectedOptionImage.sprite = option1Image;
                 selectedOptionText.text = "Alien";
                 break;
-            case "berry-happy":
+            case BERRY_ID:
                 selectedOptionImage.sprite = option2Image;
                 selectedOptionText.text = "Berry";
                 break;
-            case "grey-happy":
+            case GREY_ID:
                 selectedOptionImage.sprite = option3Image;
                 selectedOptionText.text = "Grey";
                 break;
-            case "woshi-happy":
+            case WOSHI_ID:
                 selectedOptionImage.sprite = option4Image;
                 selectedOptionText.text = "Woshi";
                 break;

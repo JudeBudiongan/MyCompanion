@@ -4,6 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class SelectCompanion : MonoBehaviour
 {
+    // Constants for companion IDs
+    private const int ALIEN_ID = 0;
+    private const int BERRY_ID = 1;
+    private const int GREY_ID = 2;
+    private const int WOSHI_ID = 3;
+
     // Reference to the notification panel
     public GameObject notificationPanel;
 
@@ -22,10 +28,10 @@ public class SelectCompanion : MonoBehaviour
     private Sprite selectedImage;  // Sprite for the selected companion's image
 
     // References to the companion images for each option
-    public Sprite option1Image;
-    public Sprite option2Image;
-    public Sprite option3Image;
-    public Sprite option4Image;
+    public Sprite option1Image;  // Alien sprite
+    public Sprite option2Image;  // Berry sprite
+    public Sprite option3Image;  // Grey sprite
+    public Sprite option4Image;  // Woshi sprite
 
     // Start is called before the first frame update
     void Start()
@@ -33,10 +39,10 @@ public class SelectCompanion : MonoBehaviour
         notificationPanel.SetActive(false);
 
         // Add listeners to the option buttons
-        option1Button.onClick.AddListener(() => SelectOption("Option 1", option1Image));
-        option2Button.onClick.AddListener(() => SelectOption("Option 2", option2Image));
-        option3Button.onClick.AddListener(() => SelectOption("Option 3", option3Image));
-        option4Button.onClick.AddListener(() => SelectOption("Option 4", option4Image));
+        option1Button.onClick.AddListener(() => SelectOption("Option 1", option1Image, ALIEN_ID));
+        option2Button.onClick.AddListener(() => SelectOption("Option 2", option2Image, BERRY_ID));
+        option3Button.onClick.AddListener(() => SelectOption("Option 3", option3Image, GREY_ID));
+        option4Button.onClick.AddListener(() => SelectOption("Option 4", option4Image, WOSHI_ID));
 
         // Add listeners to Yes and No buttons
         yesButton.onClick.AddListener(GoToMainMenu);
@@ -44,10 +50,11 @@ public class SelectCompanion : MonoBehaviour
     }
 
     // Method to select an option and show the notification panel
-    void SelectOption(string option, Sprite image)
+    void SelectOption(string option, Sprite image, int id)
     {
         selectedOption = option;
         selectedImage = image;
+        PlayerPrefs.SetInt("SelectedID", id);  // Store the companion ID
         notificationPanel.SetActive(true);  // Show notification panel
     }
 
