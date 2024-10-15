@@ -1,5 +1,5 @@
-using System.Collections.Generic; 
-using UnityEngine; 
+using System.Collections.Generic;
+using UnityEngine;
 
 public class CompanionManager : MonoBehaviour
 {
@@ -21,16 +21,18 @@ public class CompanionManager : MonoBehaviour
     {
         public int CompanionID { get; set; } // Unique ID for the companion
         public string PetName { get; set; }
+        public Sprite CompanionSprite { get; set; } // Add Sprite for the companion
 
         // Satisfaction and Level properties
         public int SatisfactionLevel { get; private set; }
         public int Level { get; private set; }
 
-        public Companion(int companionID, string petName, string author)
+        public Companion(int companionID, string petName, Sprite sprite, string author)
             : base(false, author) // Initialized isBought and author here
         {
             CompanionID = companionID;
             PetName = petName;
+            CompanionSprite = sprite; // Assign the sprite
             SatisfactionLevel = 50; // Default initial satisfaction
             Level = 1;              // Default initial level
         }
@@ -76,36 +78,39 @@ public class CompanionManager : MonoBehaviour
         if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-     } else {
-            Destroy(gameObject); // Destroy duplicate instances
+        } else {
+            Destroy(gameObject); // Destroy duplicate instances 
         }
     }
 
-
     public List<Companion> companions = new List<Companion>();
+
+    // Sprites to be set in the Inspector
+    public Sprite spriteAlien, spriteBerry, spriteGrey, spriteWoshi;
+    public Sprite spriteGrimWooper, spriteFak, spriteXv6Riscv, spriteTTiddy;
+    public Sprite spritePriscue, spriteSushiSlayer, spriteRFilly, spriteEilmar;
+    public Sprite spriteSkibidi;
 
     void Start()
     {
-        // Add companions to the list with IDs, names, and authors
-
-        // STARTER COMPANIONS 
-        companions.Add(new Companion(0, "Alien", "DD")); 
-        companions.Add(new Companion(1, "Grey", "ED")); 
-        companions.Add(new Companion(2, "Woshi", "JG")); 
-        companions.Add(new Companion(3, "Kitty", "JB")); 
+        // STARTER COMPANIONS
+        companions.Add(new Companion(0, "Alien", spriteAlien, "DD"));
+        companions.Add(new Companion(1, "Berry", spriteBerry, "JB"));
+        companions.Add(new Companion(2, "Woshi", spriteGrey, "ED"));
+        companions.Add(new Companion(3, "Woshi", spriteWoshi, "JG"));
 
         // SHOP COMPANIONS
-        companions.Add(new Companion(4, "Grim-Wooper", "JB"));
-        companions.Add(new Companion(5, "Fak", "KB"));
-        companions.Add(new Companion(6, "xv6-riscv", "KR"));
-        companions.Add(new Companion(7, "T-Tiddy", "AS"));
-        companions.Add(new Companion(8, "Priscue", "FM"));
-        companions.Add(new Companion(9, "Sushi-Slayer", "JZ"));
-        companions.Add(new Companion(10, "R-Filly", "AB"));
-        companions.Add(new Companion(11, "Eilmar", "ES")); 
+        companions.Add(new Companion(4, "Grim-Wooper", spriteGrimWooper, "JB"));
+        companions.Add(new Companion(5, "Fak", spriteFak, "KB"));
+        companions.Add(new Companion(6, "xv6-riscv", spriteXv6Riscv, "KR"));
+        companions.Add(new Companion(7, "T-Tiddy", spriteTTiddy, "AS"));
+        companions.Add(new Companion(8, "Priscue", spritePriscue, "FM"));
+        companions.Add(new Companion(9, "Sushi-Slayer", spriteSushiSlayer, "JZ"));
+        companions.Add(new Companion(10, "R-Filly", spriteRFilly, "AB"));
+        companions.Add(new Companion(11, "Eilmar", spriteEilmar, "ES"));
 
         // SPECIAL REWARD COMPANIONS (FOR FUTURE USE)
-        companions.Add(new Companion(12, "skibidi", "KR")); 
+        companions.Add(new Companion(12, "skibidi", spriteSkibidi, "KR"));
     }
 
     public void SetCompanionBought(int companionID)
