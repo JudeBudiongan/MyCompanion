@@ -39,6 +39,8 @@ public class CatalogueManager : MonoBehaviour
     // Method to show the selected companion and hide the rest
     void ShowCompanion(int id)
     {
+        Debug.Log($"ShowCompanion called with ID: {id}");
+
         // Hide all companion slots and borders initially
         foreach (GameObject slot in companionSlots)
         {
@@ -50,12 +52,16 @@ public class CatalogueManager : MonoBehaviour
             border.SetActive(false);
         }
 
-        // Check if the id is within the valid range
-        if (id >= 0 && id < companionSlots.Length && id < companionBorders.Length)
+        // Check if the id is within the valid range (0 to 13)
+        if (id >= 0 && id <= 13)
         {
+            // Debug log for attempting to show the companion
+            Debug.Log($"Attempting to show companion with ID: {id}");
+
             // Display the corresponding companion based on the ID and update the image and border
             companionSlots[id].SetActive(true);
 
+            // This switch statement is safe because we've already validated the id
             switch (id)
             {
                 case ALIEN_ID:
@@ -75,13 +81,13 @@ public class CatalogueManager : MonoBehaviour
                     companionBorders[WOSHI_ID].SetActive(true); // Activate border
                     break;
                 default:
-                    Debug.LogWarning("Invalid Companion ID or no companion selected.");
+                    Debug.LogWarning("Companion ID not yet assigned to an image.");
                     break;
             }
         }
         else
         {
-            Debug.LogWarning("Selected ID is out of range: " + id);
+            Debug.LogWarning($"Selected ID is out of range: {id}. Valid range is 0 to 13.");
         }
     }
 
