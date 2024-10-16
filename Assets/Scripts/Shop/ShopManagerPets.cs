@@ -59,7 +59,10 @@ public class ShopManagerPets : MonoBehaviour
         shopItems.Add(new ShopPets(8, 573));
         shopItems.Add(new ShopPets(9, 699));
         shopItems.Add(new ShopPets(10, 1));
-        shopItems.Add(new ShopPets(11, 30));
+        shopItems.Add(new ShopPets(11, 50));
+        shopItems.Add(new ShopPets(12, 40));
+        shopItems.Add(new ShopPets(13, 999));
+        shopItems.Add(new ShopPets(14, 510));
 
         // Sync all button states to ensure they reflect the correct bought status
         RefreshButtonStates();

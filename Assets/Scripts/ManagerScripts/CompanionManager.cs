@@ -89,7 +89,7 @@ public class CompanionManager : MonoBehaviour
     public Sprite spriteAlien, spriteBerry, spriteGrey, spriteWoshi;
     public Sprite spriteGrimWooper, spriteFak, spriteXv6Riscv, spriteTTiddy;
     public Sprite spritePriscue, spriteSushiSlayer, spriteRFilly, spriteEilmar;
-    public Sprite spriteSkibidi;
+    public Sprite spriteCat, spriteSkibidi, spritelileduj;
 
     void Start()
     {
@@ -108,9 +108,10 @@ public class CompanionManager : MonoBehaviour
         companions.Add(new Companion(9, "Sushi-Slayer", spriteSushiSlayer, "JZ"));
         companions.Add(new Companion(10, "R-Filly", spriteRFilly, "AB"));
         companions.Add(new Companion(11, "Eilmar", spriteEilmar, "ES"));
-
-        // SPECIAL REWARD COMPANIONS (FOR FUTURE USE)
-        companions.Add(new Companion(12, "skibidi", spriteSkibidi, "KR"));
+        companions.Add(new Companion(12, "cat", spriteCat, "JB"));
+        companions.Add(new Companion(13, "skibidi", spriteSkibidi, "KR"));
+        companions.Add(new Companion(14, "lil e-duj", spritelileduj, "DA"));
+        
     }
 
     public void SetCompanionBought(int companionID)
