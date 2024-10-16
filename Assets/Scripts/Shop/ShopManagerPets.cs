@@ -70,7 +70,7 @@ public class ShopManagerPets : MonoBehaviour
 
     private void UpdateCoinDisplay()
     {
-        CoinsTxt.text = "Coins: " + coinManager.TotalCoins; // Synchronize with CoinManager
+        CoinsTxt.text = " " + coinManager.TotalCoins; // Synchronize with CoinManager
     }
 
     public void Buy()
