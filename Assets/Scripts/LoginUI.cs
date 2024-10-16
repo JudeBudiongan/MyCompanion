@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using Firebase;
+using Firebase.Database;
+using Firebase.Extensions;
 
 public class LoginUI : MonoBehaviour
 {
@@ -10,9 +13,14 @@ public class LoginUI : MonoBehaviour
     public Text notif_Title_Text, notif_Message_Text;
 
     private SceneManagerScript sceneManager;
+    private DatabaseReference databaseReference;
 
     void Start()
     {
+
+        // Initialize Firebase database reference
+        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
         // Get the SceneManagerScript component
         sceneManager = FindObjectOfType<SceneManagerScript>();
 
@@ -164,9 +172,30 @@ public class LoginUI : MonoBehaviour
         }
         else
         {
+            RegisterUser(signupEmail.text, signupUsername.text, signupPassword.text);
             // Call SceneManager's LoadScene method
             sceneManager.LoadScene("PickStarter");  // Goes to the select starter screen
         }
+    }
+
+    // Register user in the Firebase Realtime Database
+    private void RegisterUser(string email, string username, string password)
+    {
+        User newUser = new User { Email = email, Username = username, Password = password };
+        string json = JsonUtility.ToJson(newUser);
+        string userId = databaseReference.Child("users").Push().Key; // Create a unique key for each user
+        databaseReference.Child("users").Child(userId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DisplayNotification("Success", "User registered successfully!");
+                OpenLoginPanel(); // Optionally, open the login panel after registration
+            }
+            else
+            {
+                DisplayNotification("Error", "Registration failed. Please try again.");
+            }
+        });
     }
 
     // Validation check for Forgot Password panel
@@ -230,5 +259,11 @@ public class LoginUI : MonoBehaviour
         notif_Message_Text.text = "";
     }
 
-    
+    [System.Serializable]
+    public class User
+    {
+        public string Email;
+        public string Username;
+        public string Password; // Store this securely (e.g., hashed) in a real application
+    }
 }

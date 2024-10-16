@@ -46,7 +46,20 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.dll
+.vscode\settings.json
  
+# Firebase SDK stuff
+Assets/Editor Default Resources/*
+Assets/ExternalDependencyManager/*
+Assets/Firebase/*
+Assets/Plugins/iOS/*
+Assets/Plugins/tvOS/*
+Assets/Plugins/Android/FirebaseApp/*
+Assets/Plugins/Android/gradleTemplate/*
+Assets/Plugins/Android/mainTemplate/*
+Assets/Plugins/Android/settingsTemplate/*
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta

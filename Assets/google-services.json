@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "169058933181",
+    "firebase_url": "https://my-companion-b7176-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "my-companion-b7176",
+    "storage_bucket": "my-companion-b7176.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169058933181:android:b4ed75865d99cb762fdad4",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.com.unity.template.mobile2D"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnAMPCc9oTx3jOdGVpXwQyzE-1Kr72zBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
