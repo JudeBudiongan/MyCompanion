@@ -40,7 +40,7 @@ public class buttoninfoPets : MonoBehaviour
 
         if (selectedItem != null)
         {
-            PriceTxt.text = " " + selectedItem.price.ToString();
+            PriceTxt.text = "Price: $" + selectedItem.price.ToString();
 
             if (ItemID < companionManager.companions.Count) // Ensure index is valid
             {

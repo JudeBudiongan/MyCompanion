@@ -23,7 +23,7 @@ public class MainMenuController : MonoBehaviour
         Debug.Log($"Selected ID retrieved: {selectedID}");
 
         // Change the text and image based on the selected companion
-        if (selectedID >= 0 && selectedID < 12) // Adjust this limit based on your companion IDs
+        if (selectedID >= 0 && selectedID < 15) // Adjust this limit based on your companion IDs
         {
             var selectedCompanion = companionManager.GetCompanionById(selectedID);
             if (selectedCompanion != null)

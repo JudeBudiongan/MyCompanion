@@ -69,6 +69,12 @@ public class CatalogueManager : MonoBehaviour
     private void OnCompanionSelected(int companionID)
     {
         Debug.Log("Companion with ID " + companionID + " selected.");
+
+        // Save the selected companion ID to PlayerPrefs
+        PlayerPrefs.SetInt("SelectedID", companionID);
+        PlayerPrefs.Save(); // Make sure to save PlayerPrefs
+
+        // Load the Main Menu scene
         SceneManager.LoadScene("Main Menu");
     }
 }
