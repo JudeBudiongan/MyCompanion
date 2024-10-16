@@ -4,34 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class SelectCompanion : MonoBehaviour
 {
-    // Constants for companion IDs
-    private const int ALIEN_ID = 0;
-    private const int BERRY_ID = 1;
-    private const int GREY_ID = 2;
-    private const int WOSHI_ID = 3;
-
     // Reference to the notification panel
     public GameObject notificationPanel;
 
     // References to the buttons for options 1, 2, 3, and 4
-    public Button option1Button;
-    public Button option2Button;
-    public Button option3Button;
-    public Button option4Button;
+    public Button[] optionButtons; // Array of option buttons
 
     // Reference to the Yes and No buttons
     public Button yesButton;
     public Button noButton;
 
-    // Variables to store the selected option and image
+    // Variables to store the selected option
     private string selectedOption;
-    private Sprite selectedImage;  // Sprite for the selected companion's image
-
-    // References to the companion images for each option
-    public Sprite option1Image;  // Alien sprite
-    public Sprite option2Image;  // Berry sprite
-    public Sprite option3Image;  // Grey sprite
-    public Sprite option4Image;  // Woshi sprite
+    private Sprite selectedImage; // Sprite for the selected companion's image
 
     // Reference to CompanionManager
     private CompanionManager companionManager;
@@ -43,11 +28,12 @@ public class SelectCompanion : MonoBehaviour
         // Get the CompanionManager instance
         companionManager = CompanionManager.Instance;
 
-        // Add listeners to the option buttons
-        option1Button.onClick.AddListener(() => SelectOption("Option 1", option1Image, ALIEN_ID));
-        option2Button.onClick.AddListener(() => SelectOption("Option 2", option2Image, BERRY_ID));
-        option3Button.onClick.AddListener(() => SelectOption("Option 3", option3Image, GREY_ID));
-        option4Button.onClick.AddListener(() => SelectOption("Option 4", option4Image, WOSHI_ID));
+        // Set up buttons dynamically based on the companions in the CompanionManager
+        for (int i = 0; i < optionButtons.Length; i++)
+        {
+            int index = i; // Local copy for closure
+            optionButtons[i].onClick.AddListener(() => SelectOption(companionManager.GetCompanionById(index).PetName, companionManager.GetCompanionById(index).CompanionSprite, index));
+        }
 
         // Add listeners to Yes and No buttons
         yesButton.onClick.AddListener(GoToMainMenu);
@@ -59,8 +45,8 @@ public class SelectCompanion : MonoBehaviour
     {
         selectedOption = option;
         selectedImage = image;
-        PlayerPrefs.SetInt("SelectedID", id);  // Store the companion ID
-        notificationPanel.SetActive(true);  // Show notification panel
+        PlayerPrefs.SetInt("SelectedID", id); // Store the companion ID
+        notificationPanel.SetActive(true); // Show notification panel
     }
 
     // Method to handle Yes button click - go to Main Menu
@@ -68,7 +54,7 @@ public class SelectCompanion : MonoBehaviour
     {
         // Store the selected option and image name in PlayerPrefs
         PlayerPrefs.SetString("SelectedOption", selectedOption);
-        PlayerPrefs.SetString("SelectedImage", selectedImage.name);  // Store the image name
+        PlayerPrefs.SetString("SelectedImage", selectedImage.name); // Store the image name
 
         // Mark the chosen starter companion as "bought"
         int selectedID = PlayerPrefs.GetInt("SelectedID");
@@ -81,6 +67,6 @@ public class SelectCompanion : MonoBehaviour
     // Method to handle No button click - return to PickStarter
     void GoBackToPickStarter()
     {
-        notificationPanel.SetActive(false);  // Hide the notification panel
+        notificationPanel.SetActive(false); // Hide the notification panel
     }
 }
