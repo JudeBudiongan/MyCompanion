@@ -74,11 +74,16 @@ public class CompanionManager : MonoBehaviour
     }
 
     public static CompanionManager Instance;
-    void Awake() {
-        if (Instance == null) {
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        } else {
+        }
+        else
+        {
             Destroy(gameObject); // Destroy duplicate instances 
         }
     }
@@ -96,7 +101,7 @@ public class CompanionManager : MonoBehaviour
         // STARTER COMPANIONS
         companions.Add(new Companion(0, "Alien", spriteAlien, "DD"));
         companions.Add(new Companion(1, "Berry", spriteBerry, "JB"));
-        companions.Add(new Companion(2, "Woshi", spriteGrey, "ED"));
+        companions.Add(new Companion(2, "Grey", spriteGrey, "ED")); // Clarified naming
         companions.Add(new Companion(3, "Woshi", spriteWoshi, "JG"));
 
         // SHOP COMPANIONS

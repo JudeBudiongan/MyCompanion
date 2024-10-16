@@ -398,6 +398,8 @@ GameObject:
   m_Component:
   - component: {fileID: 475088908}
   - component: {fileID: 475088907}
+  - component: {fileID: 475088909}
+  - component: {fileID: 475088910}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -419,10 +421,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedOptionText: {fileID: 1830776692}
   selectedOptionImage: {fileID: 1857587879}
-  option1Image: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
-  option2Image: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
-  option3Image: {fileID: 21300000, guid: 3a634a67f94c386419274d347d4b5e0e, type: 3}
-  option4Image: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
 --- !u!4 &475088908
 Transform:
   m_ObjectHideFlags: 0
@@ -438,6 +436,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &475088909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475088906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1303a5a27a278b499966ca4267f8dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  companions: []
+  spriteAlien: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
+  spriteBerry: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
+  spriteGrey: {fileID: 21300000, guid: 3a634a67f94c386419274d347d4b5e0e, type: 3}
+  spriteWoshi: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
+  spriteGrimWooper: {fileID: 21300000, guid: 07a93db15f22de741a6355efdd07090e, type: 3}
+  spriteFak: {fileID: 21300000, guid: d7a3e19fd10617849a338d188b5b0658, type: 3}
+  spriteXv6Riscv: {fileID: 21300000, guid: 9c5e95d7662a2984e821e7e9d0509d8c, type: 3}
+  spriteTTiddy: {fileID: 21300000, guid: 57db92119df04074b88c70dd4ec918be, type: 3}
+  spritePriscue: {fileID: 21300000, guid: a4237f9045decc44ebffe464c787bf7c, type: 3}
+  spriteSushiSlayer: {fileID: 21300000, guid: 5f85cb0f298317d40b63a96bf73608d4, type: 3}
+  spriteRFilly: {fileID: 21300000, guid: e626f620f182bb34f8c886dba260adf9, type: 3}
+  spriteEilmar: {fileID: 21300000, guid: 4d5d56cce27031043a70a5e462196aa7, type: 3}
+  spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
+--- !u!114 &475088910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475088906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ccdda9c905afc4ea67b8aaa1807068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  companionGameObjects:
+  - {fileID: 1857587877}
+  mainMenu: {fileID: 1857587877}
+  companionManager: {fileID: 475088909}
 --- !u!1 &544399983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,6 +1995,8 @@ GameObject:
   - component: {fileID: 1857587878}
   - component: {fileID: 1857587880}
   - component: {fileID: 1857587879}
+  - component: {fileID: 1857587881}
+  - component: {fileID: 1857587882}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -2020,6 +2062,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857587877}
   m_CullTransparentMesh: 1
+--- !u!114 &1857587881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857587877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c652da89a0795418036c6ea35bccad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1857587882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857587877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28648c6fb361a4e4a98adc2af1b1ec76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedOptionText: {fileID: 1830776692}
+  selectedOptionImage: {fileID: 1857587879}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
