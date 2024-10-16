@@ -33,10 +33,15 @@ public class SelectCompanion : MonoBehaviour
     public Sprite option3Image;  // Grey sprite
     public Sprite option4Image;  // Woshi sprite
 
-    // Start is called before the first frame update
+    // Reference to CompanionManager
+    private CompanionManager companionManager;
+
     void Start()
     {
         notificationPanel.SetActive(false);
+
+        // Get the CompanionManager instance
+        companionManager = CompanionManager.Instance;
 
         // Add listeners to the option buttons
         option1Button.onClick.AddListener(() => SelectOption("Option 1", option1Image, ALIEN_ID));
@@ -65,6 +70,11 @@ public class SelectCompanion : MonoBehaviour
         PlayerPrefs.SetString("SelectedOption", selectedOption);
         PlayerPrefs.SetString("SelectedImage", selectedImage.name);  // Store the image name
 
+        // Mark the chosen starter companion as "bought"
+        int selectedID = PlayerPrefs.GetInt("SelectedID");
+        companionManager.SetCompanionBought(selectedID);
+
+        // Load the Main Menu scene
         SceneManager.LoadScene("Main Menu");
     }
 

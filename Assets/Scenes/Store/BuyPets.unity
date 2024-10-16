@@ -4094,6 +4094,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   companions: []
+  spriteAlien: {fileID: 0}
+  spriteBerry: {fileID: 0}
+  spriteGrey: {fileID: 0}
+  spriteWoshi: {fileID: 0}
+  spriteGrimWooper: {fileID: 0}
+  spriteFak: {fileID: 0}
+  spriteXv6Riscv: {fileID: 0}
+  spriteTTiddy: {fileID: 0}
+  spritePriscue: {fileID: 0}
+  spriteSushiSlayer: {fileID: 0}
+  spriteRFilly: {fileID: 0}
+  spriteEilmar: {fileID: 0}
+  spriteSkibidi: {fileID: 0}
+  spritelileduj: {fileID: 0}
 --- !u!4 &1442833138
 Transform:
   m_ObjectHideFlags: 0
@@ -5539,8 +5553,8 @@ MonoBehaviour:
   NameTxt: {fileID: 1618363894}
   AuthorTxt: {fileID: 556151129}
   PetImage: {fileID: 1647160012}
-  NormalSprite: {fileID: 21300000, guid: b6f31f8fa1ed60d448d4927a6eeb266a, type: 3}
-  HappySprite: {fileID: 21300000, guid: 07a93db15f22de741a6355efdd07090e, type: 3}
+  NormalSprite: {fileID: 21300000, guid: 3bccc97a13fe7a84dbc6819381f97591, type: 3}
+  HappySprite: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
   ShopManager: {fileID: 789047542}
   scrollRect: {fileID: 0}
 --- !u!1 &1928620353

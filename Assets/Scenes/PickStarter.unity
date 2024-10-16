@@ -1797,6 +1797,7 @@ GameObject:
   - component: {fileID: 1978768548}
   - component: {fileID: 1978768547}
   - component: {fileID: 1978768546}
+  - component: {fileID: 1978768549}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1854,6 +1855,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1978768549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978768545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1303a5a27a278b499966ca4267f8dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  companions: []
+  spriteAlien: {fileID: 0}
+  spriteBerry: {fileID: 0}
+  spriteGrey: {fileID: 0}
+  spriteWoshi: {fileID: 0}
+  spriteGrimWooper: {fileID: 0}
+  spriteFak: {fileID: 0}
+  spriteXv6Riscv: {fileID: 0}
+  spriteTTiddy: {fileID: 0}
+  spritePriscue: {fileID: 0}
+  spriteSushiSlayer: {fileID: 0}
+  spriteRFilly: {fileID: 0}
+  spriteEilmar: {fileID: 0}
+  spriteSkibidi: {fileID: 0}
 --- !u!1 &2032477937
 GameObject:
   m_ObjectHideFlags: 0
