@@ -23,7 +23,6 @@ public class CoinManager : MonoBehaviour
     void Start()
     {
         companionManager = FindObjectOfType<CompanionManager>();
-        SetCoinTextReference(coinText);
         UpdateCoinText(); // Update the UI at the start
         Debug.Log($"Initial Total Coins: {TotalCoins}");
     }
@@ -37,6 +36,14 @@ public class CoinManager : MonoBehaviour
     {
         coinText = text;
         UpdateCoinText();
+    }
+
+    // Method to add coins (for daily rewards)
+    public void AddCoins(int amount)
+    {
+        TotalCoins += amount;
+        Debug.Log($"Added {amount} coins. Total now: {TotalCoins}");
+        UpdateCoinText(); // Update the UI
     }
 
     // Method to deduct coins
@@ -103,7 +110,7 @@ public class CoinManager : MonoBehaviour
     {
         if (coinText != null)
         {
-            coinText.text = "Coins: " + TotalCoins.ToString("0000"); // Format to display coins as "0000"
+            coinText.text = TotalCoins.ToString("0000"); // Format to display coins as "0000"
         }
     }
 }

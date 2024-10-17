@@ -40,7 +40,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (coinManager != null && coinText != null)
         {
-            coinText.text = "Coins: " + coinManager.TotalCoins.ToString("0000"); // Synchronize with CoinManager
+            coinText.text = " " + coinManager.TotalCoins.ToString("0000"); // Synchronize with CoinManager
         }
     }
 }
