@@ -1,37 +1,230 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using Firebase;
+using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
+using System.Threading.Tasks;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class LoginUI : MonoBehaviour
 {
     public GameObject loginPanel, signupPanel, forgotPasswordPanel, startupPanel, firstStartupPanel, notifPanel;
-    public InputField loginEmail, loginPassword, signupEmail, signupPassword, signupCPassword, signupUsername, forgotPassWord, forgotCPassWord;
+    public InputField loginEmail, loginPassword, signupEmail, signupPassword, signupCPassword, signupUsername, forgotPassWord;
     public Toggle loginPasswordToggle, signupPasswordToggle, forgotPasswordToggle, signupCPasswordToggle, forgotCPasswordToggle;
     public Text notif_Title_Text, notif_Message_Text;
 
-    private SceneManagerScript sceneManager;
+    [Header("Firebase")]
+    public DependencyStatus dependencyStatus;
+    public FirebaseAuth auth;
+    public FirebaseUser Userauth;
     private DatabaseReference databaseReference;
 
+    private SceneManagerScript sceneManager;
+
+    [System.Serializable]
+    public class User
+    {
+        public string Email;
+        public string Username;
+        public string Password; // Store this securely (e.g., hashed) in a real application
+    }
+
+    private void InitializeFirebase()
+    {
+        Debug.Log("Setting up Firebase Auth and Database");
+        auth = FirebaseAuth.DefaultInstance;
+        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+        Firebase.FirebaseApp.LogLevel = Firebase.LogLevel.Debug;
+
+    }
+
+    public void LoginButton()
+    {
+        StartCoroutine(Login(loginEmail.text, loginPassword.text));
+    }
+
+    public void RegisterButton()
+    {
+        StartCoroutine(Register(signupEmail.text, signupPassword.text, signupUsername.text));
+    }
+
+   private IEnumerator Login(string _email, string _password)
+{
+    var LoginTask = auth.SignInWithEmailAndPasswordAsync(_email, _password);
+    
+    // Wait until the task is completed
+    yield return new WaitUntil(() => LoginTask.IsCompleted);
+
+    try
+    {
+        // Check for exceptions after yielding
+        if (LoginTask.Exception != null)
+        {
+            // Extract the Firebase error
+            FirebaseException firebaseEx = LoginTask.Exception.GetBaseException() as FirebaseException;
+            AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+
+            string message = "Login failed. Please try again.";
+            switch (errorCode)
+            {
+                case AuthError.MissingEmail:
+                    message = "Please enter your email.";
+                    break;
+                case AuthError.MissingPassword:
+                    message = "Please enter your password.";
+                    break;
+                case AuthError.InvalidEmail:
+                    message = "The email address is invalid.";
+                    break;
+                case AuthError.UserNotFound:
+                    message = "No account found with this email.";
+                    break;
+                case AuthError.WrongPassword:
+                    message = "Incorrect password. Please try again.";
+                    break;
+                default:
+                    // Log the exception details for debugging
+                    Debug.LogError($"Login failed: {LoginTask.Exception.Message}");
+                    break;
+            }
+
+            // Display the notification to the user
+            DisplayNotification("Error", message);
+            yield break; // Stop the coroutine if login fails
+        }
+
+        // If login is successful, proceed
+        Debug.Log("Login successful!");
+        sceneManager.LoadScene("Main Menu");
+        // Proceed to the main menu or next step
+    }
+    catch (Exception e)
+    {
+        // Catch any unexpected exceptions
+        Debug.LogError($"An error occurred during login: {e.Message}");
+        DisplayNotification("Error", "An unexpected error occurred. Please try again.");
+    }
+}
+
+
+
+    private IEnumerator Register(string _email, string _password, string _username)
+    {
+        var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
+        yield return new WaitUntil(() => RegisterTask.IsCompleted);
+
+        Userauth = RegisterTask.Result.User;
+        Debug.Log($"Successfully registered: {Userauth.Email}");
+
+        UserProfile profile = new UserProfile { DisplayName = _username };
+        var ProfileTask = Userauth.UpdateUserProfileAsync(profile);
+        yield return new WaitUntil(() => ProfileTask.IsCompleted);
+
+        if (ProfileTask.Exception == null)
+        {
+            RegisterUser(_email, _username, _password);
+            sceneManager.LoadScene("PickStarter");
+        }
+        
+    }
+
+    private void RegisterUser(string email, string username, string password)
+    {
+        User newUser = new User { Email = email, Username = username, Password = password };
+        string json = JsonUtility.ToJson(newUser);
+        string userId = databaseReference.Child("users").Push().Key;
+        databaseReference.Child("users").Child(userId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task =>
+        {
+            DisplayNotification(task.IsCompleted ? "Success" : "Error", task.IsCompleted ? "User registered successfully!" : "Registration failed. Please try again.");
+            if (task.IsCompleted)
+                OpenLoginPanel();
+        });
+    }
+
+    public void OnForgotPasswordButtonClicked()
+    {
+        string email = forgotPassWord.text; // Replace with your actual input field
+        StartCoroutine(ResetPassword(email));
+    }
+
+
+    private IEnumerator ResetPassword(string email)
+{
+    // Start the Firebase password reset task
+    var resetTask = auth.SendPasswordResetEmailAsync(email);
+    yield return new WaitUntil(() => resetTask.IsCompleted);
+
+    // Check for errors
+    if (resetTask.Exception != null)
+    {
+        Debug.LogError($"Password reset failed: {resetTask.Exception.Message}");
+        DisplayNotification("Error", "Failed to send reset link. Please check your email.");
+    }
+    else
+    {
+        DisplayNotification("Success", "If this email is registered, a password reset link has been sent.");
+    }
+}
+
+public void OnResetPasswordButtonClicked()
+{
+    string email = forgotPassWord.text; // Replace with your actual email input field
+
+    if (!string.IsNullOrEmpty(email))
+    {
+        StartCoroutine(ResetPassword(email));
+    }
+    else
+    {
+        DisplayNotification("Error", "Please enter your email address.");
+    }
+}
+
+
+
+
+    private void DisplayNotification(string title, string message)
+    {
+        notif_Title_Text.text = title;
+        notif_Message_Text.text = message;
+        notifPanel.SetActive(true);
+    }
+
+    // Method to hide the notification panel
+    public void HideNotification()
+    {
+        notifPanel.SetActive(false);
+        notif_Title_Text.text = "";
+        notif_Message_Text.text = "";
+    }
+
+   
     void Start()
     {
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
+            dependencyStatus = task.Result;
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                InitializeFirebase();
+                Debug.Log("Firebase initialized successfully.");
+            }
+            else
+            {
+                Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
+            }
+        });
 
-        // Initialize Firebase database reference
-        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-
-        // Get the SceneManagerScript component
         sceneManager = FindObjectOfType<SceneManagerScript>();
-
-        OpenFirstStartupPanel(); // Starts the app on the first startup panel
+        OpenFirstStartupPanel();
         
-        // Passwords hidden on startup
+          // Passwords hidden on startup
         TogglePasswordVisibility(loginPassword, false);
         TogglePasswordVisibility(signupPassword, false);
         TogglePasswordVisibility(signupCPassword, false);
-        TogglePasswordVisibility(forgotPassWord, false);
-        TogglePasswordVisibility(forgotCPassWord, false);
     }
 
     // Toggle visibility of password for any input field
@@ -63,207 +256,38 @@ public class LoginUI : MonoBehaviour
     public void OnForgotPasswordToggleChanged()
     {
         TogglePasswordVisibility(forgotPassWord, forgotPasswordToggle.isOn);
-        TogglePasswordVisibility(forgotCPassWord, forgotPasswordToggle.isOn);
     }
 
 
-    // Opens the startup panel and hides the others
-    public void OpenStartupPanel()
-    {
-        startupPanel.SetActive(true);
-        loginPanel.SetActive(false);
-        signupPanel.SetActive(false);
-        forgotPasswordPanel.SetActive(false);
-        firstStartupPanel.SetActive(false);
-        notifPanel.SetActive(false); 
-    }
 
-    // Opens the first startup panel and hides the others
-    public void OpenFirstStartupPanel()
+
+    
+
+    
+    public void OpenPanel(GameObject panelToOpen)
     {
-        firstStartupPanel.SetActive(true);
         loginPanel.SetActive(false);
         signupPanel.SetActive(false);
         forgotPasswordPanel.SetActive(false);
         startupPanel.SetActive(false);
-        notifPanel.SetActive(false);  
-    }
-
-    // Opens the login panel and hides the others
-    public void OpenLoginPanel()
-    {
-        loginPanel.SetActive(true);
-        signupPanel.SetActive(false);
-        forgotPasswordPanel.SetActive(false);
-        startupPanel.SetActive(false);
         firstStartupPanel.SetActive(false);
-        notifPanel.SetActive(false);  
-    }
-
-    // Opens the sign-up panel and hides the others
-    public void OpenSignUpPanel()
-    {
-        signupPanel.SetActive(true);
-        loginPanel.SetActive(false);
-        forgotPasswordPanel.SetActive(false);
-        startupPanel.SetActive(false);
-        firstStartupPanel.SetActive(false);
-        notifPanel.SetActive(false);  
-    }
-
-    // Opens the forgot password panel and hides the others
-    public void OpenForgotPassPanel()
-    {
-        forgotPasswordPanel.SetActive(true);
-        loginPanel.SetActive(false);
-        signupPanel.SetActive(false);
-        startupPanel.SetActive(false);
-        firstStartupPanel.SetActive(false);
-        notifPanel.SetActive(false);  
-    }
-
-    // Check if any input field is empty and display an error message
-    public void ValidateLoginFields()
-    {
-        if (string.IsNullOrEmpty(loginEmail.text) || string.IsNullOrEmpty(loginPassword.text))
-        {
-            DisplayNotification("Error", "Please fill in all login fields.");
-        }
-        else if (!IsValidEmail(loginEmail.text))
-        {
-            DisplayNotification("Error", "Please enter a valid email address.");
-        }
-        else
-        {
-            // Call SceneManager's LoadScene method
-            sceneManager.LoadScene("Main Menu");  
-        }
-    }
-
-    // Validation Check for Register Panel
-    public void ValidateSignUpFields()
-    {
-        if (string.IsNullOrEmpty(signupEmail.text) || 
-            string.IsNullOrEmpty(signupPassword.text) || 
-            string.IsNullOrEmpty(signupCPassword.text) || 
-            string.IsNullOrEmpty(signupUsername.text))
-        {
-            DisplayNotification("Error", "Please fill in all sign-up fields."); // Checks if user has filled out all sign in fields
-        }
-        else if (!IsValidEmail(signupEmail.text))
-        {
-            DisplayNotification("Error", "Please enter a valid email address."); // Checks if user has put a valid email
-        }
-        else if (!IsValidPassword(signupPassword.text)) // Password strength check
-        {
-            DisplayNotification("Error", "Password must be at least 6 characters long, contain at least 1 uppercase letter, 1 lowercase letter, and 1 symbol."); 
-        }
-        else if (signupPassword.text != signupCPassword.text)
-        {
-            DisplayNotification("Error", "Passwords do not match."); // If passwords don't match
-        }
-        else if (!IsUsernameLengthValid(signupUsername.text)) 
-        {
-            DisplayNotification("Error", "Username must be between 3 and 15 characters long."); // Checks if username is too short or long
-        }
-        else if (!IsUsernameCharactersValid(signupUsername.text)) 
-        {
-            DisplayNotification("Error", "Username can only contain letters, underscores, and full stops."); // Checks if the username has invalid characters  
-        }
-        else
-        {
-            RegisterUser(signupEmail.text, signupUsername.text, signupPassword.text);
-            // Call SceneManager's LoadScene method
-            sceneManager.LoadScene("PickStarter");  // Goes to the select starter screen
-        }
-    }
-
-    // Register user in the Firebase Realtime Database
-    private void RegisterUser(string email, string username, string password)
-    {
-        User newUser = new User { Email = email, Username = username, Password = password };
-        string json = JsonUtility.ToJson(newUser);
-        string userId = databaseReference.Child("users").Push().Key; // Create a unique key for each user
-        databaseReference.Child("users").Child(userId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task =>
-        {
-            if (task.IsCompleted)
-            {
-                DisplayNotification("Success", "User registered successfully!");
-                OpenLoginPanel(); // Optionally, open the login panel after registration
-            }
-            else
-            {
-                DisplayNotification("Error", "Registration failed. Please try again.");
-            }
-        });
-    }
-
-    // Validation check for Forgot Password panel
-    public void ValidateForgotPasswordFields()
-    {
-        if (string.IsNullOrEmpty(forgotPassWord.text) || string.IsNullOrEmpty(forgotCPassWord.text))
-        {
-            DisplayNotification("Error", "Please fill in all password fields.");
-        }
-        else if (forgotPassWord.text != forgotCPassWord.text)
-        {
-            DisplayNotification("Error", "Passwords do not match.");
-        }
-        else
-        {
-            OpenLoginPanel();
-        }
-    }
-
-    // Validate if the username length is between 3 and 15 characters
-    private bool IsUsernameLengthValid(string username)
-    {
-        return username.Length >= 3 && username.Length <= 15;
-    }
-
-    // Validate if the username contains only letters, full stops, and underscores
-    private bool IsUsernameCharactersValid(string username)
-    {
-        string usernamePattern = @"^[a-zA-Z._]+$";
-        return Regex.IsMatch(username, usernamePattern);
-    }
-
-    private bool IsValidPassword(string password)
-    {
-        // Password must be at least 6 characters long, contain at least one uppercase letter, 
-        // one lowercase letter, one digit or symbol.
-        string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9\W]).{6,}$";
-        return Regex.IsMatch(password, passwordPattern);
-    }
-
-    // Validates email format
-    private bool IsValidEmail(string email)
-    {
-        string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-        return Regex.IsMatch(email, emailPattern);
-    }
-
-    // Displays a notification with a title and message
-    public void DisplayNotification(string title, string message)
-    {
-        notifPanel.SetActive(true);
-        notif_Title_Text.text = title;
-        notif_Message_Text.text = message;
-    }
-
-    // Hides notification panel
-    public void HideNotification()
-    {
         notifPanel.SetActive(false);
-        notif_Title_Text.text = "";
-        notif_Message_Text.text = "";
+
+        panelToOpen.SetActive(true);
     }
 
-    [System.Serializable]
-    public class User
-    {
-        public string Email;
-        public string Username;
-        public string Password; // Store this securely (e.g., hashed) in a real application
-    }
+    public void OpenLoginPanel() => OpenPanel(loginPanel);
+    public void OpenSignUpPanel() => OpenPanel(signupPanel);
+    public void OpenStartupPanel() => OpenPanel(startupPanel);
+    public void OpenFirstStartupPanel() => OpenPanel(firstStartupPanel);
+    public void OpenForgotPassPanel() => OpenPanel(forgotPasswordPanel);
+
+   
+
+    private bool IsUsernameLengthValid(string username) => username.Length >= 3 && username.Length <= 15;
+    private bool IsUsernameCharactersValid(string username) => Regex.IsMatch(username, @"^[a-zA-Z._]+$");
+    private bool IsValidPassword(string password) => Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$");
+    private bool IsValidEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+
+    
 }
