@@ -147,17 +147,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20386799}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 81322923}
-  m_Father: {fileID: 685550170}
+  m_Father: {fileID: 735775712}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: -4.716675, y: -9.252197}
   m_SizeDelta: {x: 0, y: 20.000008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &20386801
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1985846280}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DailyRewards, Assembly-CSharp
         m_MethodName: ClaimReward
         m_Mode: 1
@@ -704,7 +704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224662228}
   m_Layer: 5
-  m_Name: MainMenuUI--------------
+  m_Name: MainMenuRewardsUI--------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 265144472}
   - component: {fileID: 265144471}
   m_Layer: 5
-  m_Name: Rewards
+  m_Name: RewardsUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -902,7 +902,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -235.78784}
+  m_AnchoredPosition: {x: 0, y: -199.00008}
   m_SizeDelta: {x: -160, y: -661.57556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &265144471
@@ -1613,13 +1613,14 @@ GameObject:
   - component: {fileID: 647225849}
   - component: {fileID: 647225851}
   - component: {fileID: 647225850}
+  - component: {fileID: 647225852}
   m_Layer: 5
-  m_Name: Nomorerewards
+  m_Name: NomorerewardsUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &647225849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1678,6 +1679,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647225848}
   m_CullTransparentMesh: 1
+--- !u!114 &647225852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647225848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c652da89a0795418036c6ea35bccad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &669057530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c652da89a0795418036c6ea35bccad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &685550169
+--- !u!1 &671063557
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1801,100 +1814,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 685550170}
-  - component: {fileID: 685550173}
-  - component: {fileID: 685550172}
-  - component: {fileID: 685550171}
-  m_Layer: 5
-  m_Name: Canvas
+  - component: {fileID: 671063558}
+  - component: {fileID: 671063559}
+  m_Layer: 0
+  m_Name: DailyRewards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &685550170
-RectTransform:
+--- !u!4 &671063558
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685550169}
+  m_GameObject: {fileID: 671063557}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 902.76105, y: 1192.7728, z: 0.14334823}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 20386800}
-  m_Father: {fileID: 1985846279}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000011444092, y: 0.000030517578}
-  m_SizeDelta: {x: 1824.5195, y: 4047.5425}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &685550171
+--- !u!114 &671063559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685550169}
+  m_GameObject: {fileID: 671063557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 11500000, guid: 7101658ac0c36431695569a12ee2cd86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &685550172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685550169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!223 &685550173
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685550169}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
+  rewardUIPanel: {fileID: 20386799}
+  rewardsUI: {fileID: 265144469}
+  noMoreRewardsUI: {fileID: 647225848}
+  notificationIcon: {fileID: 2097426982}
+  claimButton: {fileID: 155971767}
+  closeButton: {fileID: 885024997}
+  openButton: {fileID: 1142291973}
+  rewardAmountText: {fileID: 548702228}
+  coinManager: {fileID: 1806446115}
 --- !u!1 &735775711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,6 +1892,7 @@ RectTransform:
   m_Children:
   - {fileID: 1329110898}
   - {fileID: 1142291971}
+  - {fileID: 20386800}
   m_Father: {fileID: 224662228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2481,7 +2446,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1985846280}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DailyRewards, Assembly-CSharp
         m_MethodName: CloseRewardPanel
         m_Mode: 1
@@ -2898,7 +2863,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1985846280}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DailyRewards, Assembly-CSharp
         m_MethodName: ShowRewardsUI
         m_Mode: 1
@@ -3609,14 +3574,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 224662228}
   - {fileID: 775589693}
   - {fileID: 132295240}
   - {fileID: 1540750650}
   - {fileID: 544399984}
   - {fileID: 230217726}
   - {fileID: 1857587878}
-  - {fileID: 1985846279}
+  - {fileID: 224662228}
   m_Father: {fileID: 669057534}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3962,6 +3926,51 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5882353}
   m_EffectDistance: {x: 5.02, y: -6.48}
   m_UseGraphicAlpha: 1
+--- !u!1 &1806446114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1806446116}
+  - component: {fileID: 1806446115}
+  m_Layer: 0
+  m_Name: CoinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1806446115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806446114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721c9fe6dbca39e47ab1c661797866ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinText: {fileID: 0}
+--- !u!4 &1806446116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806446114}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 755.1813, y: 1131.4995, z: -0.39969522}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1822964891
 GameObject:
   m_ObjectHideFlags: 0
@@ -4253,63 +4262,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857587877}
   m_CullTransparentMesh: 1
---- !u!1 &1985846278
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1985846279}
-  - component: {fileID: 1985846280}
-  m_Layer: 5
-  m_Name: 'RewardUI-------------- '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1985846279
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985846278}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 685550170}
-  m_Father: {fileID: 1672216274}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1985846280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985846278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7101658ac0c36431695569a12ee2cd86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinManager: {fileID: 0}
-  rewardUIPanel: {fileID: 685550169}
-  noMoreRewardsPanel: {fileID: 647225848}
-  rewardAmountText: {fileID: 548702228}
-  claimButton: {fileID: 155971767}
-  closeButton: {fileID: 885024997}
-  openButton: {fileID: 1142291973}
-  notificationIcon: {fileID: 2097426984}
 --- !u!1 &2097426982
 GameObject:
   m_ObjectHideFlags: 0
@@ -4394,3 +4346,5 @@ SceneRoots:
   - {fileID: 549979718}
   - {fileID: 475088908}
   - {fileID: 1318647560}
+  - {fileID: 671063558}
+  - {fileID: 1806446116}

@@ -1,64 +1,90 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System;
-using UnityEngine.UI;
 
 public class DailyRewards : MonoBehaviour
 {
-    public CoinManager coinManager;  // Reference to CoinManager
-    public GameObject rewardUIPanel; // The UI panel for displaying rewards
-    public GameObject noMoreRewardsPanel; // Panel to show when no rewards available
-    public TextMeshProUGUI rewardAmountText; // Text for reward amount
-    public Button claimButton; // Button for claiming rewards
-    public Button closeButton; // Button for closing the reward panel
-    public Button openButton; // Button for opening the rewards UI panel
-    public Image notificationIcon; // Notification icon to indicate availability of reward
-
-    private DateTime lastClaimedTime;
-    private bool rewardAvailable;
-    private const int DAILY_REWARD_AMOUNT = 250; // Reward amount
-    private const int REWARD_INTERVAL_HOURS = 23; // Reward interval
+    public GameObject rewardUIPanel;     // Main Rewards UI Panel (DarkPanel)
+    public GameObject rewardsUI;         // Rewards UI Panel (the one showing rewards)
+    public GameObject noMoreRewardsUI;   // Panel to show when no rewards are available
+    public GameObject notificationIcon;  // Notification icon
+    public Button claimButton;           // Claim reward button
+    public Button closeButton;           // Close button inside rewards panel
+    public Button openButton;            // Rewards button (opens rewards panel)
+    public TextMeshProUGUI rewardAmountText; // Updated to TextMeshProUGUI
+    public CoinManager coinManager;      // Reference to the CoinManager
+    private bool rewardAvailable;        // Is the reward available?
+    private const int DAILY_REWARD_AMOUNT = 250; // Amount of coins for daily reward
 
     void Start()
     {
-        // Load last claimed time
-        if (PlayerPrefs.HasKey("LastClaimedTime"))
-        {
-            lastClaimedTime = DateTime.Parse(PlayerPrefs.GetString("LastClaimedTime"));
-        }
-        else
-        {
-            lastClaimedTime = DateTime.MinValue;
-        }
+        // Load the last claimed time and check if the reward is available
+        CheckDailyRewardStatus();
 
-        UpdateRewardAvailability();
+        // Initially hide the entire DarkPanel (rewards UI panel)
+        rewardUIPanel.SetActive(false);
 
         // Add listeners to the buttons
         claimButton.onClick.AddListener(ClaimReward);
         closeButton.onClick.AddListener(CloseRewardPanel);
         openButton.onClick.AddListener(ShowRewardsUI); // Add listener for the open button
+
+        // Update UI based on saved reward availability status
+        UpdateRewardAvailability();
     }
 
     void Update()
     {
-        UpdateRewardAvailability();
+        // This can be used for future logic updates related to rewards if needed
     }
 
-    // Method to check if the reward is available based on last claimed time
-    private void UpdateRewardAvailability()
+    // Method to check if the reward can be claimed (based on daily reset)
+    private void CheckDailyRewardStatus()
     {
-        TimeSpan timeSinceLastClaim = DateTime.Now - lastClaimedTime;
-        rewardAvailable = timeSinceLastClaim.TotalHours >= REWARD_INTERVAL_HOURS;
+        // Load the last claimed time
+        string lastClaimedTimeStr = PlayerPrefs.GetString("LastClaimedTime", string.Empty);
 
-        if (rewardAvailable)
+        if (string.IsNullOrEmpty(lastClaimedTimeStr))
         {
-            notificationIcon.enabled = true;
-            rewardUIPanel.SetActive(false);
+            // If there is no saved claim time, allow the reward to be claimed
+            rewardAvailable = true;
         }
         else
         {
-            notificationIcon.enabled = false;
-            noMoreRewardsPanel.SetActive(true);
+            // Convert the saved string to DateTime
+            DateTime lastClaimedTime = DateTime.Parse(lastClaimedTimeStr);
+            DateTime currentTime = DateTime.Now;
+
+            // Check if it's a new day
+            if (currentTime.Date > lastClaimedTime.Date)
+            {
+                rewardAvailable = true;  // Reward is available if it's a new day
+            }
+            else
+            {
+                rewardAvailable = false; // Reward has already been claimed today
+            }
+        }
+
+        PlayerPrefs.SetInt("RewardAvailable", rewardAvailable ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    // Method to update the UI based on the reward availability
+    private void UpdateRewardAvailability()
+    {
+        if (rewardAvailable)
+        {
+            notificationIcon.SetActive(true);  // Show notification if reward is available
+            rewardsUI.SetActive(true);         // Show rewards UI when reward is available
+            noMoreRewardsUI.SetActive(false);  // Hide the "No More Rewards" panel
+        }
+        else
+        {
+            notificationIcon.SetActive(false);  // Hide notification when no reward is available
+            rewardsUI.SetActive(false);         // Hide rewards UI
+            noMoreRewardsUI.SetActive(true);    // Show "No More Rewards" panel
         }
     }
 
@@ -68,13 +94,19 @@ public class DailyRewards : MonoBehaviour
         Debug.Log("ClaimReward button clicked");
         if (rewardAvailable)
         {
-            lastClaimedTime = DateTime.Now;
-            PlayerPrefs.SetString("LastClaimedTime", lastClaimedTime.ToString());
+            // Disable reward after it's claimed
+            rewardAvailable = false;
+
+            // Save the current date and time as the last claim time
+            PlayerPrefs.SetString("LastClaimedTime", DateTime.Now.ToString());
+            PlayerPrefs.SetInt("RewardAvailable", 0); // Mark reward as claimed
             PlayerPrefs.Save();
 
+            // Add coins to the player
             coinManager.AddCoins(DAILY_REWARD_AMOUNT); // Update coin balance using CoinManager
             rewardAmountText.text = $"+{DAILY_REWARD_AMOUNT}";
 
+            // Update the availability UI after claiming the reward
             UpdateRewardAvailability();
         }
         else
@@ -87,14 +119,26 @@ public class DailyRewards : MonoBehaviour
     public void CloseRewardPanel()
     {
         Debug.Log("CloseRewardPanel button clicked");
-        rewardUIPanel.SetActive(false);
+        rewardUIPanel.SetActive(false);  // Close the whole DarkPanel
     }
 
     // Method to show the rewards UI panel
     public void ShowRewardsUI()
     {
         Debug.Log("ShowRewardsUI button clicked");
-        rewardUIPanel.SetActive(true);
-        noMoreRewardsPanel.SetActive(!rewardAvailable);
+
+        // Show the DarkPanel when the user clicks the Rewards button
+        rewardUIPanel.SetActive(true);  
+
+        if (rewardAvailable)
+        {
+            rewardsUI.SetActive(true);         // Show the rewards UI if reward is available
+            noMoreRewardsUI.SetActive(false);  // Hide the "No More Rewards" panel
+        }
+        else
+        {
+            rewardsUI.SetActive(false);        // Hide the rewards UI if no rewards are available
+            noMoreRewardsUI.SetActive(true);   // Show the "No More Rewards" panel
+        }
     }
 }
