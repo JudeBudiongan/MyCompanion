@@ -25,6 +25,7 @@ public class ShopManagerTreats : MonoBehaviour
     public Text CoinsTxt;
     public TreatManager treatManager;  // Reference to TreatManager
     public CoinManager coinManager;    // Reference to CoinManager
+    public TreatScript treatScript;    // Reference to TreatScript
 
     void Awake()
     {
@@ -37,6 +38,11 @@ public class ShopManagerTreats : MonoBehaviour
         {
             treatManager = FindObjectOfType<TreatManager>();
         }
+
+        if (treatScript == null)
+        {
+            treatScript = FindObjectOfType<TreatScript>();
+        }
     }
 
     IEnumerator DelayedInitialization()
@@ -44,8 +50,9 @@ public class ShopManagerTreats : MonoBehaviour
         yield return new WaitForSeconds(0.1f); // Slight delay before trying to find the objects
         coinManager = FindObjectOfType<CoinManager>();
         treatManager = FindObjectOfType<TreatManager>();
+        treatScript = FindObjectOfType<TreatScript>();
         UpdateCoinDisplay();
-        SyncShopItemsWithTreatManager();  // Call the correct sync method
+        SyncShopItemsWithTreatManager();
     }
 
     void Start()
@@ -58,7 +65,6 @@ public class ShopManagerTreats : MonoBehaviour
         shopItems.Add(new ShopTreats(2, 50, 8));
         shopItems.Add(new ShopTreats(3, 15, 12));
 
-        // Sync all button states to ensure they reflect the correct stock status
         RefreshButtonStates();
     }
 
@@ -83,6 +89,9 @@ public class ShopManagerTreats : MonoBehaviour
             // Increase the treat quantity in TreatManager
             treatManager.IncreaseQuantity(itemID);
 
+            // Add the treats to TreatScript (use itemID as treat amount for now)
+            treatScript.AddTreats(1);  // Add 1 treat for each purchase (adjust as necessary)
+
             // Update UI
             UpdateCoinDisplay();
             ButtonRef.GetComponent<buttoninfoTreats>().UpdateButtonState();
@@ -93,7 +102,6 @@ public class ShopManagerTreats : MonoBehaviour
         }
     }
 
-    // Method to refresh button states across all buttons in the scene
     private void RefreshButtonStates()
     {
         foreach (var button in FindObjectsOfType<buttoninfoTreats>())
@@ -102,15 +110,14 @@ public class ShopManagerTreats : MonoBehaviour
         }
     }
 
-    // Sync the stock status of ShopTreats with TreatManager on scene load
     private void SyncShopItemsWithTreatManager()
     {
         foreach (var shopTreat in shopItems)
         {
             var treatItem = treatManager.GetTreatById(shopTreat.ID);
-            if (treatItem != null) // Check if the treatItem is found
+            if (treatItem != null)
             {
-                shopTreat.stock = treatItem.Stock; // Correctly sync stock from TreatManager
+                shopTreat.stock = treatItem.Stock;
             }
         }
         RefreshButtonStates();

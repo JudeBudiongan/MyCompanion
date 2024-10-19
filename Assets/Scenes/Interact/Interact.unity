@@ -1266,6 +1266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1533216409}
   - component: {fileID: 1533216408}
+  - component: {fileID: 1533216410}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1302,6 +1303,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1533216410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533216407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3559a587c96b644382c71ee523c6025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1852096353}
+  treatButton: {fileID: 1943614995}
+  treatAmount: 10
+  maxHealth: 100
 --- !u!1 &1574456455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,7 +1523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944cf69ce4b234317b3a22dd857b5789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 1852096353}
 --- !u!1 &1598715876
@@ -2002,6 +2019,7 @@ GameObject:
   - component: {fileID: 1943614997}
   - component: {fileID: 1943614996}
   - component: {fileID: 1943614995}
+  - component: {fileID: 1943614998}
   m_Layer: 5
   m_Name: Treat
   m_TagString: Untagged
@@ -2072,19 +2090,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1943614996}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1574456460}
-        m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Treat
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1943614996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2123,6 +2129,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943614993}
   m_CullTransparentMesh: 1
+--- !u!114 &1943614998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943614993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3559a587c96b644382c71ee523c6025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1852096353}
+  treatButton: {fileID: 1943614995}
+  treatAmount: 10
+  maxHealth: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
