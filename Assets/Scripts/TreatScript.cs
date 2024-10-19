@@ -5,7 +5,7 @@ using UnityEngine;
 public class TreatScript : MonoBehaviour
 {
     public HealthBar healthBar;  // Reference to the HealthBar script
-    private int treatsAvailable = 0;  // Number of treats available
+    private int treatsAvailable = 15;  // Number of treats available
     private int currentHealth;   // Player's current health
     public int maxHealth = 100;  // Max health value
     public int healthIncreaseAmount = 10; // Amount to increase health per treat
@@ -25,7 +25,7 @@ public class TreatScript : MonoBehaviour
         }
 
         // Initialize the health bar
-        currentHealth = maxHealth;  // Start health at max
+        currentHealth = 50;  // Start health at max
         healthBar.SetMaxHealth(maxHealth);
         healthBar.SetHealth(currentHealth);  // Set the initial health
     }
