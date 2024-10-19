@@ -24,8 +24,8 @@ public class CompanionManager : MonoBehaviour
         public Sprite CompanionSprite { get; set; } // Add Sprite for the companion
 
         // Satisfaction and Level properties
-        public int SatisfactionLevel { get; private set; }
-        public int Level { get; private set; }
+        public int SatisfactionLevel { get; set; }
+        public int Level { get; set; }
 
         public Companion(int companionID, string petName, Sprite sprite, string author)
             : base(false, author) // Initialized isBought and author here
@@ -96,7 +96,7 @@ public class CompanionManager : MonoBehaviour
     public Sprite spritePriscue, spriteSushiSlayer, spriteRFilly, spriteEilmar;
     public Sprite spriteCat, spriteSkibidi, spritelileduj;
 
-    void Start()
+    public void Start()
     {
         // STARTER COMPANIONS
         companions.Add(new Companion(0, "Alien", spriteAlien, "DD"));
@@ -149,5 +149,21 @@ public class CompanionManager : MonoBehaviour
             return companions[companionID].IsBought;
         }
         return false; // Return false if the ID is invalid
+    }
+
+     public HealthBar healthBar; // Reference to the HealthBar component
+
+    public void UpdateHealthBarForSelectedCompanion(int companionID)
+    {
+        Companion selectedCompanion = GetCompanionById(companionID);
+        if (selectedCompanion != null)
+        {
+            healthBar.SetMaxSatisfaction(100); // Assuming max satisfaction is 100
+            healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
+        }
+        else
+        {
+            Debug.LogWarning("Selected Companion is null.");
+        }
     }
 }

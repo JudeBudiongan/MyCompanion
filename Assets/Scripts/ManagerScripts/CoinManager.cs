@@ -3,7 +3,8 @@ using static CompanionManager;
 
 public class CoinManager : MonoBehaviour
 {
-    public int TotalCoins { get; private set; } = 1000; // Initialize total coins to 0
+    // Property to get and set TotalCoins
+    public int TotalCoins {get; set;} = 1000;
     private CompanionManager companionManager; // Reference to CompanionManager
     public static CoinManager Instance;
     void Awake() {
