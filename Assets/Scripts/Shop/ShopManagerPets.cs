@@ -47,7 +47,7 @@ public class ShopManagerPets : MonoBehaviour
         SyncShopItemsWithCompanionManager();  // New function call to ensure correct item state
     }
 
-    public void Start()
+    void Start()
     {
         StartCoroutine(DelayedInitialization());
 
@@ -68,7 +68,7 @@ public class ShopManagerPets : MonoBehaviour
         RefreshButtonStates();
     }
 
-    public void UpdateCoinDisplay()
+    private void UpdateCoinDisplay()
     {
         CoinsTxt.text = " " + coinManager.TotalCoins; // Synchronize with CoinManager
     }
@@ -112,7 +112,7 @@ public class ShopManagerPets : MonoBehaviour
     }
 
     // Sync the bought status of ShopPets with CompanionManager on scene load
-    public void SyncShopItemsWithCompanionManager()
+    private void SyncShopItemsWithCompanionManager()
     {
         foreach (var shopPet in shopItems)
         {
