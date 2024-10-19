@@ -117,6 +117,8 @@ public class LoginUI : MonoBehaviour
     // Check if any input field is empty and display an error message
     public void ValidateLoginFields()
     {
+        HideNotification();
+        
         if (string.IsNullOrEmpty(loginEmail.text) || string.IsNullOrEmpty(loginPassword.text))
         {
             DisplayNotification("Error", "Please fill in all login fields.");

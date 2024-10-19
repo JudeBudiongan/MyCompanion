@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CompanionManager;
 
 public class TreatScript : MonoBehaviour
 {
-    public HealthBar healthBar;  // Reference to the HealthBar script
-    private int treatsAvailable = 0;  // Number of treats available
-    private int currentHealth;   // Player's current health
-    public int maxHealth = 100;  // Max health value
-    public int healthIncreaseAmount = 10; // Amount to increase health per treat
+    public HealthBar healthBar; // Reference to the HealthBar script
+    public CompanionManager companionManager; // Reference to the CompanionManager script
+    public int treatsAvailable = 15; // Number of treats available
+    public int satisfactionIncreaseAmount = 10; // Amount to increase satisfaction per treat
+
+    private Companion selectedCompanion; // The currently selected companion
 
     void Start()
     {
@@ -24,10 +26,32 @@ public class TreatScript : MonoBehaviour
             }
         }
 
-        // Initialize the health bar
-        currentHealth = maxHealth;  // Start health at max
-        healthBar.SetMaxHealth(maxHealth);
-        healthBar.SetHealth(currentHealth);  // Set the initial health
+        // Check if the CompanionManager is not set in the Inspector, find it dynamically
+        if (companionManager == null)
+        {
+            companionManager = CompanionManager.Instance;
+
+            if (companionManager == null)
+            {
+                Debug.LogError("CompanionManager not found in the scene! Make sure it's assigned or exists in the hierarchy.");
+                return;
+            }
+        }
+
+        // Retrieve the currently selected companion from PlayerPrefs
+        int selectedID = PlayerPrefs.GetInt("SelectedID", -1); // Default to -1 if no companion is selected
+        selectedCompanion = companionManager.GetCompanionById(selectedID);
+
+        if (selectedCompanion != null)
+        {
+            // Initialize the health bar with the selected companion's satisfaction
+            healthBar.SetMaxSatisfaction(100); // Assuming max satisfaction is 100
+            healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
+        }
+        else
+        {
+            Debug.LogWarning("No companion has been selected or found.");
+        }
     }
 
     // Method to add treats (e.g., when bought from the shop)
@@ -37,27 +61,32 @@ public class TreatScript : MonoBehaviour
         Debug.Log("Treats added: " + amount + ". Total treats available: " + treatsAvailable);
     }
 
-    // Method to use a treat and increase health
+    // Method to use a treat and increase satisfaction
     public void UseTreat()
     {
-        if (treatsAvailable > 0)  // Check if there are treats available
+        if (selectedCompanion == null)
         {
-            if (currentHealth < maxHealth)  // Check if health can be increased
+            Debug.LogWarning("No companion selected to feed.");
+            return;
+        }
+
+        if (treatsAvailable > 0) // Check if there are treats available
+        {
+            if (selectedCompanion.SatisfactionLevel < 100) // Check if satisfaction can be increased
             {
-                currentHealth += healthIncreaseAmount;  // Increase health by defined amount
-                if (currentHealth > maxHealth)
+                selectedCompanion.IncreaseSatisfaction(satisfactionIncreaseAmount); // Increase satisfaction
+                if (selectedCompanion.SatisfactionLevel > 100)
                 {
-                    currentHealth = maxHealth;  // Ensure health doesn't exceed maxHealth
+                    selectedCompanion.SatisfactionLevel = 100; // Ensure satisfaction doesn't exceed max
                 }
 
-                healthBar.SetHealth(currentHealth);  // Update the health bar
-                treatsAvailable--;  // Decrease the number of treats available
-                Debug.Log("Used a treat. Current health: " + currentHealth + ". Remaining treats: " + treatsAvailable);
-                Debug.Log("Treat has been fed to the companion!"); // Log feeding message
+                healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel); // Update the health bar
+                treatsAvailable--; // Decrease the number of treats available
+                Debug.Log("Used a treat. " + selectedCompanion.PetName + "'s satisfaction: " + selectedCompanion.SatisfactionLevel + ". Remaining treats: " + treatsAvailable);
             }
             else
             {
-                Debug.Log("Health is already full.");
+                Debug.Log(selectedCompanion.PetName + "'s satisfaction is already full.");
             }
         }
         else
