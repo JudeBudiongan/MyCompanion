@@ -36,7 +36,8 @@ public class DailyRewards : MonoBehaviour
 
     void Update()
     {
-        // This can be used for future logic updates related to rewards if needed
+        // Check if 24 hours have passed since the last claim
+        CheckIfRewardAvailableAgain();
     }
 
     // Method to check if the reward can be claimed (based on daily reset)
@@ -56,14 +57,14 @@ public class DailyRewards : MonoBehaviour
             DateTime lastClaimedTime = DateTime.Parse(lastClaimedTimeStr);
             DateTime currentTime = DateTime.Now;
 
-            // Check if it's a new day
-            if (currentTime.Date > lastClaimedTime.Date)
+            // Check if 24 hours have passed since the last claim
+            if ((currentTime - lastClaimedTime).TotalHours >= 24)
             {
-                rewardAvailable = true;  // Reward is available if it's a new day
+                rewardAvailable = true;  // Reward is available if 24 hours have passed
             }
             else
             {
-                rewardAvailable = false; // Reward has already been claimed today
+                rewardAvailable = false; // Reward has already been claimed within the last 24 hours
             }
         }
 
@@ -139,6 +140,26 @@ public class DailyRewards : MonoBehaviour
         {
             rewardsUI.SetActive(false);        // Hide the rewards UI if no rewards are available
             noMoreRewardsUI.SetActive(true);   // Show the "No More Rewards" panel
+        }
+    }
+
+    // Method to check if reward is available again after 24 hours
+    private void CheckIfRewardAvailableAgain()
+    {
+        if (!rewardAvailable)
+        {
+            string lastClaimedTimeStr = PlayerPrefs.GetString("LastClaimedTime", string.Empty);
+            if (!string.IsNullOrEmpty(lastClaimedTimeStr))
+            {
+                DateTime lastClaimedTime = DateTime.Parse(lastClaimedTimeStr);
+                DateTime currentTime = DateTime.Now;
+
+                if ((currentTime - lastClaimedTime).TotalHours >= 24)
+                {
+                    rewardAvailable = true;
+                    UpdateRewardAvailability();
+                }
+            }
         }
     }
 }
