@@ -821,6 +821,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681279319}
   m_CullTransparentMesh: 1
+--- !u!1 &775064068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 775064070}
+  - component: {fileID: 775064069}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &775064069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775064068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de45d12104d6c244a939c3f4f1db380f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &775064070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775064068}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 665.9649, y: 1682.4387, z: -1.1443441}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1028218367
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,6 +999,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028218367}
   m_CullTransparentMesh: 1
+--- !u!1 &1286998096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1286998098}
+  - component: {fileID: 1286998097}
+  m_Layer: 0
+  m_Name: CompanionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1286998097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286998096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1303a5a27a278b499966ca4267f8dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  companions: []
+  spriteAlien: {fileID: 0}
+  spriteBerry: {fileID: 0}
+  spriteGrey: {fileID: 0}
+  spriteWoshi: {fileID: 0}
+  spriteGrimWooper: {fileID: 0}
+  spriteFak: {fileID: 0}
+  spriteXv6Riscv: {fileID: 0}
+  spriteTTiddy: {fileID: 0}
+  spritePriscue: {fileID: 0}
+  spriteSushiSlayer: {fileID: 0}
+  spriteRFilly: {fileID: 0}
+  spriteEilmar: {fileID: 0}
+  spriteCat: {fileID: 0}
+  spriteSkibidi: {fileID: 0}
+  spritelileduj: {fileID: 0}
+  healthBar: {fileID: 0}
+--- !u!4 &1286998098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286998096}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 625.7058, y: 1724.1658, z: -0.12738311}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1419706953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,8 +1422,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1852096353}
-  maxHealth: 100
-  healthIncreaseAmount: 10
+  companionManager: {fileID: 0}
+  treatsAvailable: 15
+  satisfactionIncreaseAmount: 10
 --- !u!114 &1533216411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,9 +1641,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944cf69ce4b234317b3a22dd857b5789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
+  maxSatisfaction: 100
   healthBar: {fileID: 1852096353}
+  companionManager: {fileID: 0}
 --- !u!1 &1598715876
 GameObject:
   m_ObjectHideFlags: 0
@@ -2167,8 +2273,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1852096353}
-  maxHealth: 100
-  healthIncreaseAmount: 10
+  companionManager: {fileID: 0}
+  treatsAvailable: 15
+  satisfactionIncreaseAmount: 10
 --- !u!114 &1943614999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2189,3 +2296,5 @@ SceneRoots:
   - {fileID: 1574456459}
   - {fileID: 541438613}
   - {fileID: 1533216409}
+  - {fileID: 1286998098}
+  - {fileID: 775064070}

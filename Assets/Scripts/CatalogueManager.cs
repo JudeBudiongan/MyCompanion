@@ -65,16 +65,13 @@ public class CatalogueManager : MonoBehaviour
         return companionID == selectedID;
     }
 
-    // Method to handle button click, you can customize this to fit your use case
     private void OnCompanionSelected(int companionID)
     {
         Debug.Log("Companion with ID " + companionID + " selected.");
-
-        // Save the selected companion ID to PlayerPrefs
+        GameManager.Instance.SetSelectedCompanionID(companionID);
         PlayerPrefs.SetInt("SelectedID", companionID);
-        PlayerPrefs.Save(); // Make sure to save PlayerPrefs
-
-        // Load the Main Menu scene
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Main Menu");
     }
+
 }

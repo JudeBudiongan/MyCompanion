@@ -81,6 +81,10 @@ public class TreatScript : MonoBehaviour
                 }
 
                 healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel); // Update the health bar
+
+                // Update satisfaction in GameManager to maintain consistency across scenes
+                GameManager.Instance.SetSatisfaction(selectedCompanion.SatisfactionLevel);
+
                 treatsAvailable--; // Decrease the number of treats available
                 Debug.Log("Used a treat. " + selectedCompanion.PetName + "'s satisfaction: " + selectedCompanion.SatisfactionLevel + ". Remaining treats: " + treatsAvailable);
             }

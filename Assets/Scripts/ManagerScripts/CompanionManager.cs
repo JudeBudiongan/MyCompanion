@@ -116,7 +116,12 @@ public class CompanionManager : MonoBehaviour
         companions.Add(new Companion(12, "cat", spriteCat, "JB"));
         companions.Add(new Companion(13, "skibidi", spriteSkibidi, "KR"));
         companions.Add(new Companion(14, "lil e-duj", spritelileduj, "DA"));
-        
+
+        // Load satisfaction levels from saved data
+        foreach (var companion in companions)
+        {
+            LoadCompanionData(companion);
+        }
     }
 
     public void SetCompanionBought(int companionID)
@@ -151,7 +156,7 @@ public class CompanionManager : MonoBehaviour
         return false; // Return false if the ID is invalid
     }
 
-     public HealthBar healthBar; // Reference to the HealthBar component
+    public HealthBar healthBar; // Reference to the HealthBar component
 
     public void UpdateHealthBarForSelectedCompanion(int companionID)
     {
@@ -165,5 +170,17 @@ public class CompanionManager : MonoBehaviour
         {
             Debug.LogWarning("Selected Companion is null.");
         }
+    }
+
+    // New Methods to Save and Load Satisfaction Data
+    public void SaveCompanionData(Companion companion)
+    {
+        PlayerPrefs.SetInt("Satisfaction_" + companion.CompanionID, companion.SatisfactionLevel);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadCompanionData(Companion companion)
+    {
+        companion.SatisfactionLevel = PlayerPrefs.GetInt("Satisfaction_" + companion.CompanionID, 50); // Default to 50 if not set
     }
 }

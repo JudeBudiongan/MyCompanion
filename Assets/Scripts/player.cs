@@ -5,79 +5,72 @@ using static CompanionManager;
 
 public class Player : MonoBehaviour
 {
-    public HealthBar healthBar;
-    private Companion currentCompanion;
-    private int maxSatisfaction;
-    private int currentSatisfaction;
+    public int maxSatisfaction = 100; // Assuming max satisfaction is 100
 
-    // Reference to TreatScript (assuming it's on the same GameObject or set via Inspector)
-    public TreatScript treatScript;
+    public HealthBar healthBar;
+    public CompanionManager companionManager;
+
+    private Companion selectedCompanion;
 
     void Start()
     {
-        // Fetch the currently selected companion (using PlayerPrefs or CompanionManager)
-        int selectedID = PlayerPrefs.GetInt("SelectedID", -1);
-        currentCompanion = CompanionManager.Instance.GetCompanionById(selectedID);
-
-        if (currentCompanion != null)
+        if (companionManager == null)
         {
-            maxSatisfaction = currentCompanion.SatisfactionLevel; // Assume this is the max satisfaction
-            currentSatisfaction = maxSatisfaction;
+            companionManager = CompanionManager.Instance;
+        }
+
+        // Retrieve the currently selected companion from PlayerPrefs
+        int selectedID = PlayerPrefs.GetInt("SelectedID", -1); // Default to -1 if no companion is selected
+        selectedCompanion = companionManager.GetCompanionById(selectedID);
+
+        if (selectedCompanion != null)
+        {
+            healthBar.SetMaxSatisfaction(maxSatisfaction);
+            healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
         }
         else
         {
-            // If no companion is found, use a default value
-            maxSatisfaction = 25;
-            currentSatisfaction = maxSatisfaction;
+            Debug.LogWarning("No companion has been selected or found.");
         }
-
-        // Set up the health bar
-        healthBar.SetMaxSatisfaction(maxSatisfaction);
-        healthBar.SetSatisfaction(currentSatisfaction);
     }
 
     void Update()
     {
-        // Use the Heal method via TreatScript
-        if (Input.GetKeyDown(KeyCode.T))
+        // Example input to modify satisfaction, just for testing
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            treatScript.UseTreat();
+            DecreaseSatisfaction(10);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            IncreaseSatisfaction(10);
         }
     }
 
-    public void TakeDamage(int damage)
+    public void DecreaseSatisfaction(int amount)
     {
-        currentSatisfaction -= damage;
-
-        // Ensure satisfaction doesn't drop below 0
-        if (currentSatisfaction < 0)
+        if (selectedCompanion != null)
         {
-            currentSatisfaction = 0;
-        }
+            selectedCompanion.SatisfactionLevel -= amount;
+            if (selectedCompanion.SatisfactionLevel < 0) selectedCompanion.SatisfactionLevel = 0;
+            healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
 
-        healthBar.SetSatisfaction(currentSatisfaction);
-        UpdateCompanionSatisfaction(); // Update the companion's satisfaction level
+            // Save the updated satisfaction level to maintain consistency across scenes
+            companionManager.SaveCompanionData(selectedCompanion);
+        }
     }
 
-    public void Heal(int amount)
+    public void IncreaseSatisfaction(int amount)
     {
-        currentSatisfaction += amount;
-
-        // Ensure satisfaction doesn't exceed maxSatisfaction
-        if (currentSatisfaction > maxSatisfaction)
+        if (selectedCompanion != null)
         {
-            currentSatisfaction = maxSatisfaction;
-        }
+            selectedCompanion.SatisfactionLevel += amount;
+            if (selectedCompanion.SatisfactionLevel > maxSatisfaction) selectedCompanion.SatisfactionLevel = maxSatisfaction;
+            healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
 
-        healthBar.SetSatisfaction(currentSatisfaction);
-        UpdateCompanionSatisfaction(); // Update the companion's satisfaction level
-    }
-
-    private void UpdateCompanionSatisfaction()
-    {
-        if (currentCompanion != null)
-        {
-            currentCompanion.SatisfactionLevel = currentSatisfaction;
+            // Save the updated satisfaction level to maintain consistency across scenes
+            companionManager.SaveCompanionData(selectedCompanion);
         }
     }
 }
