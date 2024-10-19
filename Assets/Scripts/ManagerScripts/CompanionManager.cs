@@ -24,8 +24,8 @@ public class CompanionManager : MonoBehaviour
         public Sprite CompanionSprite { get; set; } // Add Sprite for the companion
 
         // Satisfaction and Level properties
-        public int SatisfactionLevel { get; set; }
-        public int Level { get; set; }
+        public int SatisfactionLevel { get; private set; }
+        public int Level { get; private set; }
 
         public Companion(int companionID, string petName, Sprite sprite, string author)
             : base(false, author) // Initialized isBought and author here
@@ -96,7 +96,7 @@ public class CompanionManager : MonoBehaviour
     public Sprite spritePriscue, spriteSushiSlayer, spriteRFilly, spriteEilmar;
     public Sprite spriteCat, spriteSkibidi, spritelileduj;
 
-    public void Start()
+    void Start()
     {
         // STARTER COMPANIONS
         companions.Add(new Companion(0, "Alien", spriteAlien, "DD"));

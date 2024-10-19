@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static CompanionManager;
+using UnityEngine.UI;  // Ensure to include this for UI Button
 
 public class TreatScript : MonoBehaviour
 {
-    public HealthBar healthBar; // Reference to the HealthBar script
-    public CompanionManager companionManager; // Reference to the CompanionManager script
-    public int treatsAvailable = 15; // Number of treats available
-    public int satisfactionIncreaseAmount = 10; // Amount to increase satisfaction per treat
+    public HealthBar healthBar;  // Reference to the HealthBar script
+    private TreatManager.TreatItem currentTreat;  // Reference to the specific treat being used
+    private int currentHealth;   // Player's current health
+    public int maxHealth = 100;  // Max health value
+    public int healthIncreaseAmount = 10; // Amount to increase health per treat
 
-    private Companion selectedCompanion; // The currently selected companion
+    private Button buyButton; // Reference to the buy button
+    private bool isBuying = false; // Prevent multiple buys
 
     void Start()
     {
@@ -26,58 +28,61 @@ public class TreatScript : MonoBehaviour
             }
         }
 
-        // Check if the CompanionManager is not set in the Inspector, find it dynamically
-        if (companionManager == null)
-        {
-            companionManager = CompanionManager.Instance;
+        // Initialize the health bar
+        currentHealth = 50;  // Start health at a specified level
+        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetHealth(currentHealth);  // Set the initial health
 
-            if (companionManager == null)
-            {
-                Debug.LogError("CompanionManager not found in the scene! Make sure it's assigned or exists in the hierarchy.");
-                return;
-            }
-        }
-
-        // Retrieve the currently selected companion from PlayerPrefs
-        int selectedID = PlayerPrefs.GetInt("SelectedID", -1); // Default to -1 if no companion is selected
-        selectedCompanion = companionManager.GetCompanionById(selectedID);
-
-        if (selectedCompanion != null)
+        // Find the button in the scene
+        buyButton = FindObjectOfType<Button>(); // Modify to find your specific button or assign in Inspector
+        if (buyButton != null)
         {
-            // Initialize the health bar with the selected companion's satisfaction
-            healthBar.SetMaxSatisfaction(100); // Assuming max satisfaction is 100
-            healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
-        }
-        else
-        {
-            Debug.LogWarning("No companion has been selected or found.");
+            buyButton.onClick.AddListener(OnBuyButtonPressed);
         }
     }
 
-    // Method to add treats (e.g., when bought from the shop)
-    public void AddTreats(int amount)
+    // Method to handle buy button press
+    private void OnBuyButtonPressed()
     {
-        treatsAvailable += amount;
-        Debug.Log("Treats added: " + amount + ". Total treats available: " + treatsAvailable);
+        if (!isBuying) // Check if already in a buying process
+        {
+            isBuying = true; // Set buying flag
+            AddTreats(0, 1); // Buy treat ID 0 and quantity 1
+            StartCoroutine(ResetBuyingFlag()); // Reset after a short delay
+        }
     }
 
-    // Method to use a treat and increase satisfaction
+    private IEnumerator ResetBuyingFlag()
+    {
+        yield return new WaitForSeconds(1f); // Delay before allowing another purchase
+        isBuying = false; // Allow new purchases again
+    }
+
+    // Method to use a treat and increase health
     public void UseTreat()
     {
-        if (selectedCompanion == null)
+        // Get all available treats from the TreatManager
+        List<TreatManager.TreatItem> availableTreats = TreatManager.Instance.GetAllAvailableTreats();
+
+        if (availableTreats.Count == 0)
         {
-            Debug.LogWarning("No companion selected to feed.");
+            Debug.Log("No treats available in player inventory.");
             return;
         }
 
-        if (treatsAvailable > 0) // Check if there are treats available
+        // Select the first available treat for this example
+        currentTreat = availableTreats[0]; // You can implement your selection logic here
+
+        Debug.Log("Attempting to use treat: " + currentTreat.TreatName); // Debug log
+
+        if (currentTreat.Quantity > 0)  // Check if treats are available in player storage
         {
-            if (selectedCompanion.SatisfactionLevel < 100) // Check if satisfaction can be increased
+            if (currentHealth < maxHealth)  // Check if health can be increased
             {
-                selectedCompanion.IncreaseSatisfaction(satisfactionIncreaseAmount); // Increase satisfaction
-                if (selectedCompanion.SatisfactionLevel > 100)
+                currentHealth += healthIncreaseAmount;  // Increase health by the defined amount
+                if (currentHealth > maxHealth)
                 {
-                    selectedCompanion.SatisfactionLevel = 100; // Ensure satisfaction doesn't exceed max
+                    currentHealth = maxHealth;  // Ensure health doesn't exceed maxHealth
                 }
 
                 healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel); // Update the health bar
@@ -90,12 +95,34 @@ public class TreatScript : MonoBehaviour
             }
             else
             {
-                Debug.Log(selectedCompanion.PetName + "'s satisfaction is already full.");
+                Debug.Log("Health is already full.");
             }
         }
         else
         {
-            Debug.Log("No treats available.");
+            Debug.Log("No treats available in player inventory.");
+        }
+    }
+
+    // Method to add treats when bought from the shop
+    public void AddTreats(int treatID, int amount)
+    {
+        // We set amount to 1 here since we only want to add one treat when bought
+        amount = 1;
+
+        // Retrieve the treat from the TreatManager by its ID
+        currentTreat = TreatManager.Instance.GetTreatById(treatID);
+
+        if (currentTreat != null)
+        {
+            // Increase the treat quantity in the TreatManager
+            TreatManager.Instance.IncreaseTreatStock(treatID, amount);  // Increase the shop stock
+            TreatManager.Instance.IncreaseQuantity(treatID, amount);    // Add to the player's inventory
+            Debug.Log($"{amount} treat of {currentTreat.TreatName} added to player inventory.");
+        }
+        else
+        {
+            Debug.LogError("Invalid treat ID.");
         }
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static CompanionManager;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class Player : MonoBehaviour
 
     private Companion selectedCompanion;
 
+    // Start is called before the first frame update
     void Start()
     {
         if (companionManager == null)
@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Update is called once per frame
     void Update()
     {
         // Example input to modify satisfaction, just for testing
