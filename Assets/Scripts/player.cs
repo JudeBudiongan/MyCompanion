@@ -1,83 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static CompanionManager;
 
 public class Player : MonoBehaviour
 {
+    public int maxHealth = 25;
+    public int currentHealth;
+
     public HealthBar healthBar;
-    private Companion currentCompanion;
-    private int maxSatisfaction;
-    private int currentSatisfaction;
 
-    // Reference to TreatScript (assuming it's on the same GameObject or set via Inspector)
-    public TreatScript treatScript;
-
+    // Start is called before the first frame update
     void Start()
     {
-        // Fetch the currently selected companion (using PlayerPrefs or CompanionManager)
-        int selectedID = PlayerPrefs.GetInt("SelectedID", -1);
-        currentCompanion = CompanionManager.Instance.GetCompanionById(selectedID);
-
-        if (currentCompanion != null)
-        {
-            maxSatisfaction = currentCompanion.SatisfactionLevel; // Assume this is the max satisfaction
-            currentSatisfaction = maxSatisfaction;
-        }
-        else
-        {
-            // If no companion is found, use a default value
-            maxSatisfaction = 25;
-            currentSatisfaction = maxSatisfaction;
-        }
-
-        // Set up the health bar
-        healthBar.SetMaxSatisfaction(maxSatisfaction);
-        healthBar.SetSatisfaction(currentSatisfaction);
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
+    // Update is called once per frame
     void Update()
     {
-        // Use the Heal method via TreatScript
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            treatScript.UseTreat();
+            TakeDamage(3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Heal(3);
         }
     }
 
-    public void TakeDamage(int damage)
+    void TakeDamage(int damage)
     {
-        currentSatisfaction -= damage;
+        currentHealth -= damage;
 
-        // Ensure satisfaction doesn't drop below 0
-        if (currentSatisfaction < 0)
+        // Ensure health doesn't drop below 0
+        if (currentHealth < 0)
         {
-            currentSatisfaction = 0;
+            currentHealth = 0;
         }
 
-        healthBar.SetSatisfaction(currentSatisfaction);
-        UpdateCompanionSatisfaction(); // Update the companion's satisfaction level
+        healthBar.SetHealth(currentHealth);
     }
 
-    public void Heal(int amount)
+    void Heal(int amount)
     {
-        currentSatisfaction += amount;
+        currentHealth += amount;
 
-        // Ensure satisfaction doesn't exceed maxSatisfaction
-        if (currentSatisfaction > maxSatisfaction)
+        // Ensure health doesn't exceed maxHealth
+        if (currentHealth > maxHealth)
         {
-            currentSatisfaction = maxSatisfaction;
+            currentHealth = maxHealth;
         }
 
-        healthBar.SetSatisfaction(currentSatisfaction);
-        UpdateCompanionSatisfaction(); // Update the companion's satisfaction level
-    }
-
-    private void UpdateCompanionSatisfaction()
-    {
-        if (currentCompanion != null)
-        {
-            currentCompanion.SatisfactionLevel = currentSatisfaction;
-        }
+        healthBar.SetHealth(currentHealth);
     }
 }
