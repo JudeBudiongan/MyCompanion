@@ -85,7 +85,7 @@ public class TreatManager : MonoBehaviour
     }
 
     // Method to increase player's inventory quantity when a treat is bought
-    public void IncreaseQuantity(int treatID, int amount)
+    public void IncreaseQuantity(int treatID)
     {
         if (treatID >= 0 && treatID < treats.Count)
         {

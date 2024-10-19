@@ -24,7 +24,7 @@ public class CompanionManager : MonoBehaviour
         public Sprite CompanionSprite { get; set; } // Add Sprite for the companion
 
         // Satisfaction and Level properties
-        public int SatisfactionLevel { get; private set; }
+        public int SatisfactionLevel { get; set; }
         public int Level { get; private set; }
 
         public Companion(int companionID, string petName, Sprite sprite, string author)

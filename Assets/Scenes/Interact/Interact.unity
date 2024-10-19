@@ -1372,6 +1372,7 @@ GameObject:
   - component: {fileID: 1533216409}
   - component: {fileID: 1533216408}
   - component: {fileID: 1533216410}
+  - component: {fileID: 1533216411}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1421,9 +1422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1852096353}
-  companionManager: {fileID: 0}
-  treatsAvailable: 15
-  satisfactionIncreaseAmount: 10
+  maxHealth: 100
+  healthIncreaseAmount: 10
 --- !u!114 &1533216411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2137,6 +2137,7 @@ GameObject:
   - component: {fileID: 1943614996}
   - component: {fileID: 1943614995}
   - component: {fileID: 1943614998}
+  - component: {fileID: 1943614999}
   m_Layer: 5
   m_Name: Treat
   m_TagString: Untagged
@@ -2207,7 +2208,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1943614996}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1533216410}
+        m_TargetAssemblyTypeName: TreatScript, Assembly-CSharp
+        m_MethodName: UseTreat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1943614996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,9 +2272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1852096353}
-  companionManager: {fileID: 0}
-  treatsAvailable: 15
-  satisfactionIncreaseAmount: 10
+  maxHealth: 100
+  healthIncreaseAmount: 10
 --- !u!114 &1943614999
 MonoBehaviour:
   m_ObjectHideFlags: 0

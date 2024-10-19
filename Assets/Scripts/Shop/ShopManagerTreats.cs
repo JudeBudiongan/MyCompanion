@@ -55,7 +55,6 @@ public class ShopManagerTreats : MonoBehaviour
         treatScript = FindObjectOfType<TreatScript>();
         UpdateCoinDisplay();
         SyncShopItemsWithTreatManager();
-        PopulateShopUI(); // Call to populate the shop UI
     }
 
     void Start()
@@ -88,12 +87,11 @@ public class ShopManagerTreats : MonoBehaviour
             // Deduct the price using the new method in CoinManager
             coinManager.DeductCoins(selectedItem.price);
             selectedItem.stock--;
+                    Debug.Log("Buying treat with ID: " + itemID);
+
 
             // Increase the treat quantity in TreatManager (assuming second parameter is the quantity)
-            treatManager.IncreaseQuantity(itemID, 1); // Pass itemID and the quantity (1)
-
-            // Add the treats to TreatScript
-            treatScript.AddTreats(itemID, 1);  // Add 1 treat for each purchase
+            treatManager.IncreaseQuantity(itemID); // Pass itemID and the quantity (1)
 
             // Update UI
             UpdateCoinDisplay();
@@ -126,26 +124,6 @@ public class ShopManagerTreats : MonoBehaviour
         RefreshButtonStates();
     }
 
-    private void PopulateShopUI()
-    {
-        // Clear existing buttons if necessary
-        foreach (Transform child in itemButtonContainer)
-        {
-            Destroy(child.gameObject);
-        }
 
-        // Create buttons for each shop item
-        foreach (var item in shopItems)
-        {
-            GameObject buttonObject = Instantiate(itemButtonPrefab, itemButtonContainer);
-            buttoninfoTreats buttonInfo = buttonObject.GetComponent<buttoninfoTreats>();
 
-            // Set button information
-            buttonInfo.ItemID = item.ID; // Set the ID for button
-            buttonInfo.UpdateButtonState(); // Update button state based on current stock
-
-            // Add listener for the buy button
-            buttonObject.GetComponent<Button>().onClick.AddListener(Buy);
-        }
-    }
 }
