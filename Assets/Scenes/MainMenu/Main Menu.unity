@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 669057535}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 669057535}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -567,12 +567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28648c6fb361a4e4a98adc2af1b1ec76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedOptionText: {fileID: 1830776692}
-  selectedOptionImage: {fileID: 1857587879}
-  option1Image: {fileID: 21300000, guid: a6c2d8375038270439d209875d7d69ec, type: 3}
-  option2Image: {fileID: 21300000, guid: 9f6efdbc7f440554fb2020ec67fb6173, type: 3}
-  option3Image: {fileID: 21300000, guid: cad981ee23d78864cb5bcae5c11bcfe6, type: 3}
-  option4Image: {fileID: 21300000, guid: 3e8e85ec7594e9a4597015c4e983f937, type: 3}
 --- !u!4 &475088908
 Transform:
   m_ObjectHideFlags: 0
@@ -671,7 +665,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 669057535}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -1079,7 +1073,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 669057535}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -1883,7 +1877,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 669057535}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5

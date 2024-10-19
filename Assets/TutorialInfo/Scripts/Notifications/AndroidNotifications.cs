@@ -7,7 +7,6 @@ using UnityEngine.Android;
 public class AndroidNotifications : MonoBehaviour
 {
     // Request authorization to send notifications
-
     public void RequestAuthorization()
     {
         if (!Permission.HasUserAuthorizedPermission("android.permission.POST_NOTIFICATIONS"))
@@ -17,15 +16,15 @@ public class AndroidNotifications : MonoBehaviour
     }
 
     // Register a notification channel
-
+//
     public void RegisterNotificationsChannel()
     {
         var channel = new AndroidNotificationChannel
         {
             Id = "default_channel",
-            Name = "Default Channel",
-            Importance = Importance.Default,
-            Description = "Reduced Social Media Usage"
+            Name = "Social Media Usage Alerts",
+            Importance = Importance.High,
+            Description = "Social Media Usage Alerts"
         };
 
         AndroidNotificationCenter.RegisterNotificationChannel(channel);
