@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -75,18 +76,23 @@ public class CompanionManager : MonoBehaviour
 
     public static CompanionManager Instance;
 
-    void Awake()
-    {
-        if (Instance == null)
+    public event Action OnCompanionAdded;
+
+        void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+                Debug.Log("CompanionManager instance created.");
+            }
+            else
+            {
+                Debug.Log("Duplicate CompanionManager instance destroyed.");
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            Destroy(gameObject); // Destroy duplicate instances 
-        }
-    }
+
 
     public List<Companion> companions = new List<Companion>();
 
@@ -118,7 +124,6 @@ public class CompanionManager : MonoBehaviour
         companions.Add(new Companion(14, "lil e-duj", spritelileduj, "DA"));
         companions.Add(new Companion(15, "Bing", spriteBing, "JG"));
 
-
         // Load satisfaction levels from saved data
         foreach (var companion in companions)
         {
@@ -126,18 +131,50 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
-    public void SetCompanionBought(int companionID)
-    {
-        if (companionID >= 0 && companionID < companions.Count)
+        public void SetCompanionBought(int companionID)
         {
-            companions[companionID].IsBought = true;
-            Debug.Log($"{companions[companionID].PetName} has been marked as bought.");
+            if (companionID >= 0 && companionID < companions.Count)
+            {
+                companions[companionID].IsBought = true;
+                Debug.Log($"{companions[companionID].PetName} has been marked as bought.");
+
+                // Trigger event when a companion is bought
+                OnCompanionAdded?.Invoke();
+            }
+            else
+            {
+                Debug.LogWarning("Invalid companion ID.");
+            }   
         }
-        else
+
+
+        public int GetCompanionCount()
         {
-            Debug.LogWarning("Invalid companion ID.");
+            int count = 0;
+            foreach (var companion in companions)
+            {
+                if (companion.IsBought)
+                {
+                    count++;
+                }
+            }
+            return count;
         }
-    }
+
+            public int GetBoughtCompanionsCount()
+        {
+            int boughtCount = 0;
+            foreach (var companion in companions)
+            {
+                if (companion.IsBought)
+                {
+                    boughtCount++;
+                }
+            }
+            return boughtCount;
+        }
+
+
 
     public Companion GetCompanionById(int companionID)
     {

@@ -18,9 +18,15 @@ public class CatalogueManager : MonoBehaviour
 
         // Populate the catalog based on the companions from CompanionManager
         PopulateCatalog();
+
+        // Subscribe to companion added event
+        if (companionManager != null)
+        {
+            companionManager.OnCompanionAdded += UpdateCatalogueUI;
+        }
     }
 
-    void PopulateCatalog()
+    public void PopulateCatalog()
     {
         // Clear existing slots if any (in case this method is called multiple times)
         foreach (Transform child in catalogContentParent)
@@ -74,4 +80,32 @@ public class CatalogueManager : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
+    // New method to refresh or update the catalog UI
+    public void UpdateCatalogueUI()
+    {
+        PopulateCatalog();
+    }
+
+    // New method to count the number of bought companions
+    public int GetBoughtCompanionCount()
+    {
+        int boughtCount = 0;
+        foreach (var companion in companionManager.companions)
+        {
+            if (companion.IsBought)
+            {
+                boughtCount++;
+            }
+        }
+        return boughtCount;
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe from event to prevent memory leaks
+        if (companionManager != null)
+        {
+            companionManager.OnCompanionAdded -= UpdateCatalogueUI;
+        }
+    }
 }
