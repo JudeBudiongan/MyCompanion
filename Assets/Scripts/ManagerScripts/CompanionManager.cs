@@ -24,7 +24,7 @@ public class CompanionManager : MonoBehaviour
         public Sprite CompanionSprite { get; set; } // Add Sprite for the companion
 
         // Satisfaction and Level properties
-        public int SatisfactionLevel { get; private set; }
+        public int SatisfactionLevel { get; set; }
         public int Level { get; private set; }
 
         public Companion(int companionID, string petName, Sprite sprite, string author)
@@ -116,7 +116,12 @@ public class CompanionManager : MonoBehaviour
         companions.Add(new Companion(12, "cat", spriteCat, "JB"));
         companions.Add(new Companion(13, "skibidi", spriteSkibidi, "KR"));
         companions.Add(new Companion(14, "lil e-duj", spritelileduj, "DA"));
-        
+
+        // Load satisfaction levels from saved data
+        foreach (var companion in companions)
+        {
+            LoadCompanionData(companion);
+        }
     }
 
     public void SetCompanionBought(int companionID)
@@ -149,5 +154,33 @@ public class CompanionManager : MonoBehaviour
             return companions[companionID].IsBought;
         }
         return false; // Return false if the ID is invalid
+    }
+
+    public HealthBar healthBar; // Reference to the HealthBar component
+
+    public void UpdateHealthBarForSelectedCompanion(int companionID)
+    {
+        Companion selectedCompanion = GetCompanionById(companionID);
+        if (selectedCompanion != null)
+        {
+            healthBar.SetMaxSatisfaction(100); // Assuming max satisfaction is 100
+            healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
+        }
+        else
+        {
+            Debug.LogWarning("Selected Companion is null.");
+        }
+    }
+
+    // New Methods to Save and Load Satisfaction Data
+    public void SaveCompanionData(Companion companion)
+    {
+        PlayerPrefs.SetInt("Satisfaction_" + companion.CompanionID, companion.SatisfactionLevel);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadCompanionData(Companion companion)
+    {
+        companion.SatisfactionLevel = PlayerPrefs.GetInt("Satisfaction_" + companion.CompanionID, 50); // Default to 50 if not set
     }
 }
