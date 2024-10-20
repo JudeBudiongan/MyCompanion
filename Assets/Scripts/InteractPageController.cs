@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static CompanionManager;
 
 public class InteractPageController : MonoBehaviour
 {
@@ -30,13 +31,16 @@ public class InteractPageController : MonoBehaviour
         Debug.Log($"Selected ID retrieved: {selectedID}");
 
         // Fetch the companion's details and update the UI
-        if (selectedID >= 0 && selectedID < 15) // Adjust this limit based on your companion IDs
+        if (selectedID >= 0 && selectedID < companionManager.companions.Count) // Use companions.Count for safety
         {
             var selectedCompanion = companionManager.GetCompanionById(selectedID);
             if (selectedCompanion != null)
             {
                 companionImage.sprite = selectedCompanion.CompanionSprite; // Assuming this property exists
                 companionNameText.text = selectedCompanion.PetName; // Assuming this property exists
+
+                // Update the companion's emotion based on satisfaction level
+                UpdateCompanionEmotion(selectedCompanion); // Pass the whole companion object
 
                 // Debug log to confirm sprite and name
                 if (companionImage.sprite != null)
@@ -66,5 +70,30 @@ public class InteractPageController : MonoBehaviour
 
         // Set the image to active and make it visible on the interact page
         companionImage.gameObject.SetActive(true);
+    }
+
+    // Method to update the companion's image based on their emotional state
+    private void UpdateCompanionEmotion(Companion companion)
+    {
+        if (companion.SatisfactionLevel < 10)
+        {
+            companionImage.sprite = companion.AngrySprite; // Set to angry sprite
+            Debug.Log("Companion is angry.");
+        }
+        else if (companion.SatisfactionLevel < 50)
+        {
+            companionImage.sprite = companion.SadSprite; // Set to sad sprite
+            Debug.Log("Companion is sad.");
+        }
+        else if (companion.SatisfactionLevel < 80)
+        {
+            companionImage.sprite = companion.NormalSprite; // Set to normal sprite
+            Debug.Log("Companion is normal.");
+        }
+        else
+        {
+            companionImage.sprite = companion.HappySprite; // Set to happy sprite
+            Debug.Log("Companion is happy.");
+        }
     }
 }

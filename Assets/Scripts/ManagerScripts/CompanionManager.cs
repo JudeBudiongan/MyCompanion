@@ -27,6 +27,12 @@ public class CompanionManager : MonoBehaviour
         public int SatisfactionLevel { get; set; }
         public int Level { get; private set; }
 
+        // Emotional sprites
+        public Sprite AngrySprite { get; set; }
+        public Sprite SadSprite { get; set; }
+        public Sprite NormalSprite { get; set; }
+        public Sprite HappySprite { get; set; }
+
         public Companion(int companionID, string petName, Sprite sprite, string author)
             : base(false, author) // Initialized isBought and author here
         {
@@ -96,6 +102,23 @@ public class CompanionManager : MonoBehaviour
     public Sprite spritePriscue, spriteSushiSlayer, spriteRFilly, spriteEilmar;
     public Sprite spriteCat, spriteSkibidi, spritelileduj;
 
+    // Emotional sprites to be set in the Inspector
+    public Sprite spriteAlienAngry, spriteAlienSad, spriteAlienNormal, spriteAlienHappy;
+    public Sprite spriteBerryAngry, spriteBerrySad, spriteBerryNormal, spriteBerryHappy;
+    public Sprite spriteGreyAngry, spriteGreySad, spriteGreyNormal, spriteGreyHappy;
+    public Sprite spriteWoshiAngry, spriteWoshiSad, spriteWoshiNormal, spriteWoshiHappy;
+    public Sprite spriteGrimWooperAngry, spriteGrimWooperSad, spriteGrimWooperNormal, spriteGrimWooperHappy;
+    public Sprite spriteFakAngry, spriteFakSad, spriteFakNormal, spriteFakHappy;
+    public Sprite spriteXv6RiscvAngry, spriteXv6RiscvSad, spriteXv6RiscvNormal, spriteXv6RiscvHappy;
+    public Sprite spriteTTiddyAngry, spriteTTiddySad, spriteTTiddyNormal, spriteTTiddyHappy;
+    public Sprite spritePriscueAngry, spritePriscueSad, spritePriscueNormal, spritePriscueHappy;
+    public Sprite spriteSushiSlayerAngry, spriteSushiSlayerSad, spriteSushiSlayerNormal, spriteSushiSlayerHappy;
+    public Sprite spriteRFillyAngry, spriteRFillySad, spriteRFillyNormal, spriteRFillyHappy;
+    public Sprite spriteEilmarAngry, spriteEilmarSad, spriteEilmarNormal, spriteEilmarHappy;
+    public Sprite spriteCatAngry, spriteCatSad, spriteCatNormal, spriteCatHappy;
+    public Sprite spriteSkibidiAngry, spriteSkibidiSad, spriteSkibidiNormal, spriteSkibidiHappy;
+    public Sprite spriteliledujAngry, spriteliledujSad, spriteliledujNormal, spriteliledujHappy;
+
     void Start()
     {
         // STARTER COMPANIONS
@@ -121,6 +144,42 @@ public class CompanionManager : MonoBehaviour
         foreach (var companion in companions)
         {
             LoadCompanionData(companion);
+        }
+
+        // Set emotional sprites for each companion
+        SetCompanionEmotionalSprites();
+    }
+
+    // New method to set emotional sprites for each companion
+    private void SetCompanionEmotionalSprites()
+    {
+        // Assign emotional sprites for companions
+        SetCompanionEmotionalSprites(0, spriteAlienAngry, spriteAlienSad, spriteAlienNormal, spriteAlienHappy);
+        SetCompanionEmotionalSprites(1, spriteBerryAngry, spriteBerrySad, spriteBerryNormal, spriteBerryHappy);
+        SetCompanionEmotionalSprites(2, spriteGreyAngry, spriteGreySad, spriteGreyNormal, spriteGreyHappy);
+        SetCompanionEmotionalSprites(3, spriteWoshiAngry, spriteWoshiSad, spriteWoshiNormal, spriteWoshiHappy);
+        SetCompanionEmotionalSprites(4, spriteGrimWooperAngry, spriteGrimWooperSad, spriteGrimWooperNormal, spriteGrimWooperHappy);
+        SetCompanionEmotionalSprites(5, spriteFakAngry, spriteFakSad, spriteFakNormal, spriteFakHappy);
+        SetCompanionEmotionalSprites(6, spriteXv6RiscvAngry, spriteXv6RiscvSad, spriteXv6RiscvNormal, spriteXv6RiscvHappy);
+        SetCompanionEmotionalSprites(7, spriteTTiddyAngry, spriteTTiddySad, spriteTTiddyNormal, spriteTTiddyHappy);
+        SetCompanionEmotionalSprites(8, spritePriscueAngry, spritePriscueSad, spritePriscueNormal, spritePriscueHappy);
+        SetCompanionEmotionalSprites(9, spriteSushiSlayerAngry, spriteSushiSlayerSad, spriteSushiSlayerNormal, spriteSushiSlayerHappy);
+        SetCompanionEmotionalSprites(10, spriteRFillyAngry, spriteRFillySad, spriteRFillyNormal, spriteRFillyHappy);
+        SetCompanionEmotionalSprites(11, spriteEilmarAngry, spriteEilmarSad, spriteEilmarNormal, spriteEilmarHappy);
+        SetCompanionEmotionalSprites(12, spriteCatAngry, spriteCatSad, spriteCatNormal, spriteCatHappy);
+        SetCompanionEmotionalSprites(13, spriteSkibidiAngry, spriteSkibidiSad, spriteSkibidiNormal, spriteSkibidiHappy);
+        SetCompanionEmotionalSprites(14, spriteliledujAngry, spriteliledujSad, spriteliledujNormal, spriteliledujHappy);
+    }
+
+    // Helper method to set emotional sprites
+    private void SetCompanionEmotionalSprites(int companionID, Sprite angry, Sprite sad, Sprite normal, Sprite happy)
+    {
+        if (companionID >= 0 && companionID < companions.Count)
+        {
+            companions[companionID].AngrySprite = angry;
+            companions[companionID].SadSprite = sad;
+            companions[companionID].NormalSprite = normal;
+            companions[companionID].HappySprite = happy;
         }
     }
 
