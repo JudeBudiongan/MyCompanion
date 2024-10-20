@@ -103,6 +103,9 @@ public class CompanionManager : MonoBehaviour
         companions.Add(new Companion(9, "Sushi-Slayer", "JZ"));
         companions.Add(new Companion(10, "R-Filly", "AB"));
         companions.Add(new Companion(11, "Eilmar", "ES")); 
+
+        // SPECIAL REWARD COMPANIONS (FOR FUTURE USE)
+        companions.Add(new Companion(12, "skibidi", "KR")); 
     }
 
     public void SetCompanionBought(int companionID)

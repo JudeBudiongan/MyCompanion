@@ -66,7 +66,7 @@ public class buttoninfoPets : MonoBehaviour
                     }
                     else
                     {
-                        BoughtTxt.text = "Not Owned";
+                        BoughtTxt.text = " ";
                         PetImage.sprite = NormalSprite;
                     }
                 }
