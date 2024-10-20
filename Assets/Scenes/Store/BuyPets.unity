@@ -5314,6 +5314,8 @@ MonoBehaviour:
   spriteCat: {fileID: 0}
   spriteSkibidi: {fileID: 0}
   spritelileduj: {fileID: 0}
+  spriteBing: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!4 &1442833138
 Transform:
   m_ObjectHideFlags: 0

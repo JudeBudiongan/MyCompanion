@@ -94,7 +94,7 @@ public class CompanionManager : MonoBehaviour
     public Sprite spriteAlien, spriteBerry, spriteGrey, spriteWoshi;
     public Sprite spriteGrimWooper, spriteFak, spriteXv6Riscv, spriteTTiddy;
     public Sprite spritePriscue, spriteSushiSlayer, spriteRFilly, spriteEilmar;
-    public Sprite spriteCat, spriteSkibidi, spritelileduj;
+    public Sprite spriteCat, spriteSkibidi, spritelileduj, spriteBing;
 
     void Start()
     {
@@ -116,6 +116,8 @@ public class CompanionManager : MonoBehaviour
         companions.Add(new Companion(12, "cat", spriteCat, "JB"));
         companions.Add(new Companion(13, "skibidi", spriteSkibidi, "KR"));
         companions.Add(new Companion(14, "lil e-duj", spritelileduj, "DA"));
+        companions.Add(new Companion(15, "Bing", spriteBing, "JG"));
+
 
         // Load satisfaction levels from saved data
         foreach (var companion in companions)
