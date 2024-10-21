@@ -54,9 +54,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Leaderboard/Stats.unity
     guid: bca43987ff6e58b4e92d64e38a2ebcab
   - enabled: 1
-    path: Assets/Scenes/Leaderboard/AppStats.unity
-    guid: 5876b1a0ba4720c409fda88c278e3abd
-  - enabled: 1
     path: Assets/Scenes/Store/Toys.unity
     guid: ca4891ae2e2f47b42ad2eecb8c20f4b1
   - enabled: 1
@@ -76,7 +73,7 @@ EditorBuildSettings:
     guid: 00a2be65606fcf44fa7b738940589656
   - enabled: 1
     path: Assets/Scenes/Store/BuyPets.unity
-    guid: b14f11be9f54519489d604f370f677a8
+    guid: 46fc22abe0eb26b45971bdf1a4c9de31
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: d69b735bfce11474e8cdca79265d9a82, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fa29865ee51cc2441b384e073b645726, type: 2}
