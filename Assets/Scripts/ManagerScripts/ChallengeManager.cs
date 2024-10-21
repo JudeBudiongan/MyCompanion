@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -5,53 +6,55 @@ using UnityEngine.UI;
 public class ChallengeManager : MonoBehaviour
 {
     public CompanionManager companionManager;
-    public CatalogueManager catalogueManager;  // Reference to CatalogueManager
     public GameObject notCompleteIcon;
     public TextMeshProUGUI challengeText;
-    public Button claimButton;  // Reference to the claim button
-    public TextMeshProUGUI claimButtonText;  // Reference to the "Claim" button text
+    public Button claimButton;
+    public TextMeshProUGUI claimButtonText;
 
     private int targetCompanionCount = 3;
     private bool isChallengeCompleted = false;
 
-    void Awake() {
+    void Awake()
+    {
         if (companionManager == null)
         {
             companionManager = FindObjectOfType<CompanionManager>();
         }
     }
 
-
-void Start()
-{
-    // If not assigned in the inspector, find CompanionManager in the scene
-    if (companionManager == null)
+    IEnumerator DelayedInitialization()
     {
-        companionManager = CompanionManager.Instance;
+        yield return new WaitForSeconds(0.1f);
+        companionManager = FindObjectOfType<CompanionManager>();
+
+        if (companionManager != null)
+        {
+            companionManager.OnCompanionAdded += CheckChallengeCompletion;
+            CheckChallengeCompletion();
+        }
     }
 
-    // Ensure the instance exists
-    if (companionManager == null)
+    void Start()
     {
-        Debug.LogError("CompanionManager is missing. Make sure it's properly set in the scene.");
-        return;
+        StartCoroutine(DelayedInitialization());
+
+        if (companionManager == null)
+        {
+            companionManager = CompanionManager.Instance;
+        }
+
+        if (companionManager == null)
+        {
+            Debug.LogError("CompanionManager is missing. Make sure it's properly set in the scene.");
+            return;
+        }
+
+        notCompleteIcon.SetActive(true);
+        claimButton.gameObject.SetActive(false);
+        UpdateChallengeText();
+
+        claimButton.onClick.AddListener(OnClaimButtonClicked);
     }
-
-    // Initialize UI
-    notCompleteIcon.SetActive(true);
-    claimButton.gameObject.SetActive(false);  // Hide the claim button initially
-    UpdateChallengeText();
-
-    // Subscribe to companion added event
-    companionManager.OnCompanionAdded += CheckChallengeCompletion;
-
-    // Initial check for challenge status
-    CheckChallengeCompletion();
-
-    // Add listener to the claim button
-    claimButton.onClick.AddListener(OnClaimButtonClicked);
-}
-
 
     private void UpdateChallengeText()
     {
@@ -61,21 +64,21 @@ void Start()
         }
         else
         {
-            int remainingCompanions = targetCompanionCount - catalogueManager.GetBoughtCompanionCount();
+            int remainingCompanions = targetCompanionCount - companionManager.GetBoughtCompanionsCount();
             challengeText.text = $"Buy {remainingCompanions} more companions to earn 'Bing'";
         }
     }
 
     private void CheckChallengeCompletion()
     {
-        int boughtCount = catalogueManager.GetBoughtCompanionCount();
+        int boughtCount = companionManager.GetBoughtCompanionsCount();
         if (!isChallengeCompleted && boughtCount >= targetCompanionCount)
         {
             CompleteChallenge();
         }
         else
         {
-            UpdateChallengeText();  // Update the UI if not completed
+            UpdateChallengeText();
         }
     }
 
@@ -83,10 +86,9 @@ void Start()
     {
         isChallengeCompleted = true;
 
-        // Update UI
         notCompleteIcon.SetActive(false);
-        claimButton.gameObject.SetActive(true);  // Show the claim button
-        claimButtonText.text = "Claim Bing";  // Set the button text
+        claimButton.gameObject.SetActive(true);
+        claimButtonText.text = "Claim Bing";
         UpdateChallengeText();
 
         Debug.Log("Special companion 'Bing' unlocked for buying more than 3 companions! Click 'Claim' to add Bing.");
@@ -94,7 +96,6 @@ void Start()
 
     private void OnClaimButtonClicked()
     {
-        // Unlock "Bing" companion when the claim button is pressed
         CompanionManager.Companion bingCompanion = companionManager.GetCompanionById(15);
         if (bingCompanion == null)
         {
@@ -102,20 +103,14 @@ void Start()
             companionManager.companions.Add(bingCompanion);
         }
 
-        // Set Bing as bought so it shows up in the catalog
         bingCompanion.IsBought = true;
         Debug.Log("Bing has been claimed and marked as bought!");
 
-        // Update catalogue to show new companion
-        catalogueManager.UpdateCatalogueUI();
-
-        // Hide the claim button after claiming
         claimButton.gameObject.SetActive(false);
     }
 
     void OnDestroy()
     {
-        // Unsubscribe from the event to prevent memory leaks
         if (companionManager != null)
         {
             companionManager.OnCompanionAdded -= CheckChallengeCompletion;

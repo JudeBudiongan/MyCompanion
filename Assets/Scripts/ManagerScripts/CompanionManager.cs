@@ -138,12 +138,12 @@ public class CompanionManager : MonoBehaviour
             Debug.Log($"{companions[companionID].PetName} has been marked as bought.");
 
             // Trigger event when a companion is bought
-            OnCompanionAdded?.Invoke();
+            TriggerCompanionAddedEvent();
         }
         else
         {
             Debug.LogWarning("Invalid companion ID.");
-        }   
+        }
     }
 
     public int GetCompanionCount()
@@ -179,6 +179,12 @@ public class CompanionManager : MonoBehaviour
             return companions[companionID];
         }
         return null;
+    }
+
+    // Add this method to manually trigger the event
+    public void TriggerCompanionAddedEvent()
+    {
+        OnCompanionAdded?.Invoke();
     }
 
     public bool IsCompanionBought(int companionID)
