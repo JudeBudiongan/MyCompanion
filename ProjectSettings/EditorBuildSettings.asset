@@ -54,9 +54,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Leaderboard/Stats.unity
     guid: bca43987ff6e58b4e92d64e38a2ebcab
   - enabled: 1
-    path: Assets/Scenes/Leaderboard/AppStats.unity
-    guid: 5876b1a0ba4720c409fda88c278e3abd
-  - enabled: 1
     path: Assets/Scenes/Store/Toys.unity
     guid: ca4891ae2e2f47b42ad2eecb8c20f4b1
   - enabled: 1
