@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static CompanionManager;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -23,13 +24,16 @@ public class MainMenuController : MonoBehaviour
         Debug.Log($"Selected ID retrieved: {selectedID}");
 
         // Change the text and image based on the selected companion
-        if (selectedID >= 0 && selectedID < 15) // Adjust this limit based on your companion IDs
+        if (selectedID >= 0 && selectedID < companionManager.companions.Count) // Use companions.Count for safety
         {
             var selectedCompanion = companionManager.GetCompanionById(selectedID);
             if (selectedCompanion != null)
             {
                 selectedOptionImage.sprite = selectedCompanion.CompanionSprite; // Assuming this property exists
                 selectedOptionText.text = selectedCompanion.PetName; // Assuming this property exists
+
+                // Update the companion's emotion based on satisfaction level
+                UpdateCompanionEmotion(selectedCompanion); // Pass the whole companion object
 
                 // Debug log to confirm sprite loading
                 if (selectedOptionImage.sprite != null)
@@ -59,5 +63,30 @@ public class MainMenuController : MonoBehaviour
 
         // Set the image to active and center it in the middle of the screen
         selectedOptionImage.gameObject.SetActive(true);
+    }
+
+    // Method to update the companion's emotion based on satisfaction level
+    private void UpdateCompanionEmotion(Companion companion)
+    {
+        if (companion.SatisfactionLevel < 10)
+        {
+            selectedOptionImage.sprite = companion.AngrySprite; // Set to angry sprite
+            Debug.Log("Companion is angry.");
+        }
+        else if (companion.SatisfactionLevel < 50)
+        {
+            selectedOptionImage.sprite = companion.SadSprite; // Set to sad sprite
+            Debug.Log("Companion is sad.");
+        }
+        else if (companion.SatisfactionLevel < 80)
+        {
+            selectedOptionImage.sprite = companion.NormalSprite; // Set to normal sprite
+            Debug.Log("Companion is normal.");
+        }
+        else
+        {
+            selectedOptionImage.sprite = companion.HappySprite; // Set to happy sprite
+            Debug.Log("Companion is happy.");
+        }
     }
 }

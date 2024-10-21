@@ -536,9 +536,70 @@ MonoBehaviour:
   spriteSushiSlayer: {fileID: 21300000, guid: 5f85cb0f298317d40b63a96bf73608d4, type: 3}
   spriteRFilly: {fileID: 21300000, guid: e626f620f182bb34f8c886dba260adf9, type: 3}
   spriteEilmar: {fileID: 21300000, guid: 4d5d56cce27031043a70a5e462196aa7, type: 3}
-  spriteCat: {fileID: 0}
+  spriteCat: {fileID: 21300000, guid: f5bd145b31cd1f1448be2c792b3a850b, type: 3}
   spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
-  spritelileduj: {fileID: 0}
+  spritelileduj: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
+  spriteAlienAngry: {fileID: 21300000, guid: b6427d5945201b34a8f1182e298cf0a9, type: 3}
+  spriteAlienSad: {fileID: 21300000, guid: e400d276e5448134fb91a9fd94dc029c, type: 3}
+  spriteAlienNormal: {fileID: 21300000, guid: a6c2d8375038270439d209875d7d69ec, type: 3}
+  spriteAlienHappy: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
+  spriteBerryAngry: {fileID: 21300000, guid: bfe6fb5ce4b9aec4db250b6d9d1666ac, type: 3}
+  spriteBerrySad: {fileID: 21300000, guid: 09c3170b7e4d1a24d81c22c09815601f, type: 3}
+  spriteBerryNormal: {fileID: 21300000, guid: 9f6efdbc7f440554fb2020ec67fb6173, type: 3}
+  spriteBerryHappy: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
+  spriteGreyAngry: {fileID: 21300000, guid: 3d0d7df155b73134182898b9a3c422ee, type: 3}
+  spriteGreySad: {fileID: 21300000, guid: 4e44f69c27025764b9b72e328606b69e, type: 3}
+  spriteGreyNormal: {fileID: 21300000, guid: 7d936d9dac13c194f888712b92ef0e8a, type: 3}
+  spriteGreyHappy: {fileID: 21300000, guid: 3a634a67f94c386419274d347d4b5e0e, type: 3}
+  spriteWoshiAngry: {fileID: 21300000, guid: 9b8612102a8e5f04a924b58b0c2dc19f, type: 3}
+  spriteWoshiSad: {fileID: 21300000, guid: 7d5f584d79b08004684c6acb5cb0bdcf, type: 3}
+  spriteWoshiNormal: {fileID: 21300000, guid: 3e8e85ec7594e9a4597015c4e983f937, type: 3}
+  spriteWoshiHappy: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
+  spriteGrimWooperAngry: {fileID: 21300000, guid: 04536ce5fac2f264abcf1ab5c997523a, type: 3}
+  spriteGrimWooperSad: {fileID: 21300000, guid: 0dbb72ba93ba10b43a749f2ec3f28ae9, type: 3}
+  spriteGrimWooperNormal: {fileID: 21300000, guid: b6f31f8fa1ed60d448d4927a6eeb266a, type: 3}
+  spriteGrimWooperHappy: {fileID: 21300000, guid: 07a93db15f22de741a6355efdd07090e, type: 3}
+  spriteFakAngry: {fileID: 21300000, guid: 50fe316fa1a0e064abcd289ec903cba8, type: 3}
+  spriteFakSad: {fileID: 21300000, guid: ee46ca129771a1343bc462abc9fbdc16, type: 3}
+  spriteFakNormal: {fileID: 21300000, guid: 094fae3a682f81f4bae0636a020b9fdb, type: 3}
+  spriteFakHappy: {fileID: 21300000, guid: d7a3e19fd10617849a338d188b5b0658, type: 3}
+  spriteXv6RiscvAngry: {fileID: 21300000, guid: 50127041d1cf6734092ecac6cc09ae11, type: 3}
+  spriteXv6RiscvSad: {fileID: 21300000, guid: b8386e6a8ad1e7e4aa2572453fe2cb3f, type: 3}
+  spriteXv6RiscvNormal: {fileID: 21300000, guid: 0546238d84f104c4eae0f056d1e72474, type: 3}
+  spriteXv6RiscvHappy: {fileID: 21300000, guid: 9c5e95d7662a2984e821e7e9d0509d8c, type: 3}
+  spriteTTiddyAngry: {fileID: 21300000, guid: 7047156235beb524e81ef7fa083a8fe7, type: 3}
+  spriteTTiddySad: {fileID: 21300000, guid: 50f08dcceaa4d48489e8ae465a1cbe76, type: 3}
+  spriteTTiddyNormal: {fileID: 21300000, guid: 031f1b5a9d7445547864603c9d27a2da, type: 3}
+  spriteTTiddyHappy: {fileID: 21300000, guid: 57db92119df04074b88c70dd4ec918be, type: 3}
+  spritePriscueAngry: {fileID: 21300000, guid: 27e2575011158b045b9db738fdc46438, type: 3}
+  spritePriscueSad: {fileID: 21300000, guid: 00bf43ee99cd8f6468fe4ba111cc6430, type: 3}
+  spritePriscueNormal: {fileID: 21300000, guid: dcaf4d8368684134fabf3fb346fef2ff, type: 3}
+  spritePriscueHappy: {fileID: 21300000, guid: a4237f9045decc44ebffe464c787bf7c, type: 3}
+  spriteSushiSlayerAngry: {fileID: 21300000, guid: fcdb14f900f5e1b4a954df9078578d96, type: 3}
+  spriteSushiSlayerSad: {fileID: 21300000, guid: 08f94cdb9123d69448decefdfa1e9c04, type: 3}
+  spriteSushiSlayerNormal: {fileID: 21300000, guid: 2a917daa03e463d48b9c8c768e3f701c, type: 3}
+  spriteSushiSlayerHappy: {fileID: 21300000, guid: 5f85cb0f298317d40b63a96bf73608d4, type: 3}
+  spriteRFillyAngry: {fileID: 21300000, guid: efd939bd5408e8a49b984d6c2a7d44ee, type: 3}
+  spriteRFillySad: {fileID: 21300000, guid: 5286cf903f340084a9a9a30efb4aa584, type: 3}
+  spriteRFillyNormal: {fileID: 21300000, guid: e626f620f182bb34f8c886dba260adf9, type: 3}
+  spriteRFillyHappy: {fileID: 21300000, guid: 2970347d3b8253c4499bfc9c4ef5745c, type: 3}
+  spriteEilmarAngry: {fileID: 21300000, guid: 8ecb3fc589608e54587e4c19e49023b4, type: 3}
+  spriteEilmarSad: {fileID: 21300000, guid: 19a30286eccd94c4a81cb7db840776c0, type: 3}
+  spriteEilmarNormal: {fileID: 21300000, guid: 9b58d4ea4370bc941a0d7034845d178a, type: 3}
+  spriteEilmarHappy: {fileID: 21300000, guid: 4d5d56cce27031043a70a5e462196aa7, type: 3}
+  spriteCatAngry: {fileID: 21300000, guid: 08bc5b5e607eb8640bba9abe59921491, type: 3}
+  spriteCatSad: {fileID: 21300000, guid: bb935de139973d142ae541874274d41c, type: 3}
+  spriteCatNormal: {fileID: 21300000, guid: cad981ee23d78864cb5bcae5c11bcfe6, type: 3}
+  spriteCatHappy: {fileID: 21300000, guid: f5bd145b31cd1f1448be2c792b3a850b, type: 3}
+  spriteSkibidiAngry: {fileID: 21300000, guid: 27bbf626f06f3294b99f819835d1d98e, type: 3}
+  spriteSkibidiSad: {fileID: 21300000, guid: 064be2175f5568c42953543981ca22fb, type: 3}
+  spriteSkibidiNormal: {fileID: 21300000, guid: 8178580723b083a438b7db99c228f5dc, type: 3}
+  spriteSkibidiHappy: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
+  spriteliledujAngry: {fileID: 21300000, guid: 141daedb51896c84887506609a82f2cb, type: 3}
+  spriteliledujSad: {fileID: 21300000, guid: e37d3a111266d994bb788ab57231a75e, type: 3}
+  spriteliledujNormal: {fileID: 21300000, guid: 3bccc97a13fe7a84dbc6819381f97591, type: 3}
+  spriteliledujHappy: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
+  healthBar: {fileID: 0}
 --- !u!114 &475088910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2325,9 +2386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944cf69ce4b234317b3a22dd857b5789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
-  currentHealth: 0
+  maxSatisfaction: 100
   healthBar: {fileID: 1905268104}
+  companionManager: {fileID: 0}
 --- !u!1 &1905268102
 GameObject:
   m_ObjectHideFlags: 0
