@@ -54,6 +54,14 @@ public class CompanionManager : MonoBehaviour
             Debug.Log($"Hooray! Companion leveled up to {Level}!");
         }
 
+        public void LevelDown()
+        {
+            Level--;
+            SatisfactionLevel = 50;
+
+            Debug.Log($"Ouch! Companion leveled down to {Level}!");
+        }
+
         public void IncreaseSatisfaction(int amount)
         {
             SatisfactionLevel += amount;
@@ -65,10 +73,17 @@ public class CompanionManager : MonoBehaviour
 
         public void DecreaseSatisfaction(int amount)
         {
-            SatisfactionLevel -= amount;
-            if (SatisfactionLevel < 0)
+            if (amount > SatisfactionLevel)
             {
-                SatisfactionLevel = 0;
+                LevelDown();
+            }
+            else
+            {
+                SatisfactionLevel -= amount;
+                if (SatisfactionLevel < 0)
+                {
+                    SatisfactionLevel = 0;
+                }
             }
         }
 

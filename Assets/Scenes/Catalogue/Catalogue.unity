@@ -1657,9 +1657,9 @@ MonoBehaviour:
   spriteSushiSlayer: {fileID: 21300000, guid: 5f85cb0f298317d40b63a96bf73608d4, type: 3}
   spriteRFilly: {fileID: 21300000, guid: 2970347d3b8253c4499bfc9c4ef5745c, type: 3}
   spriteEilmar: {fileID: 21300000, guid: 4d5d56cce27031043a70a5e462196aa7, type: 3}
-  spriteCat: {fileID: 0}
+  spriteCat: {fileID: 21300000, guid: f5bd145b31cd1f1448be2c792b3a850b, type: 3}
   spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
-  spritelileduj: {fileID: 0}
+  spritelileduj: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
   healthBar: {fileID: 0}
 --- !u!4 &1740555027
 Transform:
