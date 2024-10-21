@@ -55,24 +55,33 @@ public class ChallengeManager : MonoBehaviour
         }
     }
 
-    private void CompleteChallenge()
-    {
-        isChallengeCompleted = true;
-
-        // Update UI
-        notCompleteIcon.SetActive(false);
-        completeIcon.SetActive(true);
-        UpdateChallengeText();
-
-        // Unlock "Bing" companion
-        CompanionManager.Companion bingCompanion = new CompanionManager.Companion(15, "Bing", companionManager.spriteBing, "JG");
-        if (!companionManager.companions.Contains(bingCompanion))
+        private void CompleteChallenge()
         {
-            companionManager.companions.Add(bingCompanion);
+            isChallengeCompleted = true;
+
+            // Update UI
+            notCompleteIcon.SetActive(false);
+            completeIcon.SetActive(true);
+            UpdateChallengeText();
+
+            // Unlock "Bing" companion
+            CompanionManager.Companion bingCompanion = companionManager.GetCompanionById(15);
+            if (bingCompanion == null)
+            {
+                bingCompanion = new CompanionManager.Companion(15, "Bing", companionManager.spriteBing, "JG");
+                companionManager.companions.Add(bingCompanion);
+            }
+
+            // Set Bing as bought so it shows up in the catalog
+            bingCompanion.IsBought = true;
+
+            Debug.Log("Special companion 'Bing' unlocked for buying more than 3 companions!");
+
+            // Trigger catalogue update to show the new companion immediately
+            catalogueManager.UpdateCatalogueUI();
         }
 
-        Debug.Log("Special companion 'Bing' unlocked for buying more than 3 companions!");
-    }
+
 
     void OnDestroy()
     {
