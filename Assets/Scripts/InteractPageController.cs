@@ -90,25 +90,25 @@ public class InteractPageController : MonoBehaviour
         if (companion.SatisfactionLevel < 10)
         {
             companionImage.sprite = companion.AngrySprite; // Set to angry sprite
-            emotionMessage = "Your pet is angry!";
+            emotionMessage = "Your Companion is angry!";
             Debug.Log("Companion is angry.");
         }
         else if (companion.SatisfactionLevel < 50)
         {
             companionImage.sprite = companion.SadSprite; // Set to sad sprite
-            emotionMessage = "Your pet is sad!";
+            emotionMessage = "Your Companion is sad!";
             Debug.Log("Companion is sad.");
         }
         else if (companion.SatisfactionLevel < 80)
         {
             companionImage.sprite = companion.NormalSprite; // Set to normal sprite
-            emotionMessage = "Your pet is feeling normal.";
+            emotionMessage = "Your Companion is feeling normal.";
             Debug.Log("Companion is normal.");
         }
         else
         {
             companionImage.sprite = companion.HappySprite; // Set to happy sprite
-            emotionMessage = "Your pet is happy!";
+            emotionMessage = "Your Companion is happy!";
             Debug.Log("Companion is happy.");
         }
 
