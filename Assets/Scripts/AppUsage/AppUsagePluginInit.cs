@@ -8,18 +8,6 @@ public class AppUsagePluginInit : MonoBehaviour
     public GameObject appUsageItemPrefab; // Reference to your prefab
     public Transform contentPanel; // Reference to the Content panel of the Scroll View
 
-    // List of known social media package names
-    private readonly Dictionary<string, string> socialMediaApps = new Dictionary<string, string>
-    {
-        { "com.instagram.android", "Instagram" },
-        { "com.snapchat.android", "Snapchat" },
-        { "com.twitter.android", "Twitter" },
-        { "com.facebook.katana", "Facebook" },
-        { "com.whatsapp", "WhatsApp" },
-        { "com.zhiliaoapp.musically", "TikTok" },
-        { "com.google.android.youtube", "YouTube" }
-    };
-
     void Start()
     {
         // Create an instance of the Java class
@@ -77,7 +65,7 @@ public class AppUsagePluginInit : MonoBehaviour
                         long lastTimeUsed = usageStat.Call<long>("getLastTimeUsed");
                         long totalTimeInForeground = usageStat.Call<long>("getTotalTimeInForeground");
 
-                        if (socialMediaApps.ContainsKey(packageName))
+                        if (SocialMediaApps.socialMediaApps.ContainsKey(packageName))
                         {
                             totalSocialMediaTime += totalTimeInForeground;
                             if (usageStats.ContainsKey(packageName))
@@ -129,7 +117,7 @@ public class AppUsagePluginInit : MonoBehaviour
             var appNameText = newItem.transform.Find("AppName").GetComponent<Text>();
             var timeUsedText = newItem.transform.Find("TimeUsed").GetComponent<Text>();
 
-            string appName = socialMediaApps[stat.PackageName];
+            string appName = SocialMediaApps.socialMediaApps[stat.PackageName];
             TimeSpan timeUsed = TimeSpan.FromMilliseconds(stat.TotalTimeUsed);
             string formattedTimeUsed = $"{timeUsed.Hours}h {timeUsed.Minutes}m {timeUsed.Seconds}s";
             Debug.Log($"App: {appName}, Time Spent: {formattedTimeUsed}");
