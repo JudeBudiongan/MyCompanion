@@ -78,21 +78,20 @@ public class CompanionManager : MonoBehaviour
 
     public event Action OnCompanionAdded;
 
-        void Awake()
+    void Awake()
+    {
+        if (Instance == null)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-                Debug.Log("CompanionManager instance created.");
-            }
-            else
-            {
-                Debug.Log("Duplicate CompanionManager instance destroyed.");
-                Destroy(gameObject);
-            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("CompanionManager instance created.");
         }
-
+        else
+        {
+            Debug.Log("Duplicate CompanionManager instance destroyed.");
+            Destroy(gameObject);
+        }
+    }
 
     public List<Companion> companions = new List<Companion>();
 
@@ -107,7 +106,7 @@ public class CompanionManager : MonoBehaviour
         // STARTER COMPANIONS
         companions.Add(new Companion(0, "Alien", spriteAlien, "DD"));
         companions.Add(new Companion(1, "Berry", spriteBerry, "JB"));
-        companions.Add(new Companion(2, "Grey", spriteGrey, "ED")); // Clarified naming
+        companions.Add(new Companion(2, "Grey", spriteGrey, "ED"));
         companions.Add(new Companion(3, "Woshi", spriteWoshi, "JG"));
 
         // SHOP COMPANIONS
@@ -131,50 +130,47 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
-        public void SetCompanionBought(int companionID)
+    public void SetCompanionBought(int companionID)
+    {
+        if (companionID >= 0 && companionID < companions.Count)
         {
-            if (companionID >= 0 && companionID < companions.Count)
-            {
-                companions[companionID].IsBought = true;
-                Debug.Log($"{companions[companionID].PetName} has been marked as bought.");
+            companions[companionID].IsBought = true;
+            Debug.Log($"{companions[companionID].PetName} has been marked as bought.");
 
-                // Trigger event when a companion is bought
-                OnCompanionAdded?.Invoke();
-            }
-            else
-            {
-                Debug.LogWarning("Invalid companion ID.");
-            }   
+            // Trigger event when a companion is bought
+            OnCompanionAdded?.Invoke();
         }
-
-
-        public int GetCompanionCount()
+        else
         {
-            int count = 0;
-            foreach (var companion in companions)
-            {
-                if (companion.IsBought)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
+            Debug.LogWarning("Invalid companion ID.");
+        }   
+    }
 
-            public int GetBoughtCompanionsCount()
+    public int GetCompanionCount()
+    {
+        int count = 0;
+        foreach (var companion in companions)
         {
-            int boughtCount = 0;
-            foreach (var companion in companions)
+            if (companion.IsBought)
             {
-                if (companion.IsBought)
-                {
-                    boughtCount++;
-                }
+                count++;
             }
-            return boughtCount;
         }
+        return count;
+    }
 
-
+    public int GetBoughtCompanionsCount()
+    {
+        int boughtCount = 0;
+        foreach (var companion in companions)
+        {
+            if (companion.IsBought)
+            {
+                boughtCount++;
+            }
+        }
+        return boughtCount;
+    }
 
     public Companion GetCompanionById(int companionID)
     {
@@ -185,7 +181,6 @@ public class CompanionManager : MonoBehaviour
         return null;
     }
 
-    // New method to check if a companion is bought
     public bool IsCompanionBought(int companionID)
     {
         if (companionID >= 0 && companionID < companions.Count)
@@ -202,7 +197,7 @@ public class CompanionManager : MonoBehaviour
         Companion selectedCompanion = GetCompanionById(companionID);
         if (selectedCompanion != null)
         {
-            healthBar.SetMaxSatisfaction(100); // Assuming max satisfaction is 100
+            healthBar.SetMaxSatisfaction(100);
             healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
         }
         else
@@ -211,7 +206,6 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
-    // New Methods to Save and Load Satisfaction Data
     public void SaveCompanionData(Companion companion)
     {
         PlayerPrefs.SetInt("Satisfaction_" + companion.CompanionID, companion.SatisfactionLevel);
@@ -220,6 +214,6 @@ public class CompanionManager : MonoBehaviour
 
     public void LoadCompanionData(Companion companion)
     {
-        companion.SatisfactionLevel = PlayerPrefs.GetInt("Satisfaction_" + companion.CompanionID, 50); // Default to 50 if not set
+        companion.SatisfactionLevel = PlayerPrefs.GetInt("Satisfaction_" + companion.CompanionID, 50);
     }
 }

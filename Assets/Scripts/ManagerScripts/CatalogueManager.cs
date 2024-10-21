@@ -37,6 +37,8 @@ public class CatalogueManager : MonoBehaviour
             // Loop through all companions and create catalog slots
             foreach (var companion in companionManager.companions)
             {
+                Debug.Log("Processing companion: " + companion.PetName + ", IsBought: " + companion.IsBought);
+                
                 // Check if the companion is bought or if it's a starter companion that has been selected
                 if (companion.IsBought || IsStarterSelected(companion.CompanionID))
                 {
@@ -63,6 +65,7 @@ public class CatalogueManager : MonoBehaviour
                 }
             }
         }
+
 
 
     // Helper method to check if a starter companion is selected
