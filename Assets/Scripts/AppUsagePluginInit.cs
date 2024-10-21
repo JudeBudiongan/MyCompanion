@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class AppUsagePluginInit : MonoBehaviour
 {
-    public Text usageStatsText;
+    public GameObject appUsageItemPrefab; // Reference to your prefab
+    public Transform contentPanel; // Reference to the Content panel of the Scroll View
 
     // List of known social media package names
     private readonly Dictionary<string, string> socialMediaApps = new Dictionary<string, string>
@@ -43,7 +44,7 @@ public class AppUsagePluginInit : MonoBehaviour
             else
             {
                 // Retrieve usage stats if permission is granted
-                using (AndroidJavaObject usageStatsList = pluginClass.CallStatic<AndroidJavaObject>("getUsageStats"))
+                using (AndroidJavaObject usageStatsList = pluginClass.CallStatic<AndroidJavaObject>("getUsageStatsToday"))
                 {
                     if (usageStatsList == null)
                     {
@@ -60,7 +61,9 @@ public class AppUsagePluginInit : MonoBehaviour
                         return;
                     }
 
-                    List<UsageStat> usageStats = new();
+                    Dictionary<string, UsageStat> usageStats = new();
+
+                    long totalSocialMediaTime = 0;
 
                     foreach (AndroidJavaObject usageStat in usageStatsArray)
                     {
@@ -76,16 +79,25 @@ public class AppUsagePluginInit : MonoBehaviour
 
                         if (socialMediaApps.ContainsKey(packageName))
                         {
-                            usageStats.Add(new UsageStat
+                            totalSocialMediaTime += totalTimeInForeground;
+                            if (usageStats.ContainsKey(packageName))
                             {
-                                PackageName = packageName,
-                                LastTimeUsed = lastTimeUsed,
-                                TotalTimeInForeground = totalTimeInForeground
-                            });
+                                usageStats[packageName].TotalTimeUsed += totalTimeInForeground; // Update time if duplicate entry encountered
+                            }
+                            else
+                            {
+                                usageStats[packageName] = new UsageStat
+                                {
+                                    PackageName = packageName,
+                                    LastTimeUsed = lastTimeUsed,
+                                    TotalTimeUsed = totalTimeInForeground
+                                };
+                            }
                         }
                     }
 
-                    DisplayUsageStats(usageStats);
+                    DisplayUsageStats(new List<UsageStat>(usageStats.Values));
+                    DisplayTotalUsageStats(totalSocialMediaTime);
                 }
             }
         }
@@ -100,24 +112,44 @@ public class AppUsagePluginInit : MonoBehaviour
         }
 
         // Sort the list in descending order of time spent
-        usageStats.Sort((x, y) => y.TotalTimeInForeground.CompareTo(x.TotalTimeInForeground));
+        usageStats.Sort((x, y) => y.TotalTimeUsed.CompareTo(x.TotalTimeUsed));
 
-        // Build the display string
-        string displayText = "";
-        foreach (var stat in usageStats)
+        // Clear existing items in the content panel
+        foreach (Transform child in contentPanel)
         {
-            string appName = socialMediaApps.ContainsKey(stat.PackageName)
-                ? socialMediaApps[stat.PackageName]
-                : stat.PackageName;
-
-            TimeSpan timeSpent = TimeSpan.FromMilliseconds(stat.TotalTimeInForeground);
-            string formattedTimeSpent = $"{timeSpent.Hours}h {timeSpent.Minutes}m {timeSpent.Seconds}s";
-
-            Debug.Log($"App: {appName}, Package: {stat.PackageName}, Time Spent: {formattedTimeSpent}");
-
-            displayText += $"App: {appName}, Time Spent: {formattedTimeSpent}\n";
+            if (child.name != "TotalUsageText")
+            {
+                Destroy(child.gameObject);
+            }
         }
 
-        usageStatsText.text = displayText;
+        foreach (var stat in usageStats)
+        {
+            GameObject newItem = Instantiate(appUsageItemPrefab, contentPanel);
+            var appNameText = newItem.transform.Find("AppName").GetComponent<Text>();
+            var timeUsedText = newItem.transform.Find("TimeUsed").GetComponent<Text>();
+
+            string appName = socialMediaApps[stat.PackageName];
+            TimeSpan timeUsed = TimeSpan.FromMilliseconds(stat.TotalTimeUsed);
+            string formattedTimeUsed = $"{timeUsed.Hours}h {timeUsed.Minutes}m {timeUsed.Seconds}s";
+            Debug.Log($"App: {appName}, Time Spent: {formattedTimeUsed}");
+
+            appNameText.text = appName;
+            timeUsedText.text = formattedTimeUsed;
+        }
+    }
+
+    void DisplayTotalUsageStats(long totalTime)
+    {
+        TimeSpan totalUsageTime = TimeSpan.FromMilliseconds(totalTime);
+        string formattedTime = $"{totalUsageTime.Hours}h {totalUsageTime.Minutes}m {totalUsageTime.Seconds}s";
+
+        Debug.Log($"Total social media Usage for today: {formattedTime}");
+
+        var totalUsageText = contentPanel.Find("TotalUsageText").GetComponent<Text>();
+        if (totalUsageText != null)
+        {
+            totalUsageText.text = $"Total Time Today: {formattedTime}";
+        }
     }
 }
