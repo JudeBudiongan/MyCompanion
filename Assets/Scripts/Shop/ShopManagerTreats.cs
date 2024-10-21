@@ -25,6 +25,9 @@ public class ShopManagerTreats : MonoBehaviour
     public Text CoinsTxt;
     public TreatManager treatManager;  // Reference to TreatManager
     public CoinManager coinManager;    // Reference to CoinManager
+    public TreatScript treatScript;    // Reference to TreatScript
+    public GameObject itemButtonPrefab; // Prefab for item button
+    public Transform itemButtonContainer; // Container to hold item buttons
 
     void Awake()
     {
@@ -37,6 +40,11 @@ public class ShopManagerTreats : MonoBehaviour
         {
             treatManager = FindObjectOfType<TreatManager>();
         }
+
+        if (treatScript == null)
+        {
+            treatScript = FindObjectOfType<TreatScript>();
+        }
     }
 
     IEnumerator DelayedInitialization()
@@ -44,8 +52,9 @@ public class ShopManagerTreats : MonoBehaviour
         yield return new WaitForSeconds(0.1f); // Slight delay before trying to find the objects
         coinManager = FindObjectOfType<CoinManager>();
         treatManager = FindObjectOfType<TreatManager>();
+        treatScript = FindObjectOfType<TreatScript>();
         UpdateCoinDisplay();
-        SyncShopItemsWithTreatManager();  // Call the correct sync method
+        SyncShopItemsWithTreatManager();
     }
 
     void Start()
@@ -58,7 +67,6 @@ public class ShopManagerTreats : MonoBehaviour
         shopItems.Add(new ShopTreats(2, 50, 8));
         shopItems.Add(new ShopTreats(3, 15, 12));
 
-        // Sync all button states to ensure they reflect the correct stock status
         RefreshButtonStates();
     }
 
@@ -69,7 +77,7 @@ public class ShopManagerTreats : MonoBehaviour
 
     public void Buy()
     {
-        GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
+        GameObject ButtonRef = EventSystem.current.currentSelectedGameObject; // Using the EventSystem to find the currently selected button
         var itemID = ButtonRef.GetComponent<buttoninfoTreats>().ItemID;
 
         ShopTreats selectedItem = shopItems.Find(item => item.ID == itemID);
@@ -79,9 +87,11 @@ public class ShopManagerTreats : MonoBehaviour
             // Deduct the price using the new method in CoinManager
             coinManager.DeductCoins(selectedItem.price);
             selectedItem.stock--;
+                    Debug.Log("Buying treat with ID: " + itemID);
 
-            // Increase the treat quantity in TreatManager
-            treatManager.IncreaseQuantity(itemID);
+
+            // Increase the treat quantity in TreatManager (assuming second parameter is the quantity)
+            treatManager.IncreaseQuantity(itemID); // Pass itemID and the quantity (1)
 
             // Update UI
             UpdateCoinDisplay();
@@ -93,7 +103,6 @@ public class ShopManagerTreats : MonoBehaviour
         }
     }
 
-    // Method to refresh button states across all buttons in the scene
     private void RefreshButtonStates()
     {
         foreach (var button in FindObjectsOfType<buttoninfoTreats>())
@@ -102,17 +111,19 @@ public class ShopManagerTreats : MonoBehaviour
         }
     }
 
-    // Sync the stock status of ShopTreats with TreatManager on scene load
     private void SyncShopItemsWithTreatManager()
     {
         foreach (var shopTreat in shopItems)
         {
             var treatItem = treatManager.GetTreatById(shopTreat.ID);
-            if (treatItem != null) // Check if the treatItem is found
+            if (treatItem != null)
             {
-                shopTreat.stock = treatItem.Stock; // Correctly sync stock from TreatManager
+                shopTreat.stock = treatItem.Stock;
             }
         }
         RefreshButtonStates();
     }
+
+
+
 }

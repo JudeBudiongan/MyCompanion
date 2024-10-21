@@ -1797,6 +1797,7 @@ GameObject:
   - component: {fileID: 1978768548}
   - component: {fileID: 1978768547}
   - component: {fileID: 1978768546}
+  - component: {fileID: 1978768549}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1829,16 +1830,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notificationPanel: {fileID: 1546016176}
-  option1Button: {fileID: 194315683}
-  option2Button: {fileID: 1049648999}
-  option3Button: {fileID: 1058885246}
-  option4Button: {fileID: 1243369056}
+  optionButtons:
+  - {fileID: 194315683}
+  - {fileID: 1049648999}
+  - {fileID: 1058885246}
+  - {fileID: 1243369056}
   yesButton: {fileID: 1501831252}
   noButton: {fileID: 1937576526}
-  option1Image: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
-  option2Image: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
-  option3Image: {fileID: 21300000, guid: 3a634a67f94c386419274d347d4b5e0e, type: 3}
-  option4Image: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
 --- !u!4 &1978768548
 Transform:
   m_ObjectHideFlags: 0
@@ -1854,6 +1852,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1978768549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978768545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1303a5a27a278b499966ca4267f8dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  companions: []
+  spriteAlien: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
+  spriteBerry: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
+  spriteGrey: {fileID: 21300000, guid: 3a634a67f94c386419274d347d4b5e0e, type: 3}
+  spriteWoshi: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
+  spriteGrimWooper: {fileID: 21300000, guid: 07a93db15f22de741a6355efdd07090e, type: 3}
+  spriteFak: {fileID: 21300000, guid: d7a3e19fd10617849a338d188b5b0658, type: 3}
+  spriteXv6Riscv: {fileID: 21300000, guid: 9c5e95d7662a2984e821e7e9d0509d8c, type: 3}
+  spriteTTiddy: {fileID: 21300000, guid: 57db92119df04074b88c70dd4ec918be, type: 3}
+  spritePriscue: {fileID: 21300000, guid: a4237f9045decc44ebffe464c787bf7c, type: 3}
+  spriteSushiSlayer: {fileID: 21300000, guid: 5f85cb0f298317d40b63a96bf73608d4, type: 3}
+  spriteRFilly: {fileID: 21300000, guid: 2970347d3b8253c4499bfc9c4ef5745c, type: 3}
+  spriteEilmar: {fileID: 21300000, guid: 4d5d56cce27031043a70a5e462196aa7, type: 3}
+  spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
 --- !u!1 &2032477937
 GameObject:
   m_ObjectHideFlags: 0

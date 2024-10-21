@@ -1,75 +1,77 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CatalogueManager : MonoBehaviour
 {
-    // Array of GameObjects representing each companion's slot in the catalog
-    public GameObject[] companionSlots;
+    // Reference to CompanionManager to get the list of companions
+    private CompanionManager companionManager;
 
-    // List of sprites for each companion (ensure the images are correctly assigned in the Inspector)
-    public Sprite option1Image;  // Alien sprite
-    public Sprite option2Image;  // Berry sprite
-    public Sprite option3Image;  // Grey sprite
-    public Sprite option4Image;  // Woshi sprite
+    // UI elements for catalog
+    public Transform catalogContentParent; // Parent GameObject to hold instantiated slots (like a ScrollView content)
 
-    // Constants for companion IDs
-    private const int ALIEN_ID = 0;
-    private const int BERRY_ID = 1;
-    private const int GREY_ID = 2;
-    private const int WOSHI_ID = 3;
-
-    // Start is called before the first frame update
     void Start()
     {
-        // Retrieve the selected ID from PlayerPrefs
-        int selectedID = PlayerPrefs.GetInt("SelectedID", -1); // Default to -1 if not found
+        // Get the CompanionManager instance
+        companionManager = CompanionManager.Instance;
 
-        // Debug log to check if selectedID is retrieved correctly
-        Debug.Log("Selected ID: " + selectedID);
-
-        // Display only the selected companion in the catalog
-        ShowCompanion(selectedID);
+        // Populate the catalog based on the companions from CompanionManager
+        PopulateCatalog();
     }
 
-    // Method to show the selected companion and hide the rest
-    void ShowCompanion(int id)
+    void PopulateCatalog()
     {
-        // Hide all companion slots initially
-        foreach (GameObject slot in companionSlots)
+        // Clear existing slots if any (in case this method is called multiple times)
+        foreach (Transform child in catalogContentParent)
         {
-            slot.SetActive(false);
+            Destroy(child.gameObject);
         }
 
-        // Display the corresponding companion based on the ID and update the image
-        switch (id)
+        // Loop through all companions and create catalog slots
+        foreach (var companion in companionManager.companions)
         {
-            case ALIEN_ID:
-                companionSlots[ALIEN_ID].SetActive(true);
-                companionSlots[ALIEN_ID].GetComponent<Image>().sprite = option1Image;
-                break;
-            case BERRY_ID:
-                companionSlots[BERRY_ID].SetActive(true);
-                companionSlots[BERRY_ID].GetComponent<Image>().sprite = option2Image;
-                break;
-            case GREY_ID:
-                companionSlots[GREY_ID].SetActive(true);
-                companionSlots[GREY_ID].GetComponent<Image>().sprite = option3Image;
-                break;
-            case WOSHI_ID:
-                companionSlots[WOSHI_ID].SetActive(true);
-                companionSlots[WOSHI_ID].GetComponent<Image>().sprite = option4Image;
-                break;
-            default:
-                Debug.LogWarning("Invalid Companion ID or no companion selected.");
-                break;
+            // Check if the companion is bought or if it's a starter companion that has been selected
+            if (companion.IsBought || IsStarterSelected(companion.CompanionID))
+            {
+                // Create a new GameObject for the slot
+                GameObject slot = new GameObject(companion.PetName, typeof(RectTransform), typeof(Image), typeof(Button));
+
+                // Set parent to the catalog content
+                slot.transform.SetParent(catalogContentParent);
+
+                // Set up the RectTransform
+                RectTransform rectTransform = slot.GetComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2(100, 100); // Adjust the size as needed
+                rectTransform.localScale = Vector3.one;
+
+                // Set up the Image component and assign the sprite
+                Image slotImage = slot.GetComponent<Image>();
+                slotImage.sprite = companion.CompanionSprite; // Access the sprite directly from the Companion instance
+
+                // Add a Button component to make the slot interactive
+                Button slotButton = slot.GetComponent<Button>();
+
+                // Assign a listener to the button (e.g., to load the main menu when pressed)
+                slotButton.onClick.AddListener(() => OnCompanionSelected(companion.CompanionID));
+            }
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    // Helper method to check if a starter companion is selected
+    private bool IsStarterSelected(int companionID)
     {
-        // You can add any updates here if needed
+        int selectedID = PlayerPrefs.GetInt("SelectedID", -1); // Default to -1 if no starter has been selected
+        return companionID == selectedID;
     }
+
+    private void OnCompanionSelected(int companionID)
+    {
+        Debug.Log("Companion with ID " + companionID + " selected.");
+        GameManager.Instance.SetSelectedCompanionID(companionID);
+        PlayerPrefs.SetInt("SelectedID", companionID);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("Main Menu");
+    }
+
 }
