@@ -536,9 +536,10 @@ MonoBehaviour:
   spriteSushiSlayer: {fileID: 21300000, guid: 5f85cb0f298317d40b63a96bf73608d4, type: 3}
   spriteRFilly: {fileID: 21300000, guid: e626f620f182bb34f8c886dba260adf9, type: 3}
   spriteEilmar: {fileID: 21300000, guid: 4d5d56cce27031043a70a5e462196aa7, type: 3}
-  spriteCat: {fileID: 0}
+  spriteCat: {fileID: 21300000, guid: f5bd145b31cd1f1448be2c792b3a850b, type: 3}
   spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
-  spritelileduj: {fileID: 0}
+  spritelileduj: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
+  healthBar: {fileID: 0}
 --- !u!114 &475088910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,6 +1361,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 970752559}
   m_CullTransparentMesh: 1
+--- !u!1 &1078059923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1078059925}
+  - component: {fileID: 1078059924}
+  m_Layer: 0
+  m_Name: SatisfactionRegression
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1078059924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078059923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6d3493dbfebab4d8063494b0dd4b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1078059925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078059923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1466533696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,9 +2370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944cf69ce4b234317b3a22dd857b5789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
-  currentHealth: 0
+  maxSatisfaction: 100
   healthBar: {fileID: 1905268104}
+  companionManager: {fileID: 0}
 --- !u!1 &1905268102
 GameObject:
   m_ObjectHideFlags: 0
@@ -2463,6 +2508,50 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2083236976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083236978}
+  - component: {fileID: 2083236977}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2083236977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083236976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de45d12104d6c244a939c3f4f1db380f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2083236978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083236976}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2471,3 +2560,5 @@ SceneRoots:
   - {fileID: 669057534}
   - {fileID: 549979718}
   - {fileID: 475088908}
+  - {fileID: 1078059925}
+  - {fileID: 2083236978}
