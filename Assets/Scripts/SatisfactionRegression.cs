@@ -7,11 +7,10 @@ public class SatisfactionRegression : MonoBehaviour
 {
     public static SatisfactionRegression Instance { get; private set; }
 
-    private int decreaseAmount = 20; // Amount to decrease satisfaction by
+    private int decreaseAmount = 10; // Amount to decrease satisfaction by
     private float decreaseInterval = 30f; // Time in seconds between decreases
-
-    private CompanionManager.Companion currentCompanion;
-
+    private CompanionManager.Companion selectedCompanion;
+    private int selectedCompanionId;
     private long lastCheckTime; // Timestamp of the last time social media usage was checked
 
     private void Awake()
@@ -30,8 +29,24 @@ public class SatisfactionRegression : MonoBehaviour
 
     void Start()
     {
+        // Check if CompanionManager.Instance is null
+        if (CompanionManager.Instance == null)
+        {
+            Debug.LogError("CompanionManager.Instance is null!");
+            return; // Early exit to prevent further errors
+        }
+
         // Get the currently selected companion
-        currentCompanion = CompanionManager.Instance.GetCompanionById(0); // Replace with the actual ID of the selected companion
+        selectedCompanionId = PlayerPrefs.GetInt("SelectedID");
+        selectedCompanion = CompanionManager.Instance.GetCompanionById(selectedCompanionId); // Replace with the actual ID of the selected companion
+
+        // Check if the selected companion is null
+        if (selectedCompanion == null)
+        {
+            Debug.LogError($"No companion found with ID: {selectedCompanionId}");
+            return; // Early exit to prevent further errors
+        }
+
         lastCheckTime = GetUnixTimestampMilliseconds(); // Set the initial last check time to current time
         StartCoroutine(CheckSocialMediaUsage());
     }
@@ -42,13 +57,13 @@ public class SatisfactionRegression : MonoBehaviour
         {
             yield return new WaitForSeconds(decreaseInterval);
 
-            if (currentCompanion != null)
+            if (selectedCompanion != null)
             {
                 long currentCheckTime = GetUnixTimestampMilliseconds(); // Get the current timestamp
 
                 // Fetch social media usage from the last check to now
                 long socialMediaTime = FetchSocialMediaUsageSinceLastCheck(lastCheckTime, currentCheckTime);
-                int decreaseRate = (int)Math.Round(socialMediaTime / (60 * 60 * 1000.0)); // Decrease amount per hour
+                int decreaseRate = (int)Math.Round(socialMediaTime / (60 * 1000.0)); // Set rate to 1 hour
 
                 // Log the time spent on social media since the last check
                 TimeSpan socialMediaTimeSpan = TimeSpan.FromMilliseconds(socialMediaTime);
@@ -56,9 +71,9 @@ public class SatisfactionRegression : MonoBehaviour
                 Debug.Log($"Social media usage since last check: {formattedTime}");
 
                 // Decrease the companion's satisfaction based on the social media usage
-                currentCompanion.DecreaseSatisfaction(decreaseAmount * decreaseRate);
-                CompanionManager.Instance.SaveCompanionData(currentCompanion); // Save the updated satisfaction level
-                Debug.Log($"{currentCompanion.PetName}'s satisfaction decreased to {currentCompanion.SatisfactionLevel}.");
+                selectedCompanion.DecreaseSatisfaction(decreaseAmount * decreaseRate); // Decrease amount per hour
+                CompanionManager.Instance.SaveCompanionData(selectedCompanion); // Save the updated satisfaction level
+                Debug.Log($"{selectedCompanion.PetName}'s satisfaction decreased to {selectedCompanion.SatisfactionLevel}.");
 
                 // Update the last check time
                 lastCheckTime = currentCheckTime;

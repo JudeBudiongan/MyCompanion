@@ -539,7 +539,7 @@ MonoBehaviour:
   spriteCat: {fileID: 21300000, guid: f5bd145b31cd1f1448be2c792b3a850b, type: 3}
   spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
   spritelileduj: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1905268104}
 --- !u!114 &475088910
 MonoBehaviour:
   m_ObjectHideFlags: 0
