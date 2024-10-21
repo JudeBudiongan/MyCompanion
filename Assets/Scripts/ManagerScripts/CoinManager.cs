@@ -4,6 +4,7 @@ using static CompanionManager;
 public class CoinManager : MonoBehaviour
 {
     public int TotalCoins { get; private set; } = 1000; // Initialize total coins to 0
+    public int TotalCoinsSpent {get; private set; } = 0; // no coins have been spent at the start
     private CompanionManager companionManager; // Reference to CompanionManager
     public static CoinManager Instance;
     void Awake() {
@@ -27,12 +28,22 @@ public class CoinManager : MonoBehaviour
         if (TotalCoins >= amount)
         {
             TotalCoins -= (int)amount; // Deduct coins and cast to int
+            TotalCoinsSpent += (int)amount; //track total coins spent
+            Debug.Log($"Total coins spent is: {TotalCoinsSpent}");
             Debug.Log($"Deducted {amount} coins. Remaining: {TotalCoins}");
         }
         else
         {
             Debug.LogWarning("Not enough coins to deduct.");
         }
+    }
+
+    //Method to increase coins
+
+    public void IncreaseCoins(float amount) {
+        TotalCoins += (int)amount;
+        Debug.Log($"Increased coins by {amount}. Total Coins: {TotalCoins}");
+
     }
 
     public void EarnCoinsForLevelUp(Companion companion)

@@ -89,6 +89,12 @@ public class CompanionManager : MonoBehaviour
     }
 
     public List<Companion> companions = new List<Companion>();
+    public int NumberOfPets {get; private set; } = 0;
+
+    public void IncreaseNumberOfPets() {
+        NumberOfPets++;
+        Debug.Log($"Number of pets increased.");
+    }
 
     // Sprites to be set in the Inspector
     public Sprite spriteAlien, spriteBerry, spriteGrey, spriteWoshi;
@@ -129,6 +135,7 @@ public class CompanionManager : MonoBehaviour
         if (companionID >= 0 && companionID < companions.Count)
         {
             companions[companionID].IsBought = true;
+            IncreaseNumberOfPets(); // increase number of pets by 1
             Debug.Log($"{companions[companionID].PetName} has been marked as bought.");
         }
         else
