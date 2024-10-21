@@ -70,13 +70,13 @@ EditorBuildSettings:
     guid: 9fca660370b6dad4ca8df3adb1baaae3
   - enabled: 1
     path: Assets/Scenes/Store/BuyCleaning.unity
-    guid: 1ebda5221180bfb46a17418df7b2a240
+    guid: b1248e1bf4906a546b62ac043878b574
   - enabled: 1
     path: Assets/Scenes/Store/BuyFood.unity
-    guid: fcc8684a60c0adb4e8748808b799926e
+    guid: 00a2be65606fcf44fa7b738940589656
   - enabled: 1
-    path: Assets/Scenes/Store/BuyToys.unity
-    guid: 8817146fb9db3b34ea606303dfa488a4
+    path: Assets/Scenes/Store/BuyPets.unity
+    guid: 46fc22abe0eb26b45971bdf1a4c9de31
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: d69b735bfce11474e8cdca79265d9a82, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fa29865ee51cc2441b384e073b645726, type: 2}
