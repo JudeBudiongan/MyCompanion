@@ -5315,6 +5315,67 @@ MonoBehaviour:
   spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
   spritelileduj: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
   spriteBing: {fileID: 21300000, guid: 3202f6a9d5a9e40e6b1a8894f7696c03, type: 3}
+  spriteAlienAngry: {fileID: 0}
+  spriteAlienSad: {fileID: 0}
+  spriteAlienNormal: {fileID: 0}
+  spriteAlienHappy: {fileID: 0}
+  spriteBerryAngry: {fileID: 0}
+  spriteBerrySad: {fileID: 0}
+  spriteBerryNormal: {fileID: 0}
+  spriteBerryHappy: {fileID: 0}
+  spriteGreyAngry: {fileID: 0}
+  spriteGreySad: {fileID: 0}
+  spriteGreyNormal: {fileID: 0}
+  spriteGreyHappy: {fileID: 0}
+  spriteWoshiAngry: {fileID: 0}
+  spriteWoshiSad: {fileID: 0}
+  spriteWoshiNormal: {fileID: 0}
+  spriteWoshiHappy: {fileID: 0}
+  spriteGrimWooperAngry: {fileID: 0}
+  spriteGrimWooperSad: {fileID: 0}
+  spriteGrimWooperNormal: {fileID: 0}
+  spriteGrimWooperHappy: {fileID: 0}
+  spriteFakAngry: {fileID: 0}
+  spriteFakSad: {fileID: 0}
+  spriteFakNormal: {fileID: 0}
+  spriteFakHappy: {fileID: 0}
+  spriteXv6RiscvAngry: {fileID: 0}
+  spriteXv6RiscvSad: {fileID: 0}
+  spriteXv6RiscvNormal: {fileID: 0}
+  spriteXv6RiscvHappy: {fileID: 0}
+  spriteTTiddyAngry: {fileID: 0}
+  spriteTTiddySad: {fileID: 0}
+  spriteTTiddyNormal: {fileID: 0}
+  spriteTTiddyHappy: {fileID: 0}
+  spritePriscueAngry: {fileID: 0}
+  spritePriscueSad: {fileID: 0}
+  spritePriscueNormal: {fileID: 0}
+  spritePriscueHappy: {fileID: 0}
+  spriteSushiSlayerAngry: {fileID: 0}
+  spriteSushiSlayerSad: {fileID: 0}
+  spriteSushiSlayerNormal: {fileID: 0}
+  spriteSushiSlayerHappy: {fileID: 0}
+  spriteRFillyAngry: {fileID: 0}
+  spriteRFillySad: {fileID: 0}
+  spriteRFillyNormal: {fileID: 0}
+  spriteRFillyHappy: {fileID: 0}
+  spriteEilmarAngry: {fileID: 0}
+  spriteEilmarSad: {fileID: 0}
+  spriteEilmarNormal: {fileID: 0}
+  spriteEilmarHappy: {fileID: 0}
+  spriteCatAngry: {fileID: 0}
+  spriteCatSad: {fileID: 0}
+  spriteCatNormal: {fileID: 0}
+  spriteCatHappy: {fileID: 0}
+  spriteSkibidiAngry: {fileID: 0}
+  spriteSkibidiSad: {fileID: 0}
+  spriteSkibidiNormal: {fileID: 0}
+  spriteSkibidiHappy: {fileID: 0}
+  spriteliledujAngry: {fileID: 0}
+  spriteliledujSad: {fileID: 0}
+  spriteliledujNormal: {fileID: 0}
+  spriteliledujHappy: {fileID: 0}
+  levelTextUI: {fileID: 0}
   healthBar: {fileID: 0}
 --- !u!4 &1442833138
 Transform:

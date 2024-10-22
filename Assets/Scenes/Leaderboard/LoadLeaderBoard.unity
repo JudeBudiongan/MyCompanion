@@ -381,7 +381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '   Achievements'
+  m_text: Challenges
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 00377140b83459946b33fed771a1ec28, type: 2}
   m_sharedMaterial: {fileID: 2363903445354491098, guid: 00377140b83459946b33fed771a1ec28, type: 2}
@@ -1297,7 +1297,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Achievements
+          m_StringArgument: Challenges
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1732947590

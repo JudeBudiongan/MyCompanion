@@ -870,7 +870,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   companionManager: {fileID: 1383526188}
-  catalogueManager: {fileID: 1686002253}
   notCompleteIcon: {fileID: 1689421060}
   challengeText: {fileID: 1211036373}
   claimButton: {fileID: 1530217686}
@@ -3185,6 +3184,66 @@ MonoBehaviour:
   spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
   spritelileduj: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
   spriteBing: {fileID: 21300000, guid: 3202f6a9d5a9e40e6b1a8894f7696c03, type: 3}
+  spriteAlienAngry: {fileID: 0}
+  spriteAlienSad: {fileID: 0}
+  spriteAlienNormal: {fileID: 0}
+  spriteAlienHappy: {fileID: 0}
+  spriteBerryAngry: {fileID: 0}
+  spriteBerrySad: {fileID: 0}
+  spriteBerryNormal: {fileID: 0}
+  spriteBerryHappy: {fileID: 0}
+  spriteGreyAngry: {fileID: 0}
+  spriteGreySad: {fileID: 0}
+  spriteGreyNormal: {fileID: 0}
+  spriteGreyHappy: {fileID: 0}
+  spriteWoshiAngry: {fileID: 0}
+  spriteWoshiSad: {fileID: 0}
+  spriteWoshiNormal: {fileID: 0}
+  spriteWoshiHappy: {fileID: 0}
+  spriteGrimWooperAngry: {fileID: 0}
+  spriteGrimWooperSad: {fileID: 0}
+  spriteGrimWooperNormal: {fileID: 0}
+  spriteGrimWooperHappy: {fileID: 0}
+  spriteFakAngry: {fileID: 0}
+  spriteFakSad: {fileID: 0}
+  spriteFakNormal: {fileID: 0}
+  spriteFakHappy: {fileID: 0}
+  spriteXv6RiscvAngry: {fileID: 0}
+  spriteXv6RiscvSad: {fileID: 0}
+  spriteXv6RiscvNormal: {fileID: 0}
+  spriteXv6RiscvHappy: {fileID: 0}
+  spriteTTiddyAngry: {fileID: 0}
+  spriteTTiddySad: {fileID: 0}
+  spriteTTiddyNormal: {fileID: 0}
+  spriteTTiddyHappy: {fileID: 0}
+  spritePriscueAngry: {fileID: 0}
+  spritePriscueSad: {fileID: 0}
+  spritePriscueNormal: {fileID: 0}
+  spritePriscueHappy: {fileID: 0}
+  spriteSushiSlayerAngry: {fileID: 0}
+  spriteSushiSlayerSad: {fileID: 0}
+  spriteSushiSlayerNormal: {fileID: 0}
+  spriteSushiSlayerHappy: {fileID: 0}
+  spriteRFillyAngry: {fileID: 0}
+  spriteRFillySad: {fileID: 0}
+  spriteRFillyNormal: {fileID: 0}
+  spriteRFillyHappy: {fileID: 0}
+  spriteEilmarAngry: {fileID: 0}
+  spriteEilmarSad: {fileID: 0}
+  spriteEilmarNormal: {fileID: 0}
+  spriteEilmarHappy: {fileID: 0}
+  spriteCatAngry: {fileID: 0}
+  spriteCatSad: {fileID: 0}
+  spriteCatNormal: {fileID: 0}
+  spriteCatHappy: {fileID: 0}
+  spriteSkibidiAngry: {fileID: 0}
+  spriteSkibidiSad: {fileID: 0}
+  spriteSkibidiNormal: {fileID: 0}
+  spriteSkibidiHappy: {fileID: 0}
+  spriteliledujAngry: {fileID: 0}
+  spriteliledujSad: {fileID: 0}
+  spriteliledujNormal: {fileID: 0}
+  spriteliledujHappy: {fileID: 0}
   healthBar: {fileID: 0}
 --- !u!4 &1383526189
 Transform:
@@ -3799,51 +3858,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554124974}
   m_CullTransparentMesh: 1
---- !u!1 &1686002252
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1686002254}
-  - component: {fileID: 1686002253}
-  m_Layer: 0
-  m_Name: CatalogueManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1686002253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686002252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6de5701bb645b2c44b59eac09e7ca111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  catalogContentParent: {fileID: 0}
---- !u!4 &1686002254
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686002252}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 497.9683, y: 1097.6777, z: -9.091522}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1689421060
 GameObject:
   m_ObjectHideFlags: 0
@@ -4579,4 +4593,3 @@ SceneRoots:
   - {fileID: 566386037}
   - {fileID: 435044381}
   - {fileID: 1383526189}
-  - {fileID: 1686002254}

@@ -13,6 +13,7 @@ public class ChallengeManager : MonoBehaviour
 
     private int targetCompanionCount = 3;
     private bool isChallengeCompleted = false;
+    private bool isClaimed = false; // New flag to check if the claim button has already been clicked
 
     void Awake()
     {
@@ -50,7 +51,7 @@ public class ChallengeManager : MonoBehaviour
         }
 
         notCompleteIcon.SetActive(true);
-        claimButton.gameObject.SetActive(false);
+        claimButton.gameObject.SetActive(false); // Hide the claim button until the challenge is completed
         UpdateChallengeText();
 
         claimButton.onClick.AddListener(OnClaimButtonClicked);
@@ -87,7 +88,7 @@ public class ChallengeManager : MonoBehaviour
         isChallengeCompleted = true;
 
         notCompleteIcon.SetActive(false);
-        claimButton.gameObject.SetActive(true);
+        claimButton.gameObject.SetActive(true); // Show the claim button after the challenge is completed
         claimButtonText.text = "Claim Bing";
         UpdateChallengeText();
 
@@ -96,6 +97,13 @@ public class ChallengeManager : MonoBehaviour
 
     private void OnClaimButtonClicked()
     {
+        if (isClaimed)
+        {
+            return; // Prevent the button from being clicked multiple times
+        }
+
+        isClaimed = true; // Mark as claimed
+
         CompanionManager.Companion bingCompanion = companionManager.GetCompanionById(15);
         if (bingCompanion == null)
         {
@@ -106,7 +114,14 @@ public class ChallengeManager : MonoBehaviour
         bingCompanion.IsBought = true;
         Debug.Log("Bing has been claimed and marked as bought!");
 
-        claimButton.gameObject.SetActive(false);
+        // Level up the companion after claiming the reward
+        CompanionManager.Companion companion = companionManager.GetCompanionById(0); // Select a companion to level up
+        if (companion != null)
+        {
+            companion.LevelUp();  // Level up the companion when claimed
+        }
+
+        claimButton.gameObject.SetActive(false); // Hide the claim button after it's clicked
     }
 
     void OnDestroy()

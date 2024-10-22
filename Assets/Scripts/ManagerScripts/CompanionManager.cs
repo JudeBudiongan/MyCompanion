@@ -44,16 +44,26 @@ public class CompanionManager : MonoBehaviour
             Level = 1;              // Default initial level
         }
 
-        public void LevelUp(CoinManager coinManager)
-        {
-            Level++;
-            ResetSatisfaction();
+public void LevelUp()
+{
+    Level++;
+    ResetSatisfaction();
 
-            // Earn coins for leveling up
-            coinManager.EarnCoinsForLevelUp(this);
+    // Notify the LevelDisplay script to update the UI
+    LevelDisplay levelDisplay = FindObjectOfType<LevelDisplay>();
+    if (levelDisplay != null)
+    {
+        levelDisplay.UpdateLevelDisplay();
+    }
+    else
+    {
+        Debug.LogError("LevelDisplay script not found in the scene.");
+    }
 
-            Debug.Log($"Hooray! Companion leveled up to {Level}!");
-        }
+    Debug.Log($"Hooray! Companion leveled up to {Level}!");
+}
+
+
 
         public void LevelDown()
         {
@@ -66,11 +76,13 @@ public class CompanionManager : MonoBehaviour
         public void IncreaseSatisfaction(int amount)
         {
             SatisfactionLevel += amount;
-            if (SatisfactionLevel > 100)
+            if (SatisfactionLevel >= 100)
             {
                 SatisfactionLevel = 100;
+                LevelUp();  // Level up when satisfaction reaches 100
             }
         }
+
 
         public void DecreaseSatisfaction(int amount)
         {
