@@ -8,10 +8,11 @@ public class SatisfactionRegression : MonoBehaviour
     public static SatisfactionRegression Instance { get; private set; }
 
     private int decreaseAmount = 10; // Amount to decrease satisfaction by
-    private float decreaseInterval = 3600f; // Time in seconds between decreases
+    private float decreaseInterval = 60f; // Time in seconds between decreases
     private CompanionManager.Companion selectedCompanion;
     private int selectedCompanionId;
     private long lastCheckTime; // Timestamp of the last time social media usage was checked
+    private long previousSocialMediaTime; // Stores the total social media time from previous checks
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class SatisfactionRegression : MonoBehaviour
         }
 
         lastCheckTime = GetUnixTimestampMilliseconds(); // Set the initial last check time to current time
+        previousSocialMediaTime = 0; // Initialize previous social media time to 0
         StartCoroutine(CheckSocialMediaUsage());
     }
 
@@ -61,22 +63,26 @@ public class SatisfactionRegression : MonoBehaviour
             {
                 long currentCheckTime = GetUnixTimestampMilliseconds(); // Get the current timestamp
 
-                // Fetch social media usage from the last check to now
-                long socialMediaTime = FetchSocialMediaUsageSinceLastCheck(lastCheckTime, currentCheckTime);
-                int decreaseRate = (int)Math.Round(socialMediaTime / (60 * 60 * 1000.0)); // Set rate to 1 hour
+                // Fetch cumulative social media usage up to the current time
+                long totalSocialMediaTime = FetchSocialMediaUsageSinceLastCheck(lastCheckTime, currentCheckTime);
 
-                // Log the time spent on social media since the last check
-                TimeSpan socialMediaTimeSpan = TimeSpan.FromMilliseconds(socialMediaTime);
+                // Calculate the difference in social media usage since the last check
+                long newSocialMediaTime = totalSocialMediaTime - previousSocialMediaTime;
+
+                // Log the newly accumulated time spent on social media
+                TimeSpan socialMediaTimeSpan = TimeSpan.FromMilliseconds(newSocialMediaTime);
                 string formattedTime = $"{socialMediaTimeSpan.Hours}h {socialMediaTimeSpan.Minutes}m {socialMediaTimeSpan.Seconds}s";
-                Debug.Log($"Social media usage since last check: {formattedTime}");
+                Debug.Log($"New social media usage since last check: {formattedTime}");
 
-                // Decrease the companion's satisfaction based on the social media usage
+                // Decrease the companion's satisfaction based on the new social media usage
+                int decreaseRate = (int)Math.Round(newSocialMediaTime / (60 * 60 * 1000.0)); // Set rate to 1 hour
                 selectedCompanion.DecreaseSatisfaction(decreaseAmount * decreaseRate); // Decrease amount per hour
                 CompanionManager.Instance.SaveCompanionData(selectedCompanion); // Save the updated satisfaction level
                 Debug.Log($"{selectedCompanion.PetName}'s satisfaction decreased to {selectedCompanion.SatisfactionLevel}.");
 
-                // Update the last check time
+                // Update the last check time and previous social media time
                 lastCheckTime = currentCheckTime;
+                previousSocialMediaTime = totalSocialMediaTime; // Store the cumulative time for the next check
             }
         }
     }
