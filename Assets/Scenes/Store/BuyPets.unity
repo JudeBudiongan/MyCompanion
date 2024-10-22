@@ -7316,7 +7316,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 789047543}
-        m_TargetAssemblyTypeName: ShopManagerScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: ShopManagerPets, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
