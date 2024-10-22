@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using static CompanionManager;
 
 public class ChallengeManager : MonoBehaviour
 {
@@ -64,14 +65,14 @@ public class ChallengeManager : MonoBehaviour
         }
         else
         {
-            int remainingCompanions = targetCompanionCount - companionManager.GetBoughtCompanionsCount();
+            int remainingCompanions = targetCompanionCount - companionManager.GetBoughtCompanionCount();
             challengeText.text = $"Buy {remainingCompanions} more companions to earn 'Bing'";
         }
     }
 
     private void CheckChallengeCompletion()
     {
-        int boughtCount = companionManager.GetBoughtCompanionsCount();
+        int boughtCount = companionManager.GetBoughtCompanionCount();
         if (!isChallengeCompleted && boughtCount >= targetCompanionCount)
         {
             CompleteChallenge();

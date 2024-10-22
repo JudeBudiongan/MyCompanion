@@ -96,6 +96,7 @@ public class CompanionManager : MonoBehaviour
     }
 
      public static CompanionManager Instance;
+     public event Action OnCompanionAdded;
 
     void Awake()
     {
@@ -115,7 +116,7 @@ public class CompanionManager : MonoBehaviour
 
     public List<Companion> companions = new List<Companion>();
     public int NumberOfPets {get; private set; } = 0;
-
+    
     public void IncreaseNumberOfPets() {
         NumberOfPets++;
         Debug.Log($"Number of pets increased.");
@@ -275,5 +276,17 @@ public class CompanionManager : MonoBehaviour
         companion.SatisfactionLevel = PlayerPrefs.GetInt("Satisfaction_" + companion.CompanionID, 50);
     }
 
-    
+    // New method to count the number of bought companions
+    public int GetBoughtCompanionCount()
+    {
+        int boughtCount = 0;
+        foreach (var companion in companions)
+        {
+            if (companion.IsBought)
+            {
+                boughtCount++;
+            }
+        }
+        return boughtCount;
+    }
 }

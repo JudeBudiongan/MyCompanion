@@ -550,11 +550,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &533115311
-=======
---- !u!1 &529367974
->>>>>>> origin/johann/pet-rewards
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -562,36 +558,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
   - component: {fileID: 533115312}
   - component: {fileID: 533115315}
   - component: {fileID: 533115314}
   - component: {fileID: 533115313}
   m_Layer: 5
   m_Name: Reward 3
-=======
-  - component: {fileID: 529367975}
-  - component: {fileID: 529367977}
-  - component: {fileID: 529367976}
-  m_Layer: 5
-  m_Name: Challenges Text
->>>>>>> origin/johann/pet-rewards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
 --- !u!224 &533115312
-=======
---- !u!224 &529367975
->>>>>>> origin/johann/pet-rewards
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 533115311}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -713,15 +696,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534792919}
-=======
-  m_GameObject: {fileID: 529367974}
->>>>>>> origin/johann/pet-rewards
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-<<<<<<< HEAD
   m_Father: {fileID: 1358458872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -730,26 +709,12 @@ RectTransform:
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &534792921
-=======
-  m_Father: {fileID: 1427148277}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -561.28076}
-  m_SizeDelta: {x: 666.2461, y: 166.5615}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &529367976
->>>>>>> origin/johann/pet-rewards
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 534792919}
-=======
-  m_GameObject: {fileID: 529367974}
->>>>>>> origin/johann/pet-rewards
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -763,17 +728,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-<<<<<<< HEAD
   m_text: Spend 500 coins in the Store!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 00377140b83459946b33fed771a1ec28, type: 2}
   m_sharedMaterial: {fileID: 2363903445354491098, guid: 00377140b83459946b33fed771a1ec28, type: 2}
-=======
-  m_text: Challenges
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
->>>>>>> origin/johann/pet-rewards
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -797,22 +755,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-<<<<<<< HEAD
   m_fontSize: 80
   m_fontSizeBase: 80
-=======
-  m_fontSize: 106.9
-  m_fontSizeBase: 106.9
->>>>>>> origin/johann/pet-rewards
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-<<<<<<< HEAD
   m_fontStyle: 0
-=======
-  m_fontStyle: 1
->>>>>>> origin/johann/pet-rewards
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -848,21 +797,13 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-<<<<<<< HEAD
 --- !u!222 &534792922
-=======
---- !u!222 &529367977
->>>>>>> origin/johann/pet-rewards
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 534792919}
-=======
-  m_GameObject: {fileID: 529367974}
->>>>>>> origin/johann/pet-rewards
   m_CullTransparentMesh: 1
 --- !u!1 &542874485
 GameObject:
@@ -954,7 +895,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
