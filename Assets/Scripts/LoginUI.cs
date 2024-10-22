@@ -150,6 +150,7 @@ public class LoginUI : MonoBehaviour
     if (isRegistration)
     {
         // Set a temporary flag to indicate data should be saved after picking starter
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("ShouldSaveData", 1);
         PlayerPrefs.Save();
         Debug.Log("PlayerPrefs ShouldSaveData set to 1");
