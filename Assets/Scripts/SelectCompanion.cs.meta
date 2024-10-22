@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 8e19e5a48573142c8829c574577e2f8d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - notificationPanel: {instanceID: 0}
+  - option1Button: {instanceID: 0}
+  - option2Button: {instanceID: 0}
+  - option3Button: {instanceID: 0}
+  - option4Button: {instanceID: 0}
+  - yesButton: {instanceID: 0}
+  - noButton: {instanceID: 0}
+  - option1Image: {fileID: 21300000, guid: a6c2d8375038270439d209875d7d69ec, type: 3}
+  - option2Image: {fileID: 21300000, guid: 9f6efdbc7f440554fb2020ec67fb6173, type: 3}
+  - option3Image: {fileID: 21300000, guid: 7d936d9dac13c194f888712b92ef0e8a, type: 3}
+  - option4Image: {fileID: 21300000, guid: 3e8e85ec7594e9a4597015c4e983f937, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
