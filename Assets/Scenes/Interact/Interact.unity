@@ -971,6 +971,10 @@ MonoBehaviour:
   spriteliledujSad: {fileID: 21300000, guid: e37d3a111266d994bb788ab57231a75e, type: 3}
   spriteliledujNormal: {fileID: 21300000, guid: 3bccc97a13fe7a84dbc6819381f97591, type: 3}
   spriteliledujHappy: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
+  spriteBingAngry: {fileID: 0}
+  spriteBingSad: {fileID: 0}
+  spriteBingNormal: {fileID: 0}
+  spriteBingHappy: {fileID: 0}
   healthBar: {fileID: 0}
 --- !u!4 &1286998098
 Transform:
@@ -1515,7 +1519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7d3e371b4759bbb429c37ea11a85638e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e4faf244706b2e84bab1eb36c6c015b4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
