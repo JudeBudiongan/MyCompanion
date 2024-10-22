@@ -88,7 +88,7 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
-    public static CompanionManager Instance;
+     public static CompanionManager Instance;
 
     void Awake()
     {
@@ -102,6 +102,7 @@ public class CompanionManager : MonoBehaviour
             Destroy(gameObject); // Destroy duplicate instances 
         }
     }
+
 
     public List<Companion> companions = new List<Companion>();
     public int NumberOfPets {get; private set; } = 0;
@@ -152,6 +153,8 @@ public class CompanionManager : MonoBehaviour
             companions[companionID].IsBought = true;
             IncreaseNumberOfPets(); // increase number of pets by 1
             Debug.Log($"{companions[companionID].PetName} has been marked as bought.");
+            PlayerPrefs.SetInt("Companion_" + companionID, 1); // Save as bought
+            PlayerPrefs.Save();
         }
         else
         {
@@ -159,13 +162,9 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
-    public Companion GetCompanionById(int companionID)
+     public Companion GetCompanionById(int companionID)
     {
-        if (companionID >= 0 && companionID < companions.Count)
-        {
-            return companions[companionID];
-        }
-        return null;
+        return companions.Find(c => c.CompanionID == companionID);
     }
 
     // New method to check if a companion is bought
@@ -205,4 +204,6 @@ public class CompanionManager : MonoBehaviour
     {
         companion.SatisfactionLevel = PlayerPrefs.GetInt("Satisfaction_" + companion.CompanionID, 50); // Default to 50 if not set
     }
+
+    
 }

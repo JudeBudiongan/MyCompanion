@@ -47,9 +47,10 @@ public class ShopManagerPets : MonoBehaviour
         SyncShopItemsWithCompanionManager();  // New function call to ensure correct item state
     }
 
-    void Start()
+     void Start()
     {
         StartCoroutine(DelayedInitialization());
+        coinManager.LoadCoins();
 
         // Add shop items with ID and Price
         shopItems.Add(new ShopPets(4, 50));
@@ -85,6 +86,8 @@ public class ShopManagerPets : MonoBehaviour
             // Deduct the price using the new method in CoinManager
             coinManager.DeductCoins(selectedItem.price);
             selectedItem.bought = true;
+            coinManager.SaveCoins(); // Save the new total
+
 
             // Update UI
             UpdateCoinDisplay();
@@ -120,4 +123,6 @@ public class ShopManagerPets : MonoBehaviour
         }
         RefreshButtonStates();
     }
+
+    
 }

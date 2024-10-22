@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CatalogueManager : MonoBehaviour
 {
@@ -14,10 +14,27 @@ public class CatalogueManager : MonoBehaviour
     void Start()
     {
         // Get the CompanionManager instance
-        companionManager = CompanionManager.Instance;
+        companionManager = FindObjectOfType<CompanionManager>();
+        if (companionManager == null)
+        {
+            Debug.LogError("CompanionManager not found in the scene.");
+            return;
+        }
+
+        // Load companion statuses from PlayerPrefs
+        LoadCompanionStatuses();
 
         // Populate the catalog based on the companions from CompanionManager
         PopulateCatalog();
+    }
+
+    void LoadCompanionStatuses()
+    {
+        foreach (var companion in companionManager.companions)
+        {
+            int status = PlayerPrefs.GetInt("Companion_" + companion.CompanionID, 0); // Default to 0 (not bought)
+            companion.IsBought = status == 1; // Set status based on PlayerPrefs
+        }
     }
 
     void PopulateCatalog()
@@ -73,5 +90,4 @@ public class CatalogueManager : MonoBehaviour
         PlayerPrefs.Save();
         SceneManager.LoadScene("Main Menu");
     }
-
 }
