@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static CompanionManager;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -45,6 +46,9 @@ public class MainMenuController : MonoBehaviour
                 selectedOptionImage.sprite = selectedCompanion.CompanionSprite; // Assuming this property exists
                 selectedOptionText.text = selectedCompanion.PetName; // Assuming this property exists
 
+                // Update the companion's emotion based on satisfaction level
+                UpdateCompanionEmotion(selectedCompanion); // Pass the whole companion object
+
                 // Debug log to confirm sprite loading
                 if (selectedOptionImage.sprite != null)
                 {
@@ -77,5 +81,30 @@ public class MainMenuController : MonoBehaviour
     {
         selectedOptionImage.sprite = null;  // Clear the image if something goes wrong
         selectedOptionText.text = "No option selected"; // Reset text
+    }
+
+    // Method to update the companion's emotion based on satisfaction level
+    private void UpdateCompanionEmotion(Companion companion)
+    {
+        if (companion.SatisfactionLevel < 10)
+        {
+            selectedOptionImage.sprite = companion.AngrySprite; // Set to angry sprite
+            Debug.Log("Companion is angry.");
+        }
+        else if (companion.SatisfactionLevel < 50)
+        {
+            selectedOptionImage.sprite = companion.SadSprite; // Set to sad sprite
+            Debug.Log("Companion is sad.");
+        }
+        else if (companion.SatisfactionLevel < 80)
+        {
+            selectedOptionImage.sprite = companion.NormalSprite; // Set to normal sprite
+            Debug.Log("Companion is normal.");
+        }
+        else
+        {
+            selectedOptionImage.sprite = companion.HappySprite; // Set to happy sprite
+            Debug.Log("Companion is happy.");
+        }
     }
 }

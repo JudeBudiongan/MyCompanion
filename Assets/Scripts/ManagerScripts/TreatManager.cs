@@ -50,8 +50,8 @@ public class TreatManager : MonoBehaviour
     void Start()
     {
         // Add treat items to the list with IDs and names
-        treats.Add(new TreatItem(0, "Chewy Delight"));
-        treats.Add(new TreatItem(1, "Crunchy Biscuit"));
+        treats.Add(new TreatItem(0, "Chewy Apple"));
+        treats.Add(new TreatItem(1, "Iron Biscuit"));
         treats.Add(new TreatItem(2, "Tasty Bone"));
         treats.Add(new TreatItem(3, "Yummy Chewstick"));
     }

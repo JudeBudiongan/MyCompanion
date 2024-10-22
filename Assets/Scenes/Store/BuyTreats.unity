@@ -268,7 +268,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 302865356}
-  maxHealth: 100
+  companionManager: {fileID: 0}
+  satisfactionIncreaseAmount: 10
+  foodSpriteImage: {fileID: 0}
+  treatButtonRect: {fileID: 0}
+  companionTarget: {fileID: 0}
+  animationDuration: 1
 --- !u!4 &15558103
 Transform:
   m_ObjectHideFlags: 0
@@ -932,7 +937,7 @@ MonoBehaviour:
   QuantityTxt: {fileID: 1559008501}
   NameTxt: {fileID: 830355458}
   TreatImage: {fileID: 1597072386}
-  DefaultSprite: {fileID: 21300000, guid: 7d3e371b4759bbb429c37ea11a85638e, type: 3}
+  DefaultSprite: {fileID: 21300000, guid: c1101a972f67d164db2754844fbeeda2, type: 3}
   ShopManager: {fileID: 1317485707}
   scrollRect: {fileID: 0}
 --- !u!114 &533720612
@@ -2063,7 +2068,7 @@ MonoBehaviour:
   QuantityTxt: {fileID: 1397819345}
   NameTxt: {fileID: 916773143}
   TreatImage: {fileID: 1413695447}
-  DefaultSprite: {fileID: 21300000, guid: 7d3e371b4759bbb429c37ea11a85638e, type: 3}
+  DefaultSprite: {fileID: 21300000, guid: 615f3cdaa1374bd4db14286066f31cde, type: 3}
   ShopManager: {fileID: 1317485707}
   scrollRect: {fileID: 0}
 --- !u!114 &1144999995
@@ -2313,6 +2318,8 @@ MonoBehaviour:
   treatManager: {fileID: 1839536582}
   coinManager: {fileID: 1252275894}
   treatScript: {fileID: 15558102}
+  itemButtonPrefab: {fileID: 0}
+  itemButtonContainer: {fileID: 0}
 --- !u!4 &1317485709
 Transform:
   m_ObjectHideFlags: 0
@@ -2479,7 +2486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d0d7df155b73134182898b9a3c422ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1d0e6764d9c5f8458571840fb1d57d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2714,7 +2721,7 @@ MonoBehaviour:
   QuantityTxt: {fileID: 590374904}
   NameTxt: {fileID: 2009782006}
   TreatImage: {fileID: 2058613863}
-  DefaultSprite: {fileID: 21300000, guid: 7d3e371b4759bbb429c37ea11a85638e, type: 3}
+  DefaultSprite: {fileID: 21300000, guid: 844a1050d03ba5046bfb86af34a81e47, type: 3}
   ShopManager: {fileID: 1317485707}
   scrollRect: {fileID: 0}
 --- !u!114 &1534062771
@@ -3030,7 +3037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d0d7df155b73134182898b9a3c422ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1101a972f67d164db2754844fbeeda2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3185,7 +3192,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d0d7df155b73134182898b9a3c422ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da7129ed6a246f048a49d8d97de2d2d4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3923,7 +3930,7 @@ MonoBehaviour:
   QuantityTxt: {fileID: 556151129}
   NameTxt: {fileID: 1618363894}
   TreatImage: {fileID: 1647160012}
-  DefaultSprite: {fileID: 21300000, guid: 7d3e371b4759bbb429c37ea11a85638e, type: 3}
+  DefaultSprite: {fileID: 21300000, guid: da7129ed6a246f048a49d8d97de2d2d4, type: 3}
   ShopManager: {fileID: 1317485707}
   scrollRect: {fileID: 0}
 --- !u!1 &2009782004
@@ -4154,7 +4161,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d0d7df155b73134182898b9a3c422ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a58749f555f75e48baa41893215b26e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
