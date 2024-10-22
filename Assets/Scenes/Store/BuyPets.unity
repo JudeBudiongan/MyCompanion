@@ -3312,7 +3312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopItems: []
   CoinsTxt: {fileID: 280909872}
-  companionManager: {fileID: 1442833137}
+  companionManager: {fileID: 0}
   coinManager: {fileID: 1791577974}
 --- !u!4 &789047544
 Transform:
@@ -5299,21 +5299,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   companions: []
-  spriteAlien: {fileID: 0}
-  spriteBerry: {fileID: 0}
-  spriteGrey: {fileID: 0}
-  spriteWoshi: {fileID: 0}
-  spriteGrimWooper: {fileID: 0}
-  spriteFak: {fileID: 0}
-  spriteXv6Riscv: {fileID: 0}
-  spriteTTiddy: {fileID: 0}
-  spritePriscue: {fileID: 0}
-  spriteSushiSlayer: {fileID: 0}
-  spriteRFilly: {fileID: 0}
-  spriteEilmar: {fileID: 0}
-  spriteCat: {fileID: 0}
-  spriteSkibidi: {fileID: 0}
-  spritelileduj: {fileID: 0}
+  spriteAlien: {fileID: 21300000, guid: 254ba36b194fb7948bb4d4cf01b54031, type: 3}
+  spriteBerry: {fileID: 21300000, guid: bc6811ba3d9bb2a4481f93c7d742dd81, type: 3}
+  spriteGrey: {fileID: 21300000, guid: 3a634a67f94c386419274d347d4b5e0e, type: 3}
+  spriteWoshi: {fileID: 21300000, guid: 4e0efe2e78bce124baffb5822c2ae51a, type: 3}
+  spriteGrimWooper: {fileID: 21300000, guid: 07a93db15f22de741a6355efdd07090e, type: 3}
+  spriteFak: {fileID: 21300000, guid: d7a3e19fd10617849a338d188b5b0658, type: 3}
+  spriteXv6Riscv: {fileID: 21300000, guid: 9c5e95d7662a2984e821e7e9d0509d8c, type: 3}
+  spriteTTiddy: {fileID: 21300000, guid: 57db92119df04074b88c70dd4ec918be, type: 3}
+  spritePriscue: {fileID: 21300000, guid: a4237f9045decc44ebffe464c787bf7c, type: 3}
+  spriteSushiSlayer: {fileID: 21300000, guid: 5f85cb0f298317d40b63a96bf73608d4, type: 3}
+  spriteRFilly: {fileID: 21300000, guid: 2970347d3b8253c4499bfc9c4ef5745c, type: 3}
+  spriteEilmar: {fileID: 21300000, guid: 4d5d56cce27031043a70a5e462196aa7, type: 3}
+  spriteCat: {fileID: 21300000, guid: f5bd145b31cd1f1448be2c792b3a850b, type: 3}
+  spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
+  spritelileduj: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
+  spriteBing: {fileID: 21300000, guid: 3202f6a9d5a9e40e6b1a8894f7696c03, type: 3}
+  healthBar: {fileID: 0}
 --- !u!4 &1442833138
 Transform:
   m_ObjectHideFlags: 0

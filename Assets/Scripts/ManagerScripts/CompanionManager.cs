@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -96,16 +97,20 @@ public class CompanionManager : MonoBehaviour
 
     public static CompanionManager Instance;
 
+    public event Action OnCompanionAdded;
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("CompanionManager instance created.");
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate instances 
+            Debug.Log("Duplicate CompanionManager instance destroyed.");
+            Destroy(gameObject);
         }
     }
 
@@ -121,7 +126,7 @@ public class CompanionManager : MonoBehaviour
     public Sprite spriteAlien, spriteBerry, spriteGrey, spriteWoshi;
     public Sprite spriteGrimWooper, spriteFak, spriteXv6Riscv, spriteTTiddy;
     public Sprite spritePriscue, spriteSushiSlayer, spriteRFilly, spriteEilmar;
-    public Sprite spriteCat, spriteSkibidi, spritelileduj;
+    public Sprite spriteCat, spriteSkibidi, spritelileduj, spriteBing;
 
     // Emotional sprites to be set in the Inspector
     public Sprite spriteAlienAngry, spriteAlienSad, spriteAlienNormal, spriteAlienHappy;
@@ -145,7 +150,7 @@ public class CompanionManager : MonoBehaviour
         // STARTER COMPANIONS
         companions.Add(new Companion(0, "Alien", spriteAlien, "DD"));
         companions.Add(new Companion(1, "Berry", spriteBerry, "JB"));
-        companions.Add(new Companion(2, "Grey", spriteGrey, "ED")); // Clarified naming
+        companions.Add(new Companion(2, "Grey", spriteGrey, "ED"));
         companions.Add(new Companion(3, "Woshi", spriteWoshi, "JG"));
 
         // SHOP COMPANIONS
@@ -160,6 +165,7 @@ public class CompanionManager : MonoBehaviour
         companions.Add(new Companion(12, "cat", spriteCat, "JB"));
         companions.Add(new Companion(13, "skibidi", spriteSkibidi, "KR"));
         companions.Add(new Companion(14, "lil e-duj", spritelileduj, "DA"));
+        companions.Add(new Companion(15, "Bing", spriteBing, "JG"));
 
         // Load satisfaction levels from saved data
         foreach (var companion in companions)
@@ -211,11 +217,40 @@ public class CompanionManager : MonoBehaviour
             companions[companionID].IsBought = true;
             IncreaseNumberOfPets(); // increase number of pets by 1
             Debug.Log($"{companions[companionID].PetName} has been marked as bought.");
+
+            // Trigger event when a companion is bought
+            TriggerCompanionAddedEvent();
         }
         else
         {
             Debug.LogWarning("Invalid companion ID.");
         }
+    }
+
+    public int GetCompanionCount()
+    {
+        int count = 0;
+        foreach (var companion in companions)
+        {
+            if (companion.IsBought)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int GetBoughtCompanionsCount()
+    {
+        int boughtCount = 0;
+        foreach (var companion in companions)
+        {
+            if (companion.IsBought)
+            {
+                boughtCount++;
+            }
+        }
+        return boughtCount;
     }
 
     public Companion GetCompanionById(int companionID)
@@ -227,7 +262,12 @@ public class CompanionManager : MonoBehaviour
         return null;
     }
 
-    // New method to check if a companion is bought
+    // Add this method to manually trigger the event
+    public void TriggerCompanionAddedEvent()
+    {
+        OnCompanionAdded?.Invoke();
+    }
+
     public bool IsCompanionBought(int companionID)
     {
         if (companionID >= 0 && companionID < companions.Count)
@@ -244,7 +284,7 @@ public class CompanionManager : MonoBehaviour
         Companion selectedCompanion = GetCompanionById(companionID);
         if (selectedCompanion != null)
         {
-            healthBar.SetMaxSatisfaction(100); // Assuming max satisfaction is 100
+            healthBar.SetMaxSatisfaction(100);
             healthBar.SetSatisfaction(selectedCompanion.SatisfactionLevel);
         }
         else
@@ -253,7 +293,6 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
-    // New Methods to Save and Load Satisfaction Data
     public void SaveCompanionData(Companion companion)
     {
         PlayerPrefs.SetInt("Satisfaction_" + companion.CompanionID, companion.SatisfactionLevel);
@@ -262,6 +301,6 @@ public class CompanionManager : MonoBehaviour
 
     public void LoadCompanionData(Companion companion)
     {
-        companion.SatisfactionLevel = PlayerPrefs.GetInt("Satisfaction_" + companion.CompanionID, 50); // Default to 50 if not set
+        companion.SatisfactionLevel = PlayerPrefs.GetInt("Satisfaction_" + companion.CompanionID, 50);
     }
 }
