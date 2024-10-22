@@ -221,7 +221,7 @@ public class CompanionManager : MonoBehaviour
             PlayerPrefs.Save();
 
             // Trigger event when a companion is bought
-            TriggerCompanionAddedEvent();
+           TriggerCompanionAddedEvent();
         }
         else
         {
