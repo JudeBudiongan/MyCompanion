@@ -13,7 +13,7 @@ public class ChallengeManager : MonoBehaviour
 
     private int targetCompanionCount = 3;
     private bool isChallengeCompleted = false;
-    private bool isClaimed = false; // New flag to check if the claim button has already been clicked
+    private bool isClaimed = false; // Flag to check if the claim button has already been clicked
 
     void Awake()
     {
@@ -21,6 +21,9 @@ public class ChallengeManager : MonoBehaviour
         {
             companionManager = FindObjectOfType<CompanionManager>();
         }
+
+        // Load the claim state from PlayerPrefs
+        isClaimed = PlayerPrefs.GetInt("IsBingClaimed", 0) == 1;
     }
 
     IEnumerator DelayedInitialization()
@@ -50,11 +53,22 @@ public class ChallengeManager : MonoBehaviour
             return;
         }
 
+        // Set up the UI based on whether the challenge was claimed
         notCompleteIcon.SetActive(true);
-        claimButton.gameObject.SetActive(false); // Hide the claim button until the challenge is completed
+        claimButton.gameObject.SetActive(false); // Hide the claim button initially
+
         UpdateChallengeText();
 
-        claimButton.onClick.AddListener(OnClaimButtonClicked);
+        // If already claimed, hide the button and update UI
+        if (isClaimed)
+        {
+            claimButton.gameObject.SetActive(false); // Already claimed, so hide the button
+            challengeText.text = "Bing has already been claimed!";
+        }
+        else
+        {
+            claimButton.onClick.AddListener(OnClaimButtonClicked);
+        }
     }
 
     private void UpdateChallengeText()
@@ -122,6 +136,10 @@ public class ChallengeManager : MonoBehaviour
         }
 
         claimButton.gameObject.SetActive(false); // Hide the claim button after it's clicked
+
+        // Save the claimed state to PlayerPrefs
+        PlayerPrefs.SetInt("IsBingClaimed", 1);
+        PlayerPrefs.Save();
     }
 
     void OnDestroy()
