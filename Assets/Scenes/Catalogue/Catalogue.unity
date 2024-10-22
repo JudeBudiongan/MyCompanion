@@ -1721,6 +1721,8 @@ MonoBehaviour:
   spriteliledujNormal: {fileID: 0}
   spriteliledujHappy: {fileID: 0}
   healthBar: {fileID: 0}
+  spriteBing: {fileID: 21300000, guid: 3202f6a9d5a9e40e6b1a8894f7696c03, type: 3}
+  healthBar: {fileID: 0}
 --- !u!4 &1740555027
 Transform:
   m_ObjectHideFlags: 0

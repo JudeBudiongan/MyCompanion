@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Store/Store.unity
     guid: 89b63ecabb0cdeb4894438364a5e296c
   - enabled: 1
-    path: Assets/Scenes/Leaderboard/Achievements.unity
+    path: Assets/Scenes/Leaderboard/Challenges.unity
     guid: b3d20c638812a0e4b8f769ac7fcc9fb7
   - enabled: 1
     path: Assets/Scenes/Catalogue/Catalogue.unity
