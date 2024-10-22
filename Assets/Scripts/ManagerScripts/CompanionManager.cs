@@ -49,11 +49,11 @@ public void LevelUp()
     Level++;
     ResetSatisfaction();
 
-    // Notify the LevelDisplay script to update the UI
+    // Look for the LevelDisplay in the current scene
     LevelDisplay levelDisplay = FindObjectOfType<LevelDisplay>();
     if (levelDisplay != null)
     {
-        levelDisplay.UpdateLevelDisplay();
+        levelDisplay.UpdateLevelDisplay();  // Update UI with the new level
     }
     else
     {
@@ -73,16 +73,22 @@ public void LevelUp()
             Debug.Log($"Ouch! Companion leveled down to {Level}!");
         }
 
-        public void IncreaseSatisfaction(int amount)
+    public void IncreaseSatisfaction(int amount)
+    {
+        SatisfactionLevel += amount;
+        if (SatisfactionLevel >= 100)
         {
-            SatisfactionLevel += amount;
-            if (SatisfactionLevel >= 100)
-            {
-                SatisfactionLevel = 100;
-                LevelUp();  // Level up when satisfaction reaches 100
-            }
+            SatisfactionLevel = 100;
+            LevelUp();  // Level up when satisfaction reaches 100
         }
 
+        // Notify the LevelDisplay script to update the satisfaction
+        LevelDisplay levelDisplay = FindObjectOfType<LevelDisplay>();
+        if (levelDisplay != null)
+        {
+            levelDisplay.UpdateLevelDisplay();  // Update UI with the new satisfaction/level
+        }
+    }
 
         public void DecreaseSatisfaction(int amount)
         {

@@ -56,40 +56,11 @@ public class TreatManager : MonoBehaviour
         treats.Add(new TreatItem(3, "Yummy Chewstick"));
     }
 
-    // Method to increase the stock of a treat
-    public void IncreaseTreatStock(int treatID, int amount)
-    {
-        if (treatID >= 0 && treatID < treats.Count)
-        {
-            treats[treatID].Stock += amount;  // Increase stock
-            Debug.Log($"{amount} of {treats[treatID].TreatName} added to shop stock. Current stock: {treats[treatID].Stock}");
-        }
-        else
-        {
-            Debug.LogWarning("Invalid treat ID.");
-        }
-    }
-
-    // Method to decrease the stock of a treat after purchase/use
-    public void DecreaseTreatStock(int treatID, int amount)
-    {
-        if (treatID >= 0 && treatID < treats.Count && treats[treatID].Stock >= amount)
-        {
-            treats[treatID].Stock -= amount;  // Decrease stock
-            Debug.Log($"{amount} of {treats[treatID].TreatName} used. Current stock: {treats[treatID].Stock}");
-        }
-        else
-        {
-            Debug.LogWarning("Invalid treat ID or insufficient stock.");
-        }
-    }
-
-    // Method to increase player's inventory quantity when a treat is bought
+    // Method to increase the quantity of a treat in player's inventory
     public void IncreaseQuantity(int treatID)
     {
         if (treatID >= 0 && treatID < treats.Count)
         {
-            // We want to add only 1 treat to the inventory when bought
             treats[treatID].Quantity += 1;  // Always adds 1 to the player's inventory
             Debug.Log($"1 of {treats[treatID].TreatName} added to player's inventory. Current quantity: {treats[treatID].Quantity}");
         }
@@ -97,16 +68,6 @@ public class TreatManager : MonoBehaviour
         {
             Debug.LogWarning("Invalid treat ID.");
         }
-    }
-
-    // Method to retrieve a specific treat by its ID
-    public TreatItem GetTreatById(int treatID)
-    {
-        if (treatID >= 0 && treatID < treats.Count)
-        {
-            return treats[treatID];
-        }
-        return null;
     }
 
     // Method to get all available treats in the player's inventory
@@ -123,5 +84,50 @@ public class TreatManager : MonoBehaviour
         }
 
         return availableTreats;  // Return the list of available treats
+    }
+
+    // Method to give a treat to a companion
+    public void GiveTreatToCompanion(int companionID, int treatID)
+    {
+        // First check if the player owns the treat
+        TreatItem treat = GetTreatById(treatID);
+        if (treat != null && treat.Quantity > 0)
+        {
+            // Decrease treat quantity from player's inventory
+            treat.Quantity--;
+
+            // Give treat to the companion
+            CompanionManager companionManager = CompanionManager.Instance;
+            if (companionManager != null)
+            {
+                CompanionManager.Companion companion = companionManager.GetCompanionById(companionID);
+                if (companion != null)
+                {
+                    // Increase satisfaction by a fixed amount (let's say 10 for each treat)
+                    companion.IncreaseSatisfaction(10);
+                    Debug.Log($"{treat.TreatName} was given to {companion.PetName}. Current satisfaction: {companion.SatisfactionLevel}");
+
+                    // Optional: Update the UI, save state, etc.
+                }
+                else
+                {
+                    Debug.LogWarning("Companion not found.");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No treat available to give.");
+        }
+    }
+
+    // Method to retrieve a specific treat by its ID
+    public TreatItem GetTreatById(int treatID)
+    {
+        if (treatID >= 0 && treatID < treats.Count)
+        {
+            return treats[treatID];
+        }
+        return null;
     }
 }

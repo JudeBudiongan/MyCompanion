@@ -11,6 +11,7 @@ public class LevelDisplay : MonoBehaviour
         UpdateLevelDisplay();
     }
 
+
     public void UpdateLevelDisplay()
     {
         if (CompanionManager.Instance != null && CompanionManager.Instance.companions.Count > 0)
