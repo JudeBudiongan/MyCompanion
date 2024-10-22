@@ -86,7 +86,7 @@ public class ShopManagerPets : MonoBehaviour
             // Deduct the price using the new method in CoinManager
             coinManager.DeductCoins(selectedItem.price);
             selectedItem.bought = true;
-            coinManager.SaveCoins(); // Save the new total
+           coinManager.SaveCoins(); // Save the new total
 
 
             // Update UI

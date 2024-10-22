@@ -25,7 +25,7 @@ public class buttoninfoPets : MonoBehaviour
         // Ensure the scroll view starts at the top
         if (scrollRect != null)
         {
-            scrollRect.verticalNormalizedPosition = 1f; // Sets the scroll position to the top
+            scrollRect.verticalNormalizedPosition = 1f; // Sets the scroll position to the top 
         }
 
         // Reflects the correct state upon loading the scene
