@@ -803,6 +803,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2710ea23b4d6f3c44b13f0fc86c985fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appUsageItemPrefab: {fileID: 7368072666944757007, guid: 1de94f60159007647810ea2798eabc38, type: 3}
+  contentPanel: {fileID: 224344998878445706}
 --- !u!1 &1419477303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1088,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb06189944aa6c49958f3012e999846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appUsageItemPrefab: {fileID: 7368072666944757007, guid: 1de94f60159007647810ea2798eabc38, type: 3}
+  contentPanel: {fileID: 224441151935744524}
 --- !u!1 &1034289125889468
 GameObject:
   m_ObjectHideFlags: 0
