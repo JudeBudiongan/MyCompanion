@@ -474,7 +474,6 @@ GameObject:
   - component: {fileID: 475088908}
   - component: {fileID: 475088907}
   - component: {fileID: 475088909}
-  - component: {fileID: 475088910}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -601,18 +600,6 @@ MonoBehaviour:
   spriteliledujNormal: {fileID: 21300000, guid: 3bccc97a13fe7a84dbc6819381f97591, type: 3}
   spriteliledujHappy: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
   healthBar: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
---- !u!114 &475088910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475088906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ccdda9c905afc4ea67b8aaa1807068, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &544399983
 GameObject:
   m_ObjectHideFlags: 0
