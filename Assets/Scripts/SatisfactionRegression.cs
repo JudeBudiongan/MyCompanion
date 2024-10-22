@@ -8,7 +8,7 @@ public class SatisfactionRegression : MonoBehaviour
     public static SatisfactionRegression Instance { get; private set; }
 
     private int decreaseAmount = 10; // Amount to decrease satisfaction by
-    private float decreaseInterval = 30f; // Time in seconds between decreases
+    private float decreaseInterval = 3600f; // Time in seconds between decreases
     private CompanionManager.Companion selectedCompanion;
     private int selectedCompanionId;
     private long lastCheckTime; // Timestamp of the last time social media usage was checked
@@ -63,7 +63,7 @@ public class SatisfactionRegression : MonoBehaviour
 
                 // Fetch social media usage from the last check to now
                 long socialMediaTime = FetchSocialMediaUsageSinceLastCheck(lastCheckTime, currentCheckTime);
-                int decreaseRate = (int)Math.Round(socialMediaTime / (60 * 1000.0)); // Set rate to 1 hour
+                int decreaseRate = (int)Math.Round(socialMediaTime / (60 * 60 * 1000.0)); // Set rate to 1 hour
 
                 // Log the time spent on social media since the last check
                 TimeSpan socialMediaTimeSpan = TimeSpan.FromMilliseconds(socialMediaTime);
