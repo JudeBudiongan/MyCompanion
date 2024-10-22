@@ -8,7 +8,7 @@ public class SceneManagerScript : MonoBehaviour
     
 
     public void LoadScene(string sceneName) {
-        Debug.Log("Button clicked! Loading scene: " + sceneName);
+        Debug.Log("Button clicked! Loading scene:  " + sceneName);
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
 
     }

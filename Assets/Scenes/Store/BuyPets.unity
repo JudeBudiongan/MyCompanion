@@ -1203,7 +1203,7 @@ GameObject:
   - component: {fileID: 284133619}
   m_Layer: 5
   m_Name: Item (2)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1245,16 +1245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 6
-  PriceTxt: {fileID: 103283104}
-  BoughtTxt: {fileID: 941544933}
-  NameTxt: {fileID: 759691490}
-  AuthorTxt: {fileID: 480452525}
-  PetImage: {fileID: 50192569}
-  NormalSprite: {fileID: 21300000, guid: 0546238d84f104c4eae0f056d1e72474, type: 3}
-  HappySprite: {fileID: 21300000, guid: 9c5e95d7662a2984e821e7e9d0509d8c, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &284133620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,7 +1504,7 @@ GameObject:
   - component: {fileID: 324735451}
   m_Layer: 5
   m_Name: Item (5)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1556,16 +1546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 9
-  PriceTxt: {fileID: 172900201}
-  BoughtTxt: {fileID: 744426088}
-  NameTxt: {fileID: 327292973}
-  AuthorTxt: {fileID: 1044681072}
-  PetImage: {fileID: 278597796}
-  NormalSprite: {fileID: 21300000, guid: 2a917daa03e463d48b9c8c768e3f701c, type: 3}
-  HappySprite: {fileID: 21300000, guid: 5f85cb0f298317d40b63a96bf73608d4, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &324735452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,7 +1888,7 @@ GameObject:
   - component: {fileID: 433075901}
   m_Layer: 5
   m_Name: Item (4)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1950,16 +1930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 8
-  PriceTxt: {fileID: 1643602584}
-  BoughtTxt: {fileID: 1065716943}
-  NameTxt: {fileID: 1947962960}
-  AuthorTxt: {fileID: 1020108656}
-  PetImage: {fileID: 823240492}
-  NormalSprite: {fileID: 21300000, guid: dcaf4d8368684134fabf3fb346fef2ff, type: 3}
-  HappySprite: {fileID: 21300000, guid: a4237f9045decc44ebffe464c787bf7c, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &433075902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2306,7 +2276,7 @@ GameObject:
   - component: {fileID: 523508449}
   m_Layer: 5
   m_Name: Item (6)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2348,16 +2318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 10
-  PriceTxt: {fileID: 1388717513}
-  BoughtTxt: {fileID: 1384257389}
-  NameTxt: {fileID: 2106153304}
-  AuthorTxt: {fileID: 1032384147}
-  PetImage: {fileID: 675325291}
-  NormalSprite: {fileID: 21300000, guid: e626f620f182bb34f8c886dba260adf9, type: 3}
-  HappySprite: {fileID: 21300000, guid: 2970347d3b8253c4499bfc9c4ef5745c, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &523508450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3829,7 +3789,7 @@ GameObject:
   - component: {fileID: 1013696313}
   m_Layer: 5
   m_Name: Item (8)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3871,16 +3831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 12
-  PriceTxt: {fileID: 1448756127}
-  BoughtTxt: {fileID: 1927994134}
-  NameTxt: {fileID: 843056673}
-  AuthorTxt: {fileID: 439894641}
-  PetImage: {fileID: 245979142}
-  NormalSprite: {fileID: 21300000, guid: cad981ee23d78864cb5bcae5c11bcfe6, type: 3}
-  HappySprite: {fileID: 21300000, guid: f5bd145b31cd1f1448be2c792b3a850b, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &1013696314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4732,7 +4682,7 @@ GameObject:
   - component: {fileID: 1231106404}
   m_Layer: 5
   m_Name: Item (9)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4774,16 +4724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 13
-  PriceTxt: {fileID: 1913599824}
-  BoughtTxt: {fileID: 1792429359}
-  NameTxt: {fileID: 1484439410}
-  AuthorTxt: {fileID: 4637255}
-  PetImage: {fileID: 1148032931}
-  NormalSprite: {fileID: 21300000, guid: 8178580723b083a438b7db99c228f5dc, type: 3}
-  HappySprite: {fileID: 21300000, guid: 064be2175f5568c42953543981ca22fb, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &1231106405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5315,6 +5255,66 @@ MonoBehaviour:
   spriteSkibidi: {fileID: 21300000, guid: a0e8014d33502c64489be614f6f0f451, type: 3}
   spritelileduj: {fileID: 21300000, guid: e7ffa1eed22a30243beece9d36d93aaa, type: 3}
   spriteBing: {fileID: 21300000, guid: 3202f6a9d5a9e40e6b1a8894f7696c03, type: 3}
+  spriteAlienAngry: {fileID: 0}
+  spriteAlienSad: {fileID: 0}
+  spriteAlienNormal: {fileID: 0}
+  spriteAlienHappy: {fileID: 0}
+  spriteBerryAngry: {fileID: 0}
+  spriteBerrySad: {fileID: 0}
+  spriteBerryNormal: {fileID: 0}
+  spriteBerryHappy: {fileID: 0}
+  spriteGreyAngry: {fileID: 0}
+  spriteGreySad: {fileID: 0}
+  spriteGreyNormal: {fileID: 0}
+  spriteGreyHappy: {fileID: 0}
+  spriteWoshiAngry: {fileID: 0}
+  spriteWoshiSad: {fileID: 0}
+  spriteWoshiNormal: {fileID: 0}
+  spriteWoshiHappy: {fileID: 0}
+  spriteGrimWooperAngry: {fileID: 0}
+  spriteGrimWooperSad: {fileID: 0}
+  spriteGrimWooperNormal: {fileID: 0}
+  spriteGrimWooperHappy: {fileID: 0}
+  spriteFakAngry: {fileID: 0}
+  spriteFakSad: {fileID: 0}
+  spriteFakNormal: {fileID: 0}
+  spriteFakHappy: {fileID: 0}
+  spriteXv6RiscvAngry: {fileID: 0}
+  spriteXv6RiscvSad: {fileID: 0}
+  spriteXv6RiscvNormal: {fileID: 0}
+  spriteXv6RiscvHappy: {fileID: 0}
+  spriteTTiddyAngry: {fileID: 0}
+  spriteTTiddySad: {fileID: 0}
+  spriteTTiddyNormal: {fileID: 0}
+  spriteTTiddyHappy: {fileID: 0}
+  spritePriscueAngry: {fileID: 0}
+  spritePriscueSad: {fileID: 0}
+  spritePriscueNormal: {fileID: 0}
+  spritePriscueHappy: {fileID: 0}
+  spriteSushiSlayerAngry: {fileID: 0}
+  spriteSushiSlayerSad: {fileID: 0}
+  spriteSushiSlayerNormal: {fileID: 0}
+  spriteSushiSlayerHappy: {fileID: 0}
+  spriteRFillyAngry: {fileID: 0}
+  spriteRFillySad: {fileID: 0}
+  spriteRFillyNormal: {fileID: 0}
+  spriteRFillyHappy: {fileID: 0}
+  spriteEilmarAngry: {fileID: 0}
+  spriteEilmarSad: {fileID: 0}
+  spriteEilmarNormal: {fileID: 0}
+  spriteEilmarHappy: {fileID: 0}
+  spriteCatAngry: {fileID: 0}
+  spriteCatSad: {fileID: 0}
+  spriteCatNormal: {fileID: 0}
+  spriteCatHappy: {fileID: 0}
+  spriteSkibidiAngry: {fileID: 0}
+  spriteSkibidiSad: {fileID: 0}
+  spriteSkibidiNormal: {fileID: 0}
+  spriteSkibidiHappy: {fileID: 0}
+  spriteliledujAngry: {fileID: 0}
+  spriteliledujSad: {fileID: 0}
+  spriteliledujNormal: {fileID: 0}
+  spriteliledujHappy: {fileID: 0}
   healthBar: {fileID: 0}
 --- !u!4 &1442833138
 Transform:
@@ -6088,7 +6088,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d0d7df155b73134182898b9a3c422ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b6f31f8fa1ed60d448d4927a6eeb266a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6410,7 +6410,7 @@ GameObject:
   - component: {fileID: 1705905249}
   m_Layer: 5
   m_Name: Item (3)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6452,16 +6452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 7
-  PriceTxt: {fileID: 2144207087}
-  BoughtTxt: {fileID: 1953520043}
-  NameTxt: {fileID: 1812848511}
-  AuthorTxt: {fileID: 1352204970}
-  PetImage: {fileID: 1734005249}
-  NormalSprite: {fileID: 21300000, guid: 031f1b5a9d7445547864603c9d27a2da, type: 3}
-  HappySprite: {fileID: 21300000, guid: 57db92119df04074b88c70dd4ec918be, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &1705905250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6942,7 +6932,7 @@ GameObject:
   - component: {fileID: 1795550366}
   m_Layer: 5
   m_Name: Item (10)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6984,16 +6974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 14
-  PriceTxt: {fileID: 1304540569}
-  BoughtTxt: {fileID: 950522442}
-  NameTxt: {fileID: 1857791432}
-  AuthorTxt: {fileID: 445775066}
-  PetImage: {fileID: 1478752206}
-  NormalSprite: {fileID: 21300000, guid: 3bccc97a13fe7a84dbc6819381f97591, type: 3}
-  HappySprite: {fileID: 21300000, guid: e37d3a111266d994bb788ab57231a75e, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &1795550367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7261,7 +7241,7 @@ GameObject:
   - component: {fileID: 1890507571}
   m_Layer: 5
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7397,16 +7377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 4
-  PriceTxt: {fileID: 961409206}
-  BoughtTxt: {fileID: 1662086233}
-  NameTxt: {fileID: 1618363894}
-  AuthorTxt: {fileID: 556151129}
-  PetImage: {fileID: 1647160012}
-  NormalSprite: {fileID: 21300000, guid: b6f31f8fa1ed60d448d4927a6eeb266a, type: 3}
-  HappySprite: {fileID: 21300000, guid: 07a93db15f22de741a6355efdd07090e, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!1 &1913599822
 GameObject:
   m_ObjectHideFlags: 0
@@ -7817,7 +7787,7 @@ GameObject:
   - component: {fileID: 1984638443}
   m_Layer: 5
   m_Name: Item (7)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7859,16 +7829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 11
-  PriceTxt: {fileID: 989075527}
-  BoughtTxt: {fileID: 1928620355}
-  NameTxt: {fileID: 2078572370}
-  AuthorTxt: {fileID: 351273897}
-  PetImage: {fileID: 772655498}
-  NormalSprite: {fileID: 21300000, guid: 9b58d4ea4370bc941a0d7034845d178a, type: 3}
-  HappySprite: {fileID: 21300000, guid: 4d5d56cce27031043a70a5e462196aa7, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &1984638444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8213,7 +8173,7 @@ GameObject:
   - component: {fileID: 2140746233}
   m_Layer: 5
   m_Name: Item (1)
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8255,16 +8215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01eb63b030be54d8be9b490cd5372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 5
-  PriceTxt: {fileID: 1064099526}
-  BoughtTxt: {fileID: 1712521764}
-  NameTxt: {fileID: 181910411}
-  AuthorTxt: {fileID: 1732382601}
-  PetImage: {fileID: 1218822300}
-  NormalSprite: {fileID: 21300000, guid: 094fae3a682f81f4bae0636a020b9fdb, type: 3}
-  HappySprite: {fileID: 21300000, guid: d7a3e19fd10617849a338d188b5b0658, type: 3}
-  ShopManager: {fileID: 789047542}
-  scrollRect: {fileID: 0}
 --- !u!114 &2140746234
 MonoBehaviour:
   m_ObjectHideFlags: 0
