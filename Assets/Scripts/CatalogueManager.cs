@@ -26,6 +26,8 @@ public class CatalogueManager : MonoBehaviour
 
         // Populate the catalog based on the companions from CompanionManager
         PopulateCatalog();
+                
+
     }
 
     void LoadCompanionStatuses()
@@ -90,17 +92,5 @@ public class CatalogueManager : MonoBehaviour
         PlayerPrefs.Save();
         SceneManager.LoadScene("Main Menu");
     }
-    // New method to count the number of bought companions
-    public int GetBoughtCompanionCount()
-    {
-        int boughtCount = 0;
-        foreach (var companion in companionManager.companions)
-        {
-            if (companion.IsBought)
-            {
-                boughtCount++;
-            }
-        }
-        return boughtCount;
-    }
+    
 }

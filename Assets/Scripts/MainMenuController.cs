@@ -21,7 +21,7 @@ public class MainMenuController : MonoBehaviour
     {
         // Get the CompanionManager instance
         companionManager = CompanionManager.Instance;
-
+        
         // Find GameDataSaver in the scene
         gameDataSaver = FindObjectOfType<GameDataSaver>();
         if (gameDataSaver == null)
