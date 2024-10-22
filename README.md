@@ -4,11 +4,10 @@ My Companion is an Android mobile productivity app built using the Unity game en
 
 (Currently only support mobile Android devices)
 
-### Prerequisites
-- **Unity**: Version 2020.3.x or higher
+### Dependencies to Install
+- **Unity**: Version 2022.3.42f1 or higher
 - **Android SDK**: Installed and configured in Unity
 - **Java Development Kit (JDK)**: Version 1.8 or higher
-- **Gradle**: Required for building Android projects in Unity
 
 ## Installation
 
@@ -37,10 +36,11 @@ You must have Unity Game Engine installed.
 
 1. Ensure all dependencies are correctly installed.
 2. Connect your Android device to your Computer
-3. Open the *Build Settings* menu in `File > Build Settings` 
-3. Expand the `Run Device > Default device` dropdown menu
-4. Select your device.
-4. Select **Build And Run**
+3. Open the *Build Settings* menu in `File > Build Settings`
+4. Open **Player Settings** and set `Minimum API Level` to Android 10.0 Level 29.
+5. Expand the `Run Device > Default device` dropdown menu
+6. Select your device.
+7. Select **Build And Run**
 
 *Now you're ready to get Productive! ദ്ദി ˉ͈̀꒳ˉ͈́ )✧*
 
