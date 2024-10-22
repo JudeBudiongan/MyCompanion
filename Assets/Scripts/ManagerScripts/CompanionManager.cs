@@ -144,7 +144,8 @@ public class CompanionManager : MonoBehaviour
     public Sprite spriteCatAngry, spriteCatSad, spriteCatNormal, spriteCatHappy;
     public Sprite spriteSkibidiAngry, spriteSkibidiSad, spriteSkibidiNormal, spriteSkibidiHappy;
     public Sprite spriteliledujAngry, spriteliledujSad, spriteliledujNormal, spriteliledujHappy;
-
+    public Sprite spriteBingAngry, spriteBingSad, spriteBingNormal, spriteBingHappy;
+    
     void Start()
     {
         // STARTER COMPANIONS
@@ -196,6 +197,7 @@ public class CompanionManager : MonoBehaviour
         SetCompanionEmotionalSprites(12, spriteCatAngry, spriteCatSad, spriteCatNormal, spriteCatHappy);
         SetCompanionEmotionalSprites(13, spriteSkibidiAngry, spriteSkibidiSad, spriteSkibidiNormal, spriteSkibidiHappy);
         SetCompanionEmotionalSprites(14, spriteliledujAngry, spriteliledujSad, spriteliledujNormal, spriteliledujHappy);
+        SetCompanionEmotionalSprites(15, spriteBingAngry, spriteBingSad, spriteBingNormal, spriteBingHappy);
     }
 
     // Helper method to set emotional sprites
