@@ -44,16 +44,26 @@ public class CompanionManager : MonoBehaviour
             Level = 1;              // Default initial level
         }
 
-        public void LevelUp(CoinManager coinManager)
-        {
-            Level++;
-            ResetSatisfaction();
+        public void LevelUp()
+{
+    Level++;
+    ResetSatisfaction();
 
-            // Earn coins for leveling up
-            coinManager.EarnCoinsForLevelUp(this);
+    // Look for the LevelDisplay in the current scene
+    LevelDisplay levelDisplay = FindObjectOfType<LevelDisplay>();
+    if (levelDisplay != null)
+    {
+        levelDisplay.UpdateLevelDisplay();  // Update UI with the new level
+    }
+    else
+    {
+        Debug.LogError("LevelDisplay script not found in the scene.");
+    }
 
-            Debug.Log($"Hooray! Companion leveled up to {Level}!");
-        }
+    Debug.Log($"Hooray! Companion leveled up to {Level}!");
+}
+
+
 
         public void LevelDown()
         {
@@ -63,14 +73,22 @@ public class CompanionManager : MonoBehaviour
             Debug.Log($"Ouch! Companion leveled down to {Level}!");
         }
 
-        public void IncreaseSatisfaction(int amount)
+    public void IncreaseSatisfaction(int amount)
+    {
+        SatisfactionLevel += amount;
+        if (SatisfactionLevel >= 100)
         {
-            SatisfactionLevel += amount;
-            if (SatisfactionLevel > 100)
-            {
-                SatisfactionLevel = 100;
-            }
+            SatisfactionLevel = 100;
+            LevelUp();  // Level up when satisfaction reaches 100
         }
+
+        // Notify the LevelDisplay script to update the satisfaction
+        LevelDisplay levelDisplay = FindObjectOfType<LevelDisplay>();
+        if (levelDisplay != null)
+        {
+            levelDisplay.UpdateLevelDisplay();  // Update UI with the new satisfaction/level
+        }
+    }
 
         public void DecreaseSatisfaction(int amount)
         {
@@ -212,6 +230,34 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
+        public int GetCompanionCount()
+    {
+        int count = 0;
+        foreach (var companion in companions)
+        {
+            if (companion.IsBought)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+
+    public int GetBoughtCompanionsCount()
+    {
+        int boughtCount = 0;
+        foreach (var companion in companions)
+        {
+            if (companion.IsBought)
+            {
+                boughtCount++;
+            }
+        }
+        return boughtCount;
+    }
+
     public void SetCompanionBought(int companionID)
     {
         if (companionID >= 0 && companionID < companions.Count)
@@ -231,9 +277,13 @@ public class CompanionManager : MonoBehaviour
         }
     }
 
-     public Companion GetCompanionById(int companionID)
+      public Companion GetCompanionById(int companionID)
     {
-        return companions.Find(c => c.CompanionID == companionID);
+        if (companionID >= 0 && companionID < companions.Count)
+        {
+            return companions[companionID];
+        }
+        return null;
     }
 
     // Add this method to manually trigger the event

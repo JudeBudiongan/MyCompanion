@@ -26,7 +26,11 @@ public class CatalogueManager : MonoBehaviour
 
         // Populate the catalog based on the companions from CompanionManager
         PopulateCatalog();
-                
+
+        if (companionManager != null)
+                {
+                    companionManager.OnCompanionAdded += UpdateCatalogueUI;
+                }
 
     }
 
@@ -92,5 +96,43 @@ public class CatalogueManager : MonoBehaviour
         PlayerPrefs.Save();
         SceneManager.LoadScene("Main Menu");
     }
-    
+
+    // New method to refresh or update the catalog UI
+    public void UpdateCatalogueUI()
+    {
+        PopulateCatalog();
+
+        foreach (var companion in companionManager.companions)
+{
+    Debug.Log("Processing companion: " + companion.PetName + ", Bought Status: " + companion.IsBought);
+    if (companion.IsBought || IsStarterSelected(companion.CompanionID))
+    {
+        // Create a new GameObject for the slot as usual
+    }
+}
+
+    }
+
+    // New method to count the number of bought companions
+    public int GetBoughtCompanionCount()
+    {
+        int boughtCount = 0;
+        foreach (var companion in companionManager.companions)
+        {
+            if (companion.IsBought)
+            {
+                boughtCount++;
+            }
+        }
+        return boughtCount;
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe from event to prevent memory leaks
+        if (companionManager != null)
+        {
+            companionManager.OnCompanionAdded -= UpdateCatalogueUI;
+        }
+    }
 }

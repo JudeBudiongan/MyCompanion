@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using static CompanionManager;
 
 public class ChallengeManager : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class ChallengeManager : MonoBehaviour
 
     private int targetCompanionCount = 3;
     private bool isChallengeCompleted = false;
+    private bool isClaimed = false; // Flag to check if the claim button has already been clicked
 
     void Awake()
     {
@@ -21,6 +21,9 @@ public class ChallengeManager : MonoBehaviour
         {
             companionManager = FindObjectOfType<CompanionManager>();
         }
+
+        // Load the claim state from PlayerPrefs
+        isClaimed = PlayerPrefs.GetInt("IsBingClaimed", 0) == 1;
     }
 
     IEnumerator DelayedInitialization()
@@ -37,6 +40,8 @@ public class ChallengeManager : MonoBehaviour
 
     void Start()
     {
+
+
         StartCoroutine(DelayedInitialization());
 
         if (companionManager == null)
@@ -50,11 +55,22 @@ public class ChallengeManager : MonoBehaviour
             return;
         }
 
+        // Set up the UI based on whether the challenge was claimed
         notCompleteIcon.SetActive(true);
-        claimButton.gameObject.SetActive(false);
+        claimButton.gameObject.SetActive(false); // Hide the claim button initially
+
         UpdateChallengeText();
 
-        claimButton.onClick.AddListener(OnClaimButtonClicked);
+        // If already claimed, hide the button and update UI
+        if (isClaimed)
+        {
+            claimButton.gameObject.SetActive(false); // Already claimed, so hide the button
+            challengeText.text = "Bing has already been claimed!";
+        }
+        else
+        {
+            claimButton.onClick.AddListener(OnClaimButtonClicked);
+        }
     }
 
     private void UpdateChallengeText()
@@ -65,14 +81,14 @@ public class ChallengeManager : MonoBehaviour
         }
         else
         {
-            int remainingCompanions = targetCompanionCount - companionManager.GetBoughtCompanionCount();
+            int remainingCompanions = targetCompanionCount - companionManager.GetBoughtCompanionsCount();
             challengeText.text = $"Buy {remainingCompanions} more companions to earn 'Bing'";
         }
     }
 
     private void CheckChallengeCompletion()
     {
-        int boughtCount = companionManager.GetBoughtCompanionCount();
+        int boughtCount = companionManager.GetBoughtCompanionsCount();
         if (!isChallengeCompleted && boughtCount >= targetCompanionCount)
         {
             CompleteChallenge();
@@ -88,7 +104,7 @@ public class ChallengeManager : MonoBehaviour
         isChallengeCompleted = true;
 
         notCompleteIcon.SetActive(false);
-        claimButton.gameObject.SetActive(true);
+        claimButton.gameObject.SetActive(true); // Show the claim button after the challenge is completed
         claimButtonText.text = "Claim Bing";
         UpdateChallengeText();
 
@@ -97,6 +113,13 @@ public class ChallengeManager : MonoBehaviour
 
     private void OnClaimButtonClicked()
     {
+        if (isClaimed)
+        {
+            return; // Prevent the button from being clicked multiple times
+        }
+
+        isClaimed = true; // Mark as claimed
+
         CompanionManager.Companion bingCompanion = companionManager.GetCompanionById(15);
         if (bingCompanion == null)
         {
@@ -107,7 +130,20 @@ public class ChallengeManager : MonoBehaviour
         bingCompanion.IsBought = true;
         Debug.Log("Bing has been claimed and marked as bought!");
 
-        claimButton.gameObject.SetActive(false);
+        // Level up the companion after claiming the reward
+        CompanionManager.Companion companion = companionManager.GetCompanionById(0); // Select a companion to level up
+        if (companion != null)
+        {
+            companion.LevelUp();  // Level up the companion when claimed
+        }
+
+        claimButton.gameObject.SetActive(false); // Hide the claim button after it's clicked
+
+        // Save the claimed state to PlayerPrefs
+        PlayerPrefs.SetInt("IsBingClaimed", 1);
+        PlayerPrefs.Save();
+
+        
     }
 
     void OnDestroy()

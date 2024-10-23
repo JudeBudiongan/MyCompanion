@@ -3771,7 +3771,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 169681475}
         m_TargetAssemblyTypeName: LoginUI, Assembly-CSharp
-        m_MethodName: OnForgotPasswordButtonClicked
+        m_MethodName: OnResetPasswordButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
